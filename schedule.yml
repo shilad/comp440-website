@@ -65,8 +65,7 @@ meetings:
   - module: Foundations
     topic: "Course introduction: collective intelligence in the GenAI era"
     materials:
-      # Not linked: the Day 1 deck is still owner-only in Drive. Share it, then add a url here.
-      - { text: Day 1 slides, tbd: true }
+      - { text: Day 1 slides, url: "https://drive.google.com/file/d/1B9i3ugABsGHd2biVs4dAQYUM1c3rqte4/view" }
       - { text: Course syllabus, url: "https://docs.google.com/document/d/1I1aXkTStnQKPQGWRKp3_M79QWn5x0wKLbJn8dGIZ7hU/edit" }
       - { text: "Working with Claude (AI policy)", url: "https://docs.google.com/document/d/1I1aXkTStnQKPQGWRKp3_M79QWn5x0wKLbJn8dGIZ7hU/edit" }
       - { text: Beginning-of-semester survey, url: "https://docs.google.com/forms/d/1V2s-wjjvZy4EY8aB25mUfXf2cqgGiPgcbaXVjErRsiM/viewform" }
