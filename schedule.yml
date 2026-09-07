@@ -1,0 +1,158 @@
+# COMP 440 schedule — single source of truth.
+#
+# You never type a meeting date. The calendar block below derives all 28 rows
+# (Tue/Thu from `first` to `last`). Breaks are entries in the `meetings` list,
+# so cancelling or inserting a class re-flows everything after it automatically.
+
+course:
+  code: COMP 440
+  title: Collective Intelligence
+  term: Fall 2026
+  institution: Macalester College
+  meets: Tuesday / Thursday, 1:20–2:50pm Central
+
+calendar:
+  days: [Tue, Thu]
+  first: 2026-09-08
+  last: 2026-12-10
+  due_time: 10:00am Central   # stated once; rendered everywhere
+
+# Deadlines are declared here, once. The build joins them onto the grid above
+# and fails if one no longer lands on a class meeting.
+assignments:
+  - id: hw0
+    title: HW0 — Working With Data and Claude
+    launch: 2026-09-10
+    due: 2026-09-17
+  - id: hw1
+    title: HW1 — Collective Prediction
+    launch: 2026-09-15
+    due: 2026-09-29
+  - id: hw2
+    title: HW2 — Representing and Retrieving Knowledge
+    launch: 2026-09-29
+    due: 2026-10-13
+  - id: hw3
+    title: HW3 — Whose Preferences Count?
+    launch: 2026-10-27
+    due: 2026-11-10
+  - id: hw4
+    title: HW4 — Building and Evaluating an Agent
+    launch: 2026-11-10
+    due: 2026-11-19
+
+milestones:
+  - { date: 2026-10-13, label: Final project introduced }
+  - { date: 2026-11-12, label: Final project proposal due }
+  - { date: 2026-11-24, label: Final project update }
+  - { date: 2026-12-03, label: Project rehearsal }
+  - { date: 2026-12-08, label: Final presentation materials }
+  - { date: 2026-12-10, label: Final presentation materials }
+
+other_due:
+  - { date: 2026-09-10, label: Beginning-of-semester survey }
+
+# `speaker: true` marks a guest-speaker window. Speaker questions are placed
+# automatically on the PREVIOUS meeting — never on the visit day itself.
+meetings:
+  - module: Foundations
+    topic: "Course introduction: collective intelligence in the GenAI era"
+    materials:
+      - { text: Day 1 slides }
+      - { text: Beginning-of-semester survey }
+      - { text: Working with Claude (AI policy) }
+      - { text: Posture on AI form }
+      - { text: Course syllabus }
+  - topic: Ways of knowing; working with Claude; reading and evidence
+    materials:
+      - { text: methods + Claude activity, tbd: true }
+
+  - module: Collective Traces
+    topic: Ratings, aggregation, and recommender systems
+    materials:
+      - { text: recommender systems activity, tbd: true }
+  - topic: Similarity, recommendation, and held-out evaluation
+    materials:
+      - { text: similarity and evaluation activity, tbd: true }
+  - topic: Latent factors and learned representations
+    materials:
+      - { text: SVD / representation activity, tbd: true }
+  - topic: Cultural markets, social influence, and feedback simulation
+    speaker: true
+    materials:
+      - { text: Salganik reading + in-class simulation, tbd: true }
+
+  - module: Retrieval
+    topic: TF-IDF, BM25, and lexical retrieval
+    materials:
+      - { text: lexical retrieval activity, tbd: true }
+  - topic: Embeddings and semantic similarity
+    materials:
+      - { text: embeddings activity, tbd: true }
+  - topic: Hybrid retrieval and introductory RAG
+    materials:
+      - { text: RAG activity, tbd: true }
+  - topic: Retrieval evaluation and data provenance
+    speaker: true
+    materials:
+      - { text: evaluation activity, tbd: true }
+
+  - module: Foundation Models
+    topic: From representations and prediction to language models
+    materials:
+      - { text: language-model overview, tbd: true }
+  - break: Fall Break
+  - topic: Transformers, pretraining, and generation
+    materials:
+      - { text: foundation-model materials, tbd: true }
+  - topic: Training data, labor, authorship, and limitations
+    speaker: true
+    materials:
+      - { text: data / labor reading, tbd: true }
+
+  - module: Alignment
+    topic: Instruction tuning and supervised fine-tuning
+    materials:
+      - { text: SFT lab, tbd: true }
+  - topic: Preference data, constitutions, and disagreement
+    materials:
+      - { text: preference-labeling activity, tbd: true }
+  - topic: Direct Preference Optimization and model alignment
+    materials:
+      - { text: DPO lab, tbd: true }
+  - topic: Blind evaluation and pluralistic alignment
+    speaker: true
+    materials:
+      - { text: blind evaluation, tbd: true }
+
+  - module: Agents
+    topic: RAG, tools, and agent workflows
+    materials:
+      - { text: agent introduction, tbd: true }
+  - topic: Memory, planning, control, and agent evaluation
+    materials:
+      - { text: agent evaluation activity, tbd: true }
+  - topic: Human–AI collaboration and delegation
+    materials:
+      - { text: comparative experiment, tbd: true }
+  - topic: Agents in work and organizations
+    speaker: true
+    materials:
+      - { text: organizational case, tbd: true }
+
+  - module: Collective Systems
+    topic: Social networks and multi-agent systems
+    materials:
+      - { text: network analysis activity, tbd: true }
+  - break: Thanksgiving Break
+  - topic: Diffusion, feedback, and agent-based simulation
+    materials:
+      - { text: in-class simulation activity, tbd: true }
+  - topic: Governance, law, institutions, and synthesis
+    speaker: true
+    materials:
+      - { text: governance reading, tbd: true }
+
+  - module: Synthesis
+    topic: Final presentations, day 1
+  - topic: Final presentations, day 2; course synthesis

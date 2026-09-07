@@ -1,0 +1,250 @@
+#!/usr/bin/env python3
+"""Build the COMP 440 schedule page from schedule.yml.
+
+Derives every meeting date from the calendar block, joins deadlines onto the
+grid, and refuses to build if the data has drifted. Writes _site/index.html.
+
+Usage: python3 build.py
+"""
+import datetime as dt
+import html
+import sys
+from pathlib import Path
+
+import yaml
+
+HERE = Path(__file__).parent
+DAYS = {"Mon": 0, "Tue": 1, "Wed": 2, "Thu": 3, "Fri": 4, "Sat": 5, "Sun": 6}
+
+errors: list[str] = []
+
+
+def fail(msg: str) -> None:
+    errors.append(msg)
+
+
+def derive_dates(cal: dict) -> list[dt.date]:
+    """Walk the term, keeping only the configured meeting days."""
+    want = {DAYS[d] for d in cal["days"]}
+    out, day = [], cal["first"]
+    while day <= cal["last"]:
+        if day.weekday() in want:
+            out.append(day)
+        day += dt.timedelta(days=1)
+    return out
+
+
+def build() -> str:
+    data = yaml.safe_load((HERE / "schedule.yml").read_text())
+    course, cal = data["course"], data["calendar"]
+    grid = derive_dates(cal)
+    entries = data["meetings"]
+
+    if len(entries) != len(grid):
+        fail(
+            f"{len(entries)} entries in `meetings` but the calendar derives "
+            f"{len(grid)} slots ({cal['first']}..{cal['last']}, "
+            f"{'/'.join(cal['days'])}). Add or remove an entry."
+        )
+        return ""
+
+    # Zip entries onto the derived grid; carry module names down.
+    rows, module = [], None
+    for date, entry in zip(grid, entries):
+        module = entry.get("module", module)
+        rows.append(
+            {
+                "date": date,
+                "module": module,
+                "topic": entry.get("break") or entry.get("topic", ""),
+                "is_break": "break" in entry,
+                "speaker": entry.get("speaker", False),
+                "materials": entry.get("materials", []) or [],
+                "due": [],
+            }
+        )
+    by_date = {r["date"]: r for r in rows}
+
+    def place(date, label, kind):
+        row = by_date.get(date)
+        if row is None:
+            fail(f"{label}: {date} is not a class meeting.")
+        elif row["is_break"]:
+            fail(f"{label}: {date} falls on {row['topic']}.")
+        else:
+            row["due"].append({"label": label, "kind": kind})
+
+    for a in data.get("assignments", []):
+        if a.get("launch"):
+            row = by_date.get(a["launch"])
+            if row is None or row["is_break"]:
+                fail(f"{a['id']} launch: {a['launch']} is not a class meeting.")
+            else:
+                row["materials"] = list(row["materials"]) + [
+                    {"text": f"Launch: {a['title']}", "url": a.get("url")}
+                ]
+        if a.get("due"):
+            place(a["due"], f"{a['id'].upper()} due", "hw")
+
+    for m in data.get("milestones", []):
+        place(m["date"], m["label"], "project")
+    for o in data.get("other_due", []):
+        place(o["date"], o["label"], "other")
+
+    # Speaker questions land on the meeting BEFORE the visit, always.
+    teaching = [r for r in rows if not r["is_break"]]
+    for i, row in enumerate(teaching):
+        if row["speaker"]:
+            if i == 0:
+                fail(f"Speaker window on {row['date']} has no prior meeting.")
+            else:
+                teaching[i - 1]["due"].append(
+                    {"label": "Speaker questions due", "kind": "speaker"}
+                )
+
+    if errors:
+        return ""
+    return render(course, cal, rows)
+
+
+def render(course, cal, rows) -> str:
+    e = html.escape
+
+    def materials(row):
+        if not row["materials"]:
+            return ""
+        out = []
+        for m in row["materials"]:
+            text = e(str(m.get("text", "")))
+            if m.get("tbd"):
+                out.append(f'<li class="tbd">{text} <span class="tag">TBD</span></li>')
+            elif m.get("url"):
+                out.append(f'<li><a href="{e(m["url"])}">{text}</a></li>')
+            else:
+                out.append(f"<li>{text}</li>")
+        return f'<ul class="mat">{"".join(out)}</ul>'
+
+    def due(row):
+        if not row["due"]:
+            return ""
+        items = "".join(
+            f'<li class="d-{d["kind"]}">{e(d["label"])}</li>' for d in row["due"]
+        )
+        return f'<ul class="due">{items}</ul>'
+
+    body, module = [], None
+    for row in rows:
+        if row["module"] != module:
+            module = row["module"]
+            body.append(
+                f'<tr class="modrow"><th colspan="4" scope="rowgroup">{e(module or "")}</th></tr>'
+            )
+        d = row["date"]
+        anchor = d.strftime("%b-%d").lower()
+        cls = "brk" if row["is_break"] else ""
+        speaker = '<span class="spk">Guest speaker window</span>' if row["speaker"] else ""
+        body.append(
+            f'<tr id="{anchor}" class="{cls}" data-date="{d.isoformat()}">'
+            f'<td class="dt"><a href="#{anchor}">{d.strftime("%a, %b %-d")}</a></td>'
+            f'<td class="tp">{e(row["topic"])}{speaker}</td>'
+            f'<td>{materials(row)}</td>'
+            f'<td>{due(row)}</td>'
+            f"</tr>"
+        )
+
+    return TEMPLATE.format(
+        title=e(f'{course["code"]}: {course["title"]}'),
+        term=e(course["term"]),
+        meets=e(course["meets"]),
+        due_time=e(cal["due_time"]),
+        rows="\n".join(body),
+        built=dt.date.today().isoformat(),
+    )
+
+
+TEMPLATE = """<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title} — {term} Schedule</title>
+<style>
+:root {{
+  --bg:#fff; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e3e3e3;
+  --accent:#7c2d12; --now:#fffbeb; --nowline:#f59e0b; --brk:#f7f7f7;
+}}
+@media (prefers-color-scheme:dark) {{ :root:not([data-theme=light]) {{
+  --bg:#16181c; --fg:#e8e8e8; --muted:#9aa0a6; --line:#2c3038;
+  --accent:#fca5a5; --now:#2a2410; --nowline:#d97706; --brk:#1c1f24;
+}} }}
+* {{ box-sizing:border-box }}
+body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }}
+.wrap {{ max-width:1080px; margin:0 auto; padding:2rem 1.25rem 4rem }}
+h1 {{ font-size:1.5rem; margin:0 0 .25rem }}
+.sub {{ color:var(--muted); margin:0 0 .35rem }}
+.note {{ color:var(--muted); font-size:.9rem; margin:0 0 1.5rem }}
+.note b {{ color:var(--fg) }}
+table {{ border-collapse:collapse; width:100%; }}
+th,td {{ text-align:left; vertical-align:top; padding:.7rem .75rem; border-bottom:1px solid var(--line) }}
+thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); border-bottom:2px solid var(--line) }}
+.modrow th {{ background:var(--brk); font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); padding:.5rem .75rem; border-bottom:1px solid var(--line) }}
+.dt {{ white-space:nowrap; width:8.5rem }}
+.dt a {{ color:inherit; text-decoration:none }}
+.dt a:hover {{ text-decoration:underline }}
+.tp {{ width:30% }}
+.spk {{ display:block; font-size:.78rem; color:var(--accent); margin-top:.2rem }}
+ul.mat, ul.due {{ margin:0; padding:0; list-style:none; font-size:.9rem }}
+ul.mat li, ul.due li {{ margin:0 0 .25rem }}
+.tbd {{ color:var(--muted) }}
+.tag {{ font-size:.65rem; border:1px solid var(--line); border-radius:3px; padding:0 .25rem; vertical-align:1px }}
+ul.due li::before {{ content:"● "; color:var(--muted) }}
+.d-hw::before {{ color:#dc2626 !important }}
+.d-project::before {{ color:#2563eb !important }}
+.d-speaker::before {{ color:#7c3aed !important }}
+tr.brk td {{ background:var(--brk); color:var(--muted) }}
+tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
+.legend {{ margin-top:1.5rem; font-size:.85rem; color:var(--muted) }}
+@media (max-width:720px) {{
+  thead {{ display:none }}
+  table,tbody,tr,td {{ display:block; width:auto }}
+  tr:not(.modrow) {{ border-bottom:1px solid var(--line); padding:.6rem 0 }}
+  td {{ border:0; padding:.15rem .5rem }}
+  .dt {{ font-weight:600 }}
+  .tp {{ width:auto }}
+}}
+</style></head><body><div class="wrap">
+<h1>{title}</h1>
+<p class="sub">{term} · {meets}</p>
+<p class="note">Everything below is due at <b>{due_time}</b> on the date shown.
+Speaker questions are due the class meeting before each visit.</p>
+<table>
+<thead><tr><th>Date</th><th>Topic</th><th>Class materials</th><th>Due</th></tr></thead>
+<tbody>
+{rows}
+</tbody></table>
+<p class="legend">Last updated {built}. Items marked TBD are not yet finalized.</p>
+</div>
+<script>
+// Highlight the next meeting, client-side, so the page stays correct without a rebuild.
+(function () {{
+  var today = new Date(); today.setHours(0,0,0,0);
+  var rows = document.querySelectorAll("tr[data-date]");
+  for (var i = 0; i < rows.length; i++) {{
+    var parts = rows[i].dataset.date.split("-");
+    var d = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+    if (d >= today) {{ rows[i].classList.add("next"); break; }}
+  }}
+}})();
+</script>
+</body></html>
+"""
+
+if __name__ == "__main__":
+    out = build()
+    if errors:
+        print("Schedule did not build:\n", file=sys.stderr)
+        for err in errors:
+            print(f"  - {err}", file=sys.stderr)
+        sys.exit(1)
+    out_dir = HERE / "_site"
+    out_dir.mkdir(exist_ok=True)
+    (out_dir / "index.html").write_text(out)
+    print(f"Built {out_dir / 'index.html'}")
