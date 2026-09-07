@@ -59,6 +59,8 @@ def build() -> str:
                 "topic": entry.get("break") or entry.get("topic", ""),
                 "is_break": "break" in entry,
                 "speaker": entry.get("speaker", False),
+                "speaker_name": (entry["speaker"]
+                                 if isinstance(entry.get("speaker"), str) else None),
                 "materials": entry.get("materials", []) or [],
                 "due": [],
             }
@@ -160,7 +162,11 @@ def render(course, cal, rows, speaker_note) -> str:
         d = row["date"]
         anchor = d.strftime("%b-%d").lower()
         cls = "brk" if row["is_break"] else ""
-        speaker = '<span class="spk">Guest speaker window</span>' if row["speaker"] else ""
+        speaker = ""
+        if row["speaker"]:
+            who = (f'Guest speaker: {e(row["speaker_name"])}' if row["speaker_name"]
+                   else "Guest speaker window")
+            speaker = f'<span class="spk">{who}</span>'
         body.append(
             f'<tr id="{anchor}" class="{cls}" data-date="{d.isoformat()}">'
             f'<td class="dt"><a href="#{anchor}">{d.strftime("%a, %b %-d")}</a></td>'

@@ -76,19 +76,22 @@ meetings:
       - { text: methods + Claude activity, tbd: true }
 
   - module: Collective Traces
-    topic: Ratings, aggregation, and recommender systems
+    # Latent factors lost its own session when cultural markets took Sep 22.
+    # It is now a closing segment on Sep 17 that sets up Oct 1 (embeddings).
+    topic: Ratings, aggregation, and prediction baselines
     materials:
       - { text: recommender systems activity, tbd: true }
-  - topic: Similarity, recommendation, and held-out evaluation
+  - topic: Similarity, neighborhoods, and held-out evaluation
     materials:
       - { text: similarity and evaluation activity, tbd: true }
-  - topic: Latent factors and learned representations
-    materials:
-      - { text: SVD / representation activity, tbd: true }
+      - { text: "latent factors: closing segment, picked up Oct 1", tbd: true }
   - topic: Cultural markets, social influence, and feedback simulation
-    speaker: true
     materials:
       - { text: Salganik reading + in-class simulation, tbd: true }
+  - topic: Guest speaker session
+    speaker: Logan Stapleton
+    materials:
+      - { text: background reading (to be set with speaker), tbd: true }
 
   - module: Retrieval
     topic: TF-IDF, BM25, and lexical retrieval
