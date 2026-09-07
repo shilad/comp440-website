@@ -74,6 +74,7 @@ meetings:
   - topic: Ways of knowing; working with Claude; reading and evidence
     materials:
       - { text: methods + Claude activity, tbd: true }
+      - { text: Community norms activity, tbd: true }
 
   - module: Collective Traces
     # Latent factors lost its own session when cultural markets took Sep 22.
