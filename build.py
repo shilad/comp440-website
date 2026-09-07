@@ -65,14 +65,14 @@ def build() -> str:
         )
     by_date = {r["date"]: r for r in rows}
 
-    def place(date, label, kind):
+    def place(date, label, kind, url=None):
         row = by_date.get(date)
         if row is None:
             fail(f"{label}: {date} is not a class meeting.")
         elif row["is_break"]:
             fail(f"{label}: {date} falls on {row['topic']}.")
         else:
-            row["due"].append({"label": label, "kind": kind})
+            row["due"].append({"label": label, "kind": kind, "url": url})
 
     for a in data.get("assignments", []):
         if a.get("launch"):
@@ -84,30 +84,42 @@ def build() -> str:
                     {"text": f"Launch: {a['title']}", "url": a.get("url")}
                 ]
         if a.get("due"):
-            place(a["due"], f"{a['id'].upper()} due", "hw")
+            place(a["due"], f"{a['id'].upper()} due", "hw", a.get("url"))
 
     for m in data.get("milestones", []):
-        place(m["date"], m["label"], "project")
+        place(m["date"], m["label"], "project", m.get("url"))
     for o in data.get("other_due", []):
-        place(o["date"], o["label"], "other")
+        place(o["date"], o["label"], "other", o.get("url"))
 
-    # Speaker questions land on the meeting BEFORE the visit, always.
+    # Speaker questions are placed by policy, never entered by hand.
+    sq = data.get("speaker_questions", {})
+    when = sq.get("when", "visit_day")
+    if when not in ("visit_day", "prior_meeting"):
+        fail(f"speaker_questions.when: {when!r} (use visit_day or prior_meeting).")
+        return ""
     teaching = [r for r in rows if not r["is_break"]]
     for i, row in enumerate(teaching):
-        if row["speaker"]:
-            if i == 0:
-                fail(f"Speaker window on {row['date']} has no prior meeting.")
-            else:
-                teaching[i - 1]["due"].append(
-                    {"label": "Speaker questions due", "kind": "speaker"}
-                )
+        if not row["speaker"]:
+            continue
+        if when == "prior_meeting" and i == 0:
+            fail(f"Speaker window on {row['date']} has no prior meeting.")
+            continue
+        target = row if when == "visit_day" else teaching[i - 1]
+        target["due"].append(
+            {"label": "Speaker questions due", "kind": "speaker",
+             "time": sq.get("due_time")}
+        )
 
     if errors:
         return ""
-    return render(course, cal, rows)
+    when_txt = ("on the day of the visit" if when == "visit_day"
+                else "the class meeting before the visit")
+    t = sq.get("due_time", cal["due_time"])
+    note = f"Speaker questions are due at <b>{html.escape(t)}</b> {when_txt}."
+    return render(course, cal, rows, note)
 
 
-def render(course, cal, rows) -> str:
+def render(course, cal, rows, speaker_note) -> str:
     e = html.escape
 
     def materials(row):
@@ -127,9 +139,15 @@ def render(course, cal, rows) -> str:
     def due(row):
         if not row["due"]:
             return ""
-        items = "".join(
-            f'<li class="d-{d["kind"]}">{e(d["label"])}</li>' for d in row["due"]
-        )
+        items = ""
+        for d in row["due"]:
+            at = ""
+            if d.get("time") and d["time"] != cal["due_time"]:
+                at = f' <span class="at">{e(d["time"])}</span>'
+            lbl = e(d["label"])
+            if d.get("url"):
+                lbl = f'<a href="{e(d["url"])}">{lbl}</a>'
+            items += f'<li class="d-{d["kind"]}">{lbl}{at}</li>' 
         return f'<ul class="due">{items}</ul>'
 
     body, module = [], None
@@ -157,6 +175,7 @@ def render(course, cal, rows) -> str:
         term=e(course["term"]),
         meets=e(course["meets"]),
         due_time=e(cal["due_time"]),
+        speaker_note=speaker_note,
         rows="\n".join(body),
         built=dt.date.today().isoformat(),
     )
@@ -194,6 +213,10 @@ thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; co
 ul.mat, ul.due {{ margin:0; padding:0; list-style:none; font-size:.9rem }}
 ul.mat li, ul.due li {{ margin:0 0 .25rem }}
 .tbd {{ color:var(--muted) }}
+ul.mat a, ul.due a {{ color:inherit; text-decoration:underline; text-decoration-color:var(--line);
+  text-underline-offset:2px }}
+ul.mat a:hover, ul.due a:hover {{ text-decoration-color:currentColor }}
+.at {{ font-size:.78rem; color:var(--muted); white-space:nowrap }}
 .tag {{ font-size:.65rem; border:1px solid var(--line); border-radius:3px; padding:0 .25rem; vertical-align:1px }}
 ul.due li::before {{ content:"● "; color:var(--muted) }}
 .d-hw::before {{ color:#dc2626 !important }}
@@ -227,7 +250,7 @@ tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 <h1>{title}</h1>
 <p class="sub">{term} · {meets}</p>
 <p class="note">Everything below is due at <b>{due_time}</b> on the date shown.
-Speaker questions are due the class meeting before each visit.</p>
+{speaker_note}</p>
 <table>
 <thead><tr><th>Date</th><th>Topic</th><th>Class materials</th><th>Due</th></tr></thead>
 <tbody>
@@ -284,3 +307,16 @@ if __name__ == "__main__":
     out_dir.mkdir(exist_ok=True)
     (out_dir / "index.html").write_text(out)
     print(f"Built {out_dir / 'index.html'}")
+
+    # Not a failure -- just a running count of how much is still unlinked, so
+    # filling in materials over the term is visible work rather than a guess.
+    linked = tbd = plain = 0
+    for m in yaml.safe_load((HERE / "schedule.yml").read_text())["meetings"]:
+        for mat in m.get("materials") or []:
+            if mat.get("url"):
+                linked += 1
+            elif mat.get("tbd"):
+                tbd += 1
+            else:
+                plain += 1
+    print(f"  materials: {linked} linked, {tbd} TBD, {plain} unlinked")

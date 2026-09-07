@@ -17,6 +17,13 @@ calendar:
   last: 2026-12-10
   due_time: 10:00am Central   # stated once; rendered everywhere
 
+# Speaker questions follow their own rule (instructor-confirmed Sep 7): they are
+# forwarded to the speaker that morning, so they are due the day of the visit,
+# not the meeting before. `when` may be visit_day or prior_meeting.
+speaker_questions:
+  when: visit_day
+  due_time: 8:00am Central
+
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
 assignments:
@@ -50,7 +57,7 @@ milestones:
   - { date: 2026-12-10, label: Final presentation materials }
 
 other_due:
-  - { date: 2026-09-10, label: Beginning-of-semester survey }
+  - { date: 2026-09-10, label: Beginning-of-semester survey, url: "https://docs.google.com/forms/d/1V2s-wjjvZy4EY8aB25mUfXf2cqgGiPgcbaXVjErRsiM/viewform" }
 
 # `speaker: true` marks a guest-speaker window. Speaker questions are placed
 # automatically on the PREVIOUS meeting — never on the visit day itself.
@@ -58,11 +65,13 @@ meetings:
   - module: Foundations
     topic: "Course introduction: collective intelligence in the GenAI era"
     materials:
-      - { text: Day 1 slides }
-      - { text: Beginning-of-semester survey }
-      - { text: Working with Claude (AI policy) }
-      - { text: Posture on AI form }
-      - { text: Course syllabus }
+      # Not linked: the Day 1 deck is still owner-only in Drive. Share it, then add a url here.
+      - { text: Day 1 slides, tbd: true }
+      - { text: Course syllabus, url: "https://docs.google.com/document/d/1I1aXkTStnQKPQGWRKp3_M79QWn5x0wKLbJn8dGIZ7hU/edit" }
+      - { text: "Working with Claude (AI policy)", url: "https://docs.google.com/document/d/1I1aXkTStnQKPQGWRKp3_M79QWn5x0wKLbJn8dGIZ7hU/edit" }
+      - { text: Beginning-of-semester survey, url: "https://docs.google.com/forms/d/1V2s-wjjvZy4EY8aB25mUfXf2cqgGiPgcbaXVjErRsiM/viewform" }
+      - { text: Posture on AI form, url: "https://docs.google.com/forms/d/1n1RBweYjx5icgohDUcL8sX1u7X6q0DUSpTmnEMwKXas/viewform" }
+      - { text: Wisdom of Crowds experiment, url: "https://docs.google.com/forms/d/1ATwZHFZMxh8OUXXtAASAezbDOHtjkQpfSuz3wRwKEJg/viewform" }
   - topic: Ways of knowing; working with Claude; reading and evidence
     materials:
       - { text: methods + Claude activity, tbd: true }
