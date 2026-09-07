@@ -202,6 +202,19 @@ ul.due li::before {{ content:"● "; color:var(--muted) }}
 tr.brk td {{ background:var(--brk); color:var(--muted) }}
 tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 .legend {{ margin-top:1.5rem; font-size:.85rem; color:var(--muted) }}
+#today {{
+  position:fixed; right:1.1rem; bottom:1.1rem; z-index:9;
+  display:none; align-items:center; gap:.35rem;
+  padding:.45rem .8rem; border-radius:999px;
+  background:var(--bg); color:var(--muted);
+  border:1px solid var(--line); font-size:.82rem; cursor:pointer;
+  opacity:.55; transition:opacity .15s, color .15s, border-color .15s;
+  box-shadow:0 1px 4px rgba(0,0,0,.07);
+}}
+#today.on {{ display:inline-flex }}
+#today:hover, #today:focus-visible {{ opacity:1; color:var(--fg); border-color:var(--nowline) }}
+#today .arrow {{ color:var(--nowline) }}
+@media print {{ #today {{ display:none !important }} }}
 @media (max-width:720px) {{
   thead {{ display:none }}
   table,tbody,tr,td {{ display:block; width:auto }}
@@ -222,16 +235,39 @@ Speaker questions are due the class meeting before each visit.</p>
 </tbody></table>
 <p class="legend">Last updated {built}. Items marked TBD are not yet finalized.</p>
 </div>
+<button id="today" type="button" hidden><span class="arrow">&#8595;</span> Today</button>
 <script>
-// Highlight the next meeting, client-side, so the page stays correct without a rebuild.
+// Find the current/next meeting client-side, so the page stays correct without a rebuild.
 (function () {{
-  var today = new Date(); today.setHours(0,0,0,0);
+  var today = new Date(); today.setHours(0, 0, 0, 0);
   var rows = document.querySelectorAll("tr[data-date]");
+  var target = null;
   for (var i = 0; i < rows.length; i++) {{
-    var parts = rows[i].dataset.date.split("-");
-    var d = new Date(+parts[0], +parts[1] - 1, +parts[2]);
-    if (d >= today) {{ rows[i].classList.add("next"); break; }}
+    var p = rows[i].dataset.date.split("-");
+    if (new Date(+p[0], +p[1] - 1, +p[2]) >= today) {{ target = rows[i]; break; }}
   }}
+  if (!target) return;                       // term is over: no highlight, no button
+  target.classList.add("next");
+
+  var btn = document.getElementById("today");
+  var label = target.querySelector(".dt a");
+  var when = label ? label.textContent.trim() : "today";
+  btn.title = "Jump to " + when;
+  btn.setAttribute("aria-label", "Jump to " + when);
+  btn.hidden = false;
+
+  function inView(el) {{
+    var r = el.getBoundingClientRect();
+    return r.top >= 0 && r.bottom <= (window.innerHeight || 0);
+  }}
+  function sync() {{ btn.classList.toggle("on", !inView(target)); }}
+  btn.addEventListener("click", function () {{
+    target.scrollIntoView({{ behavior: "smooth", block: "center" }});
+    history.replaceState(null, "", "#" + target.id);
+  }});
+  addEventListener("scroll", sync, {{ passive: true }});
+  addEventListener("resize", sync);
+  sync();
 }})();
 </script>
 </body></html>
