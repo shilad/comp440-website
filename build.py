@@ -78,14 +78,15 @@ def build() -> str:
         )
     by_date = {r["date"]: r for r in rows}
 
-    def place(date, label, kind, url=None):
+    def place(date, label, kind, url=None, time=None, links=None):
         row = by_date.get(date)
         if row is None:
             fail(f"{label}: {date} is not a class meeting.")
         elif row["is_break"]:
             fail(f"{label}: {date} falls on {row['topic']}.")
         else:
-            row["due"].append({"label": label, "kind": kind, "url": url})
+            row["due"].append({"label": label, "kind": kind, "url": url,
+                               "time": time, "links": links})
 
     for a in data.get("assignments", []):
         if a.get("launch"):
@@ -98,6 +99,19 @@ def build() -> str:
                 ]
         if a.get("due"):
             place(a["due"], f"{a['id'].upper()} due", "hw", a.get("url"))
+
+    # A reading creates its own reflection deadline. Declared once here with the
+    # citation and the paper's URL; the form URL and the time come from the
+    # `reflections` policy block, so they are never repeated per reading.
+    refl = data.get("reflections", {})
+    for r in data.get("readings", []):
+        links = [{"text": "paper", "url": r["url"]}] if r.get("url") else []
+        if refl.get("form_url"):
+            links.append({"text": "reflection", "url": refl["form_url"]})
+        elif r.get("url"):
+            fail("readings are set but reflections.form_url is missing.")
+        place(r["date"], f'Read {r["cite"]}', "reading",
+              time=refl.get("due_time"), links=links)
 
     for m in data.get("milestones", []):
         place(m["date"], m["label"], "project", m.get("url"))
@@ -137,9 +151,11 @@ def build() -> str:
     when_txt = ("on the day of the visit" if when == "visit_day"
                 else "the class meeting before the visit")
     t = sq.get("due_time", cal["due_time"])
-    note = (f"{join_labels(items)} are due at <b>{html.escape(t)}</b> {when_txt}."
-            if len(items) != 1 else
-            f"{join_labels(items)} is due at <b>{html.escape(t)}</b> {when_txt}.")
+    note = f"{join_labels(items)} are due at <b>{html.escape(t)}</b> {when_txt}."
+    if refl.get("due_time"):
+        note += (" Reading reflections are due at "
+                 f"<b>{html.escape(refl['due_time'])}</b> on the day of the class "
+                 "that discusses the reading.")
     return render(course, cal, rows, note)
 
 
@@ -171,7 +187,13 @@ def render(course, cal, rows, speaker_note) -> str:
             lbl = e(d["label"])
             if d.get("url"):
                 lbl = f'<a href="{e(d["url"])}">{lbl}</a>'
-            items += f'<li class="d-{d["kind"]}">{lbl}{at}</li>' 
+            # A reading names its own links inline: Read X [paper | reflection]
+            if d.get("links"):
+                inner = " | ".join(
+                    f'<a href="{e(l["url"])}">{e(l["text"])}</a>' for l in d["links"]
+                )
+                lbl += f' <span class="lnks">[{inner}]</span>'
+            items += f'<li class="d-{d["kind"]}">{lbl}{at}</li>'
         return f'<ul class="due">{items}</ul>'
 
     body, module = [], None
@@ -250,6 +272,8 @@ ul.due li::before {{ content:"● "; color:var(--muted) }}
 .d-hw::before {{ color:#dc2626 !important }}
 .d-project::before {{ color:#2563eb !important }}
 .d-speaker::before {{ color:#7c3aed !important }}
+.d-reading::before {{ color:#0f766e !important }}
+.lnks {{ font-size:.78rem; color:var(--muted); white-space:nowrap }}
 tr.brk td {{ background:var(--brk); color:var(--muted) }}
 tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 .legend {{ margin-top:1.5rem; font-size:.85rem; color:var(--muted) }}

@@ -30,8 +30,21 @@ speaker_due:
   due_time: 8:00am Central
   items:
     - { label: Speaker questions due }
-    - { label: Reading reflection due,
-        url: "https://docs.google.com/forms/d/1vX-z6k7iQbH7BWE5OgdcpLw0hmxBl2FWvoOZivI3xjU/viewform" }
+
+# Reading reflections. The obligation comes from the READING, not from the day —
+# so a reflection deadline is placed by each entry in `readings:` below, and a
+# meeting with no assigned reading correctly shows none. Stated once here:
+reflections:
+  due_time: 8:00am Central
+  form_url: "https://docs.google.com/forms/d/1vX-z6k7iQbH7BWE5OgdcpLw0hmxBl2FWvoOZivI3xjU/viewform"
+
+# One entry per assigned reading. `date` is validated against the derived meeting
+# grid like every other deadline. Renders in the Due column as
+# `Read <cite> [paper | reflection]`.
+readings:
+  - date: 2026-09-10
+    cite: 'Keshav et al, "How to Read a Paper"'
+    url: "http://ccr.sigcomm.org/online/files/p83-keshavA.pdf"
 
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
@@ -84,10 +97,6 @@ meetings:
     materials:
       - { text: methods + Claude activity, tbd: true }
       - { text: Community norms activity, tbd: true }
-      - { text: "Keshav, How to Read a Paper (SIGCOMM CCR, July 2007)",
-          url: "http://ccr.sigcomm.org/online/files/p83-keshavA.pdf" }
-      - { text: "Reading reflection form (used all semester)",
-          url: "https://docs.google.com/forms/d/1vX-z6k7iQbH7BWE5OgdcpLw0hmxBl2FWvoOZivI3xjU/viewform" }
 
   - module: Collective Traces
     # Latent factors lost its own session when cultural markets took Sep 22.
