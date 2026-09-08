@@ -98,7 +98,8 @@ def build() -> str:
                     {"text": f"Launch: {a['title']}", "url": a.get("url")}
                 ]
         if a.get("due"):
-            place(a["due"], f"{a['id'].upper()} due", "hw", a.get("url"))
+            place(a["due"], f"{a['id'].upper()} due", "hw", a.get("url"),
+                  time=cal["due_time"])
 
     # A reading creates its own reflection deadline. Declared once here with the
     # citation and the paper's URL; the form URL and the time come from the
@@ -114,9 +115,9 @@ def build() -> str:
               time=refl.get("due_time"), links=links)
 
     for m in data.get("milestones", []):
-        place(m["date"], m["label"], "project", m.get("url"))
+        place(m["date"], m["label"], "project", m.get("url"), time=cal["due_time"])
     for o in data.get("other_due", []):
-        place(o["date"], o["label"], "other", o.get("url"))
+        place(o["date"], o["label"], "other", o.get("url"), time=cal["due_time"])
 
     # Speaker deadlines are placed by policy, never entered by hand. A speaker day
     # owes more than the questions, so `items` is a list; the row entries and the
@@ -181,8 +182,9 @@ def render(course, cal, rows, speaker_note) -> str:
             return ""
         items = ""
         for d in row["due"]:
+            # The column header states the common time; annotate only exceptions.
             at = ""
-            if d.get("time") and d["time"] != cal["due_time"]:
+            if d.get("time") and d["time"] != cal.get("column_time", cal["due_time"]):
                 at = f' <span class="at">{e(d["time"])}</span>'
             lbl = e(d["label"])
             if d.get("url"):
@@ -225,6 +227,7 @@ def render(course, cal, rows, speaker_note) -> str:
         term=e(course["term"]),
         meets=e(course["meets"]),
         due_time=e(cal["due_time"]),
+        due_col=e(cal.get("column_time", cal["due_time"])),
         speaker_note=speaker_note,
         rows="\n".join(body),
         built=dt.date.today().isoformat(),
@@ -301,10 +304,10 @@ tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 </style></head><body><div class="wrap">
 <h1>{title}</h1>
 <p class="sub">{term} · {meets}</p>
-<p class="note">Everything below is due at <b>{due_time}</b> on the date shown.
-{speaker_note}</p>
+<p class="note">Due times are in the column heading; a deadline shows a time only where it differs.
+Homework and project milestones are due at <b>{due_time}</b>. {speaker_note}</p>
 <table>
-<thead><tr><th>Date</th><th>Topic</th><th>Class materials</th><th>Due</th></tr></thead>
+<thead><tr><th>Date</th><th>Topic</th><th>Class materials</th><th>Due ({due_col})</th></tr></thead>
 <tbody>
 {rows}
 </tbody></table>
