@@ -161,6 +161,79 @@ def build() -> str:
     return render(course, cal, rows, note)
 
 
+def events_rail(t0: dt.date, t1: dt.date) -> str:
+    """The MSCS events rail. Generated data from events.yml, never hand-edited.
+
+    Rail dates are DISPLAYED, not validated against the meeting grid: these are
+    department events on Wed/Sat/Sun, not course deadlines, and the grid check
+    exists to protect deadlines.
+    """
+    path = HERE / "events.yml"
+    if not path.exists():
+        return ""
+    data = yaml.safe_load(path.read_text()) or {}
+    evs = data.get("events") or []
+    fetched = data.get("fetched")
+    if not fetched:
+        fail("events.yml has no `fetched:` date — regenerate with tools/fetch_events.py.")
+        return ""
+    age = (dt.date.today() - fetched).days
+    if age > 30:
+        fail(f"events.yml is {age} days old. Refresh it (tools/fetch_events.py) before publishing.")
+        return ""
+
+    # A date must not carry both an event and its own cancellation notice.
+    by_date = {}
+    for e in evs:
+        by_date.setdefault(e["date"], []).append(e)
+    for d, group in by_date.items():
+        if any(g.get("kind") == "cancelled" for g in group) and len(group) > 1:
+            titles = [g["title"] for g in group]
+            if any(t.lower().lstrip().startswith("no ") for t in titles) and len(titles) > 1:
+                base = [t for t in titles if not t.lower().lstrip().startswith("no ")]
+                if any("coffee" in t.lower() for t in base) and any(
+                    "coffee" in t.lower() for t in titles if t.lower().lstrip().startswith("no ")
+                ):
+                    fail(f"{d}: both a coffee break and a 'No Coffee Break' notice. "
+                         "The feed's override was not applied — check fetch_events.py.")
+
+    e = html.escape
+    out = []
+    for ev in evs:
+        d = ev["date"]
+        when = d.strftime("%a %b ") + str(d.day)
+        if ev.get("time"):
+            when += f" · {e(ev['time'])}"
+        loc = ev.get("location") or ""
+        if len(loc) > 40:
+            loc = loc[:38].rstrip() + "…"
+        out.append(
+            f'<li class="ev-{e(ev.get("kind", "other"))}">'
+            f'<span class="when">{e(when)}</span>'
+            f'<span class="what">{e(ev["title"])}</span>'
+            + (f'<span class="where">{e(loc)}</span>' if loc else "")
+            + "</li>"
+        )
+    if not out:
+        return ""
+
+    # Named honestly: the capstone requirement is seminars, and the calendar has
+    # none this term. Drops away by itself once a seminar is posted.
+    seminars = [x for x in evs if "seminar" in x["title"].lower()]
+    gap = "" if seminars else (
+        '<p class="gap"><b>No seminar dates are posted yet.</b> The capstone requirement is two '
+        "MSCS seminars with a reflection for each; the talks below are the nearest thing on the "
+        "department calendar so far. Check back.</p>"
+    )
+    return (
+        '<aside class="rail"><h2>MSCS events</h2>'
+        + gap
+        + f'<ul class="evs">{"".join(out)}</ul>'
+        + f'<p class="asof">From the MSCS Events calendar, as of {e(str(fetched))}.</p>'
+        "</aside>"
+    )
+
+
 def course_links(links: list) -> str:
     """The course-level links row: things needed all semester, not tied to a meeting."""
     if not links:
@@ -241,6 +314,7 @@ def render(course, cal, rows, speaker_note) -> str:
         due_time=e(cal["due_time"]),
         due_col=e(cal.get("column_time", cal["due_time"])),
         links=course_links(course.get("links") or []),
+        events=events_rail(cal["first"], cal["last"]),
         speaker_note=speaker_note,
         rows="\n".join(body),
         built=dt.date.today().isoformat(),
@@ -297,6 +371,27 @@ ul.due li::before {{ content:"● "; color:var(--muted) }}
 tr.brk td {{ background:var(--brk); color:var(--muted) }}
 tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 .legend {{ margin-top:1.5rem; font-size:.85rem; color:var(--muted) }}
+.cols {{ display:flex; gap:2rem; align-items:flex-start }}
+.cols main {{ flex:1 1 auto; min-width:0 }}
+.rail {{ flex:0 0 15rem; font-size:.85rem; border-left:1px solid var(--line); padding-left:1rem }}
+.rail h2 {{ font-size:.8rem; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--muted); margin:.15rem 0 .6rem; font-weight:600 }}
+.rail .gap {{ margin:0 0 .8rem; color:var(--muted); line-height:1.45 }}
+.rail .gap b {{ color:var(--fg) }}
+ul.evs {{ list-style:none; margin:0; padding:0 }}
+ul.evs li {{ margin:0 0 .7rem; padding-left:.6rem; border-left:2px solid var(--line) }}
+ul.evs .when {{ display:block; color:var(--muted); font-size:.78rem }}
+ul.evs .what {{ display:block }}
+ul.evs .where {{ display:block; color:var(--muted); font-size:.78rem }}
+li.ev-talk {{ border-left-color:#0f766e }}
+li.ev-talk .what {{ font-weight:600 }}
+li.ev-cancelled {{ opacity:.55 }}
+li.ev-cancelled .what {{ text-decoration:line-through }}
+.rail .asof {{ margin:1rem 0 0; color:var(--muted); font-size:.78rem }}
+@media (max-width:900px) {{
+  .cols {{ display:block }}
+  .rail {{ border-left:0; border-top:1px solid var(--line); padding:1rem 0 0; margin-top:1.5rem }}
+}}
 #today {{
   position:fixed; right:1.1rem; bottom:1.1rem; z-index:9;
   display:none; align-items:center; gap:.35rem;
@@ -323,12 +418,17 @@ tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 <p class="sub">{term} · {meets}</p>
 {links}
 <p class="note">Everything is due at <b>{due_time}</b> on the date shown. {speaker_note}</p>
+<div class="cols">
+<main>
 <table>
 <thead><tr><th>Date</th><th>Topic</th><th>Class materials</th><th>Due ({due_col})</th></tr></thead>
 <tbody>
 {rows}
 </tbody></table>
 <p class="legend">Last updated {built}. Items marked TBD are not yet finalized.</p>
+</main>
+{events}
+</div>
 </div>
 <button id="today" type="button" hidden><span class="arrow">&#8595;</span> Today</button>
 <script>

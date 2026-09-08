@@ -16,8 +16,26 @@ Live at **https://shilad.github.io/comp440-website/**. Instructor: Shilad Sen.
 
 ## Changing the schedule
 
-Edit **`schedule.yml`**. Nothing else. Push to `main`; the site rebuilds and redeploys in about a
+Edit **`schedule.yml`**. Push to `main`; the site rebuilds and redeploys in about a
 minute. `_site/` is build output — never edit it, never commit it.
+
+**`events.yml` is the one exception, and it is GENERATED.** It holds the MSCS events rail and is
+written by `tools/fetch_events.py` from the department's public calendar. Never hand-edit it — a
+refresh overwrites your change. It is a separate file precisely so a regeneration cannot clobber
+anything in the hand-authored `schedule.yml`.
+
+```
+python3 tools/fetch_events.py --dry-run   # show what would change
+python3 tools/fetch_events.py             # rewrite events.yml, print the diff
+```
+
+Refresh is **instructor-triggered**: the course-admin session asks before a build, rather than the
+build fetching on its own. The build never touches the network, so the site keeps publishing only
+from checked-in data. `events.yml` records `fetched:`, the rail prints it, and the build **fails**
+once it is more than 30 days old rather than quietly serving a stale calendar.
+
+Events that are dropped are listed under `skipped:` with a reason, not discarded, so a later pass
+does not have to work out again why each one is missing.
 
 **You never type a meeting date.** `calendar` declares the meeting pattern and the term bounds;
 the build assigns dates to the `meetings` list in order.
@@ -77,7 +95,12 @@ python3 build.py          # validates, then writes _site/index.html
 
 It exits non-zero, and the deploy stops, if the number of `meetings` entries doesn't match the
 derived dates, a deadline misses a class meeting or lands on a break, `speaker_questions.when` is
-not `visit_day`/`prior_meeting`, or a speaker window has no prior meeting to carry its questions.
-It also prints link coverage so remaining TBDs stay visible.
+not `visit_day`/`prior_meeting`, a speaker window has no prior meeting to carry its questions, or
+`events.yml` is undated, stale, or contains a day that carries both an event and its own
+cancellation notice. It also prints link coverage so remaining TBDs stay visible.
+
+Note on rail dates: they are **displayed, not validated** against the meeting grid. MSCS events
+fall on Wednesdays and weekends, and invariant 1 exists to protect *deadlines* — loosening it to
+admit department events would give up the guarantee that matters.
 
 Design rationale: `shilad/comp440-main` → `docs/schedule-site-design.md`.
