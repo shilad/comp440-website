@@ -17,12 +17,21 @@ calendar:
   last: 2026-12-10
   due_time: 10:00am Central   # stated once; rendered everywhere
 
-# Speaker questions follow their own rule (instructor-confirmed Sep 7): they are
-# forwarded to the speaker that morning, so they are due the day of the visit,
-# not the meeting before. `when` may be visit_day or prior_meeting.
-speaker_questions:
+# Speaker days carry their own deadline rule (instructor-confirmed Sep 7, extended
+# Sep 8): the questions are forwarded to the speaker that morning, so everything
+# owed for a visit is due at 8am on the day itself, not the meeting before.
+# `when` may be visit_day or prior_meeting. `items` are placed on every speaker
+# row, in order; an empty list places nothing.
+#
+# Note this 8am is NOT calendar.due_time. Homework and projects are 10:00am;
+# reading reflections and speaker questions are 8:00am. Two rules, deliberately.
+speaker_due:
   when: visit_day
   due_time: 8:00am Central
+  items:
+    - { label: Speaker questions due }
+    - { label: Reading reflection due,
+        url: "https://docs.google.com/forms/d/1vX-z6k7iQbH7BWE5OgdcpLw0hmxBl2FWvoOZivI3xjU/viewform" }
 
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
@@ -59,8 +68,8 @@ milestones:
 other_due:
   - { date: 2026-09-10, label: Beginning-of-semester survey, url: "https://docs.google.com/forms/d/1V2s-wjjvZy4EY8aB25mUfXf2cqgGiPgcbaXVjErRsiM/viewform" }
 
-# `speaker: true` marks a guest-speaker window. Speaker questions are placed
-# automatically on the PREVIOUS meeting — never on the visit day itself.
+# `speaker: true` marks a guest-speaker window. The `speaker_due` block above
+# decides what is placed on it and when — never type a speaker deadline by hand.
 meetings:
   - module: Foundations
     topic: "Course introduction: collective intelligence in the GenAI era"
@@ -75,6 +84,10 @@ meetings:
     materials:
       - { text: methods + Claude activity, tbd: true }
       - { text: Community norms activity, tbd: true }
+      - { text: "Keshav, How to Read a Paper (SIGCOMM CCR, July 2007)",
+          url: "http://ccr.sigcomm.org/online/files/p83-keshavA.pdf" }
+      - { text: "Reading reflection form (used all semester)",
+          url: "https://docs.google.com/forms/d/1vX-z6k7iQbH7BWE5OgdcpLw0hmxBl2FWvoOZivI3xjU/viewform" }
 
   - module: Collective Traces
     # Latent factors lost its own session when cultural markets took Sep 22.
@@ -82,6 +95,7 @@ meetings:
     topic: Ratings, aggregation, and prediction baselines
     materials:
       - { text: recommender systems activity, tbd: true }
+      - { text: "Community norms v1 — ratify or amend", tbd: true }
   - topic: Similarity, neighborhoods, and held-out evaluation
     materials:
       - { text: similarity and evaluation activity, tbd: true }
@@ -129,6 +143,7 @@ meetings:
   - topic: Preference data, constitutions, and disagreement
     materials:
       - { text: preference-labeling activity, tbd: true }
+      - { text: "Community norms — reread alongside HW3", tbd: true }
   - topic: Direct Preference Optimization and model alignment
     materials:
       - { text: DPO lab, tbd: true }
@@ -168,3 +183,5 @@ meetings:
   - module: Synthesis
     topic: Final presentations, day 1
   - topic: Final presentations, day 2; course synthesis
+    materials:
+      - { text: "Community norms + Day 1 shared doc — final reread", tbd: true }

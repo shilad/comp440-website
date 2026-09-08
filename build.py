@@ -34,6 +34,17 @@ def derive_dates(cal: dict) -> list[dt.date]:
     return out
 
 
+def join_labels(items: list[dict]) -> str:
+    """Speaker-deadline labels as a sentence subject: 'A and b'."""
+    names = [html.escape(n[: -len(" due")] if n.endswith(" due") else n)
+             for n in (i["label"] for i in items)]
+    if not names:
+        return "Nothing"
+    if len(names) == 1:
+        return names[0]
+    return ", ".join(names[:-1]) + " and " + names[-1][0].lower() + names[-1][1:]
+
+
 def build() -> str:
     data = yaml.safe_load((HERE / "schedule.yml").read_text())
     course, cal = data["course"], data["calendar"]
@@ -93,11 +104,19 @@ def build() -> str:
     for o in data.get("other_due", []):
         place(o["date"], o["label"], "other", o.get("url"))
 
-    # Speaker questions are placed by policy, never entered by hand.
-    sq = data.get("speaker_questions", {})
+    # Speaker deadlines are placed by policy, never entered by hand. A speaker day
+    # owes more than the questions, so `items` is a list; the row entries and the
+    # footer note are built from that one list and cannot drift apart.
+    sq = data.get("speaker_due") or data.get("speaker_questions") or {}
     when = sq.get("when", "visit_day")
     if when not in ("visit_day", "prior_meeting"):
-        fail(f"speaker_questions.when: {when!r} (use visit_day or prior_meeting).")
+        fail(f"speaker_due.when: {when!r} (use visit_day or prior_meeting).")
+        return ""
+    items = sq.get("items", [{"label": "Speaker questions due"}])
+    if not isinstance(items, list) or any(
+        not isinstance(i, dict) or not i.get("label") for i in items
+    ):
+        fail("speaker_due.items must be a list of {label, url?} mappings.")
         return ""
     teaching = [r for r in rows if not r["is_break"]]
     for i, row in enumerate(teaching):
@@ -107,17 +126,20 @@ def build() -> str:
             fail(f"Speaker window on {row['date']} has no prior meeting.")
             continue
         target = row if when == "visit_day" else teaching[i - 1]
-        target["due"].append(
-            {"label": "Speaker questions due", "kind": "speaker",
-             "time": sq.get("due_time")}
-        )
+        for item in items:
+            target["due"].append(
+                {"label": item["label"], "kind": "speaker",
+                 "time": sq.get("due_time"), "url": item.get("url")}
+            )
 
     if errors:
         return ""
     when_txt = ("on the day of the visit" if when == "visit_day"
                 else "the class meeting before the visit")
     t = sq.get("due_time", cal["due_time"])
-    note = f"Speaker questions are due at <b>{html.escape(t)}</b> {when_txt}."
+    note = (f"{join_labels(items)} are due at <b>{html.escape(t)}</b> {when_txt}."
+            if len(items) != 1 else
+            f"{join_labels(items)} is due at <b>{html.escape(t)}</b> {when_txt}.")
     return render(course, cal, rows, note)
 
 
