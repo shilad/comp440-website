@@ -15,12 +15,21 @@ course:
 # the things students need all semester and should never have to hunt for inside a
 # meeting's materials cell. Order is by how often they are used, not importance.
 # `url` only — these are not tied to a meeting, so no date validation applies.
+# THE submission form — one surface for everything students hand in: homework,
+# seminar reflections, reading reflections, speaker questions (instructor, Sep 8).
+# Declared once here as a YAML anchor and referenced everywhere with `*submit`,
+# so the links row, the speaker rows and every reading cannot drift apart. To
+# change the form, change this line only.
+submit_form: &submit "https://docs.google.com/forms/d/1h0Ve7FlHrqmb--b4kle1pzhEM4JAqETPtmJJ1JfJgLw/viewform"
+
 links:
-  - { text: Reading reflection, url: "https://forms.gle/Wfjx2WXkEDbSVRG19" }
-  - { text: Assignment submission, url: "https://docs.google.com/forms/d/1h0Ve7FlHrqmb--b4kle1pzhEM4JAqETPtmJJ1JfJgLw/viewform" }
+  - { text: Submit work, url: *submit }
   - { text: Syllabus, url: "https://docs.google.com/document/d/1I1aXkTStnQKPQGWRKp3_M79QWn5x0wKLbJn8dGIZ7hU/edit" }
   - { text: AI guidelines, url: "https://docs.google.com/document/d/1Eb6qxeS2wy-9TBzL8eGk9j75iYu_yEV4VoLQaywRz8E/edit" }
   - { text: Office hours, url: "https://app.reclaim.ai/m/shilad/appointment" }
+  # app_redirect resolves a channel by NAME, so this needs no channel ID and
+  # survives the channel being recreated. Opens the desktop app if installed.
+  - { text: "Slack #comp440-f26", url: "https://devgarden.slack.com/app_redirect?channel=comp440-f26" }
 
 calendar:
   days: [Tue, Thu]
@@ -38,25 +47,16 @@ calendar:
 # Sep 7). `when` may be visit_day or prior_meeting. `items` are placed on every
 # speaker row, in order; an empty list places nothing. No `due_time` — it
 # inherits calendar.due_time like everything else.
-#
-# The url here is the SAME form as `reflections.form_url` below — one form now
-# takes every reflection and the speaker questions (instructor, Sep 8). Keep the
-# two in sync; if they ever diverge it means someone changed only one of them.
 speaker_due:
   when: visit_day
   items:
-    - { label: Speaker questions due, url: "https://forms.gle/SG62Y8DqHbFoD8bt6" }
+    - { label: Speaker questions due, url: *submit }
 
 # Reflections. The obligation comes from the READING, not from the day — so a
 # reflection deadline is placed by each entry in `readings:` below, and a meeting
 # with no assigned reading correctly shows none.
-#
-# ONE form takes all of it (instructor, Sep 8): seminar reflections, reading
-# reflections and speaker questions. This is the published short link; the
-# per-form edit URL is deliberately not published here. Changing it here changes
-# every reflection link on the site, including the speaker rows above.
 reflections:
-  form_url: "https://forms.gle/SG62Y8DqHbFoD8bt6"
+  form_url: *submit
 
 # One entry per assigned reading. `date` is validated against the derived meeting
 # grid like every other deadline. Renders in the Due column as
