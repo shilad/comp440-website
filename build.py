@@ -112,7 +112,7 @@ def build() -> str:
         elif r.get("url"):
             fail("readings are set but reflections.form_url is missing.")
         place(r["date"], f'Read {r["cite"]}', "reading",
-              time=refl.get("due_time"), links=links)
+              time=refl.get("due_time", cal["due_time"]), links=links)
 
     for m in data.get("milestones", []):
         place(m["date"], m["label"], "project", m.get("url"), time=cal["due_time"])
@@ -152,11 +152,11 @@ def build() -> str:
     when_txt = ("on the day of the visit" if when == "visit_day"
                 else "the class meeting before the visit")
     t = sq.get("due_time", cal["due_time"])
-    note = f"{join_labels(items)} are due at <b>{html.escape(t)}</b> {when_txt}."
-    if refl.get("due_time"):
-        note += (" Reading reflections are due at "
-                 f"<b>{html.escape(refl['due_time'])}</b> on the day of the class "
-                 "that discusses the reading.")
+    same = t == cal["due_time"]
+    note = (f"{join_labels(items)} are due {when_txt}." if same else
+            f"{join_labels(items)} are due at <b>{html.escape(t)}</b> {when_txt}.")
+    note += (" A reading's reflection is due on the day of the class that"
+             " discusses it.")
     return render(course, cal, rows, note)
 
 
@@ -304,8 +304,7 @@ tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 </style></head><body><div class="wrap">
 <h1>{title}</h1>
 <p class="sub">{term} · {meets}</p>
-<p class="note">Due times are in the column heading; a deadline shows a time only where it differs.
-Homework and project milestones are due at <b>{due_time}</b>. {speaker_note}</p>
+<p class="note">Everything is due at <b>{due_time}</b> on the date shown. {speaker_note}</p>
 <table>
 <thead><tr><th>Date</th><th>Topic</th><th>Class materials</th><th>Due ({due_col})</th></tr></thead>
 <tbody>
