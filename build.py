@@ -208,7 +208,7 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         if len(loc) > 40:
             loc = loc[:38].rstrip() + "…"
         out.append(
-            f'<li class="ev-{e(ev.get("kind", "other"))}">'
+            f'<li class="ev-{e(ev.get("kind", "other"))}" data-date="{d.isoformat()}">'
             f'<span class="when">{e(when)}</span>'
             f'<span class="what">{e(ev["title"])}</span>'
             + (f'<span class="where">{e(loc)}</span>' if loc else "")
@@ -380,6 +380,13 @@ tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 .rail .gap b {{ color:var(--fg) }}
 ul.evs {{ list-style:none; margin:0; padding:0 }}
 ul.evs li {{ margin:0 0 .7rem; padding-left:.6rem; border-left:2px solid var(--line) }}
+/* When JS has measured the table, events are lifted out of flow and parked beside
+   the meeting they fall near. Without JS this class is never added and the list
+   above renders as an ordinary stack. */
+ul.evs.aligned {{ position:relative }}
+ul.evs.aligned li {{ position:absolute; left:0; right:0; margin:0;
+  transition:top .15s ease-out }}
+@media (prefers-reduced-motion:reduce) {{ ul.evs.aligned li {{ transition:none }} }}
 ul.evs .when {{ display:block; color:var(--muted); font-size:.78rem }}
 ul.evs .what {{ display:block }}
 ul.evs .where {{ display:block; color:var(--muted); font-size:.78rem }}
@@ -463,6 +470,69 @@ li.ev-cancelled .what {{ text-decoration:line-through }}
   addEventListener("scroll", sync, {{ passive: true }});
   addEventListener("resize", sync);
   sync();
+}})();
+
+// Park each MSCS event beside the class meeting it falls near, so the rail reads as a
+// timeline parallel to the schedule rather than a list beside it. Row heights are not
+// knowable at build time, so this measures them. If it cannot (no JS, narrow screen),
+// the rail stays a plain stacked list and nothing is lost.
+(function () {{
+  var list = document.querySelector("ul.evs");
+  if (!list) return;
+  var items = [].slice.call(list.children);
+  var rows = [].slice.call(document.querySelectorAll("tr[data-date]"));
+  if (!items.length || rows.length < 2) return;
+
+  function day(s) {{ var p = s.split("-"); return Date.UTC(+p[0], +p[1] - 1, +p[2]); }}
+  var GAP = 10;
+
+  function place() {{
+    // Below the breakpoint the rail sits under the table; leave it alone.
+    if (window.matchMedia("(max-width: 900px)").matches) {{
+      list.classList.remove("aligned");
+      list.style.height = "";
+      items.forEach(function (li) {{ li.style.top = ""; }});
+      return;
+    }}
+    var base = list.getBoundingClientRect().top + window.scrollY;
+    var marks = rows.map(function (r) {{
+      return {{ t: day(r.dataset.date),
+               y: r.getBoundingClientRect().top + window.scrollY - base }};
+    }});
+
+    // Ideal position: interpolate between the two meetings that bracket the event,
+    // so a Wednesday event lands between Tuesday's row and Thursday's.
+    var want = items.map(function (li) {{
+      var t = day(li.dataset.date), i;
+      if (t <= marks[0].t) return {{ li: li, y: marks[0].y }};
+      for (i = 0; i < marks.length - 1; i++) {{
+        if (t <= marks[i + 1].t) {{
+          var span = marks[i + 1].t - marks[i].t || 1;
+          var f = (t - marks[i].t) / span;
+          return {{ li: li, y: marks[i].y + (marks[i + 1].y - marks[i].y) * f }};
+        }}
+      }}
+      return {{ li: li, y: marks[marks.length - 1].y }};
+    }});
+
+    // Events cluster (four on Sep 24), so push overlaps down rather than stacking them
+    // on top of each other. Order is already chronological.
+    list.classList.add("aligned");
+    var bottom = 0;
+    want.forEach(function (w) {{
+      var y = Math.max(w.y, bottom ? bottom + GAP : 0);
+      w.li.style.top = y + "px";
+      bottom = y + w.li.offsetHeight;
+    }});
+    list.style.height = bottom + "px";
+  }}
+
+  var pending;
+  function relayout() {{ clearTimeout(pending); pending = setTimeout(place, 80); }}
+  place();
+  addEventListener("resize", relayout);
+  // Fonts landing late change row heights, so measure again once they have.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
 }})();
 </script>
 </body></html>
