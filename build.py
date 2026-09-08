@@ -48,6 +48,7 @@ def join_labels(items: list[dict]) -> str:
 def build() -> str:
     data = yaml.safe_load((HERE / "schedule.yml").read_text())
     course, cal = data["course"], data["calendar"]
+    course["links"] = data.get("links") or []
     grid = derive_dates(cal)
     entries = data["meetings"]
 
@@ -160,6 +161,17 @@ def build() -> str:
     return render(course, cal, rows, note)
 
 
+def course_links(links: list) -> str:
+    """The course-level links row: things needed all semester, not tied to a meeting."""
+    if not links:
+        return ""
+    e = html.escape
+    items = "".join(
+        f'<li><a href="{e(l["url"])}">{e(l["text"])}</a></li>' for l in links
+    )
+    return f'<ul class="links">{items}</ul>'
+
+
 def render(course, cal, rows, speaker_note) -> str:
     e = html.escape
 
@@ -228,6 +240,7 @@ def render(course, cal, rows, speaker_note) -> str:
         meets=e(course["meets"]),
         due_time=e(cal["due_time"]),
         due_col=e(cal.get("column_time", cal["due_time"])),
+        links=course_links(course.get("links") or []),
         speaker_note=speaker_note,
         rows="\n".join(body),
         built=dt.date.today().isoformat(),
@@ -251,7 +264,11 @@ TEMPLATE = """<!doctype html>
 body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }}
 .wrap {{ max-width:1080px; margin:0 auto; padding:2rem 1.25rem 4rem }}
 h1 {{ font-size:1.5rem; margin:0 0 .25rem }}
-.sub {{ color:var(--muted); margin:0 0 .35rem }}
+.sub {{ color:var(--muted); margin:0 0 .5rem }}
+ul.links {{ list-style:none; margin:0 0 .9rem; padding:0; display:flex; flex-wrap:wrap; gap:.4rem .9rem }}
+ul.links a {{ font-size:.9rem; font-weight:600; color:inherit; text-decoration:none;
+  border:1px solid var(--line); border-radius:999px; padding:.2rem .7rem; display:inline-block }}
+ul.links a:hover {{ border-color:currentColor }}
 .note {{ color:var(--muted); font-size:.9rem; margin:0 0 1.5rem }}
 .note b {{ color:var(--fg) }}
 table {{ border-collapse:collapse; width:100%; }}
@@ -304,6 +321,7 @@ tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 </style></head><body><div class="wrap">
 <h1>{title}</h1>
 <p class="sub">{term} · {meets}</p>
+{links}
 <p class="note">Everything is due at <b>{due_time}</b> on the date shown. {speaker_note}</p>
 <table>
 <thead><tr><th>Date</th><th>Topic</th><th>Class materials</th><th>Due ({due_col})</th></tr></thead>

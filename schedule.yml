@@ -11,6 +11,17 @@ course:
   institution: Macalester College
   meets: Tuesday / Thursday, 1:20–2:50pm Central
 
+# Course-level links, rendered as a row under the subtitle on every build. These are
+# the things students need all semester and should never have to hunt for inside a
+# meeting's materials cell. Order is by how often they are used, not importance.
+# `url` only — these are not tied to a meeting, so no date validation applies.
+links:
+  - { text: Reading reflection, url: "https://forms.gle/Wfjx2WXkEDbSVRG19" }
+  - { text: Assignment submission, url: "https://docs.google.com/forms/d/1h0Ve7FlHrqmb--b4kle1pzhEM4JAqETPtmJJ1JfJgLw/viewform" }
+  - { text: Syllabus, url: "https://docs.google.com/document/d/1I1aXkTStnQKPQGWRKp3_M79QWn5x0wKLbJn8dGIZ7hU/edit" }
+  - { text: AI guidelines, url: "https://docs.google.com/document/d/1Eb6qxeS2wy-9TBzL8eGk9j75iYu_yEV4VoLQaywRz8E/edit" }
+  - { text: Office hours, url: "https://app.reclaim.ai/m/shilad/appointment" }
+
 calendar:
   days: [Tue, Thu]
   first: 2026-09-08
