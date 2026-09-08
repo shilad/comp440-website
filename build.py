@@ -328,11 +328,11 @@ TEMPLATE = """<!doctype html>
 <style>
 :root {{
   --bg:#fff; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e3e3e3;
-  --accent:#7c2d12; --now:#fffbeb; --nowline:#f59e0b; --brk:#f7f7f7;
+  --accent:#7c2d12; --now:#fffbeb; --nowline:#f59e0b; --brk:#f7f7f7; --talk:#0f766e;
 }}
 @media (prefers-color-scheme:dark) {{ :root:not([data-theme=light]) {{
   --bg:#16181c; --fg:#e8e8e8; --muted:#9aa0a6; --line:#2c3038;
-  --accent:#fca5a5; --now:#2a2410; --nowline:#d97706; --brk:#1c1f24;
+  --accent:#fca5a5; --now:#2a2410; --nowline:#d97706; --brk:#1c1f24; --talk:#5eead4;
 }} }}
 * {{ box-sizing:border-box }}
 body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }}
@@ -366,7 +366,7 @@ ul.due li::before {{ content:"● "; color:var(--muted) }}
 .d-hw::before {{ color:#dc2626 !important }}
 .d-project::before {{ color:#2563eb !important }}
 .d-speaker::before {{ color:#7c3aed !important }}
-.d-reading::before {{ color:#0f766e !important }}
+.d-reading::before {{ color:var(--talk) !important }}
 .lnks {{ font-size:.78rem; color:var(--muted); white-space:nowrap }}
 tr.brk td {{ background:var(--brk); color:var(--muted) }}
 tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
@@ -379,7 +379,7 @@ tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 .rail .gap {{ margin:0 0 .8rem; color:var(--muted); line-height:1.45 }}
 .rail .gap b {{ color:var(--fg) }}
 ul.evs {{ list-style:none; margin:0; padding:0 }}
-ul.evs li {{ margin:0 0 .7rem; padding-left:.6rem; border-left:2px solid var(--line) }}
+ul.evs li {{ margin:0 0 .7rem }}
 /* When JS has measured the table, events are lifted out of flow and parked beside
    the meeting they fall near. Without JS this class is never added and the list
    above renders as an ordinary stack. */
@@ -390,8 +390,9 @@ ul.evs.aligned li {{ position:absolute; left:0; right:0; margin:0;
 ul.evs .when {{ display:block; color:var(--muted); font-size:.78rem }}
 ul.evs .what {{ display:block }}
 ul.evs .where {{ display:block; color:var(--muted); font-size:.78rem }}
-li.ev-talk {{ border-left-color:#0f766e }}
-li.ev-talk .what {{ font-weight:600 }}
+/* Talks are the capstone-relevant kind, so they carry the emphasis now that the
+   per-event rule is gone. */
+li.ev-talk .what {{ font-weight:600; color:var(--talk) }}
 li.ev-cancelled {{ opacity:.55 }}
 li.ev-cancelled .what {{ text-decoration:line-through }}
 .rail .asof {{ margin:1rem 0 0; color:var(--muted); font-size:.78rem }}

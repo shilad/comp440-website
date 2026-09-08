@@ -115,6 +115,26 @@ def start_weekday(start):
     return as_date(start).weekday()
 
 
+COFFEE_HOME = "Smail Gallery"
+# The feed leaves coffee-break locations blank or set to the organiser's own
+# placeholder. Both mean "the usual place", which is Smail Gallery (instructor,
+# Sep 8). A real location in the feed always wins -- e.g. the Sep 17 outdoor
+# edition, which is genuinely somewhere else.
+PLACEHOLDER = re.compile(r"^\s*(confirm location|tbd|tba|location tbd)\s*$", re.I)
+
+
+def resolve_location(title: str, location: str) -> str:
+    # A cancellation has no venue: "No Coffee Break — Smail Gallery" reads as if
+    # something is still happening there.
+    if classify(title) == "cancelled":
+        return ""
+    if location and not PLACEHOLDER.match(location):
+        return location
+    if "coffee break" in title.lower():
+        return COFFEE_HOME
+    return ""
+
+
 def classify(title: str) -> str:
     t = title.lower()
     if t.startswith("no ") or "cancel" in t:
@@ -188,7 +208,7 @@ def collect(raw: str, t0: dt.date, t1: dt.date):
             "date": d,
             "time": None if item["all_day"] else start.strftime("%-I:%M%p").lower(),
             "title": item["summary"] or "(untitled)",
-            "location": item["location"],
+            "location": resolve_location(item["summary"], item["location"]),
             "kind": classify(item["summary"]),
             "origin": origin,
         }

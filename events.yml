@@ -18,19 +18,19 @@ events:
   - { date: 2026-09-24, time: "12:00pm", title: "Cargill internship virtual info session", location: "OLRI 254", kind: career }
   - { date: 2026-09-24, time: "4:30pm", title: "Smail Gallery Artist Talk", kind: talk }
   - { date: 2026-09-24, time: "4:45pm", title: "Software Engineering Technical Interview Workshop with pizza AND a Mac Alum", location: "OLRI 250", kind: career }
-  - { date: 2026-10-01, time: "11:15am", title: "MSCS Coffee Break", location: "Confirm location", kind: social }
-  - { date: 2026-10-08, time: "11:15am", title: "MSCS Coffee Break", location: "Confirm location", kind: social }
-  - { date: 2026-10-22, time: "11:15am", title: "MSCS Coffee Break", location: "Confirm location", kind: social }
-  - { date: 2026-10-29, title: "No Coffee Break", location: "Confirm location", kind: cancelled }
+  - { date: 2026-10-01, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
+  - { date: 2026-10-08, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
+  - { date: 2026-10-22, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
+  - { date: 2026-10-29, title: "No Coffee Break", kind: cancelled }
   - { date: 2026-11-01, time: "4:40pm", title: "MSCS & Society Speaker Event", kind: talk }
   - { date: 2026-11-05, time: "11:30am", title: "MSCS registration ice cream social", location: "Smail Gallery", kind: social }
   - { date: 2026-11-07, title: "NCNA Programming Contest", kind: career }
   - { date: 2026-11-09, time: "4:40pm", title: "Hutchinson & Wagon square-wheel bike student reception", kind: social }
   - { date: 2026-11-10, time: "4:40pm", title: "MSCS & Society talk - Stan Wagon", kind: talk }
-  - { date: 2026-11-12, time: "11:15am", title: "MSCS Coffee Break", location: "Confirm location", kind: social }
-  - { date: 2026-11-19, title: "No Coffee Break", location: "Confirm location", kind: cancelled }
-  - { date: 2026-12-03, time: "11:15am", title: "MSCS Coffee Break", location: "Confirm location", kind: social }
-  - { date: 2026-12-10, time: "11:15am", title: "MSCS Coffee Break", location: "Confirm location", kind: social }
+  - { date: 2026-11-12, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
+  - { date: 2026-11-19, title: "No Coffee Break", kind: cancelled }
+  - { date: 2026-12-03, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
+  - { date: 2026-12-10, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
 
 # NOT shown. Recorded with a reason so a later pass does not have to work out
 # again why each one was dropped. Nothing here reaches the site.
