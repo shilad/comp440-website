@@ -69,10 +69,13 @@ readings:
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
 assignments:
+  # `url` is used twice by the build: on the launch material and on the "HW0 due"
+  # entry. Declare it here, never on a meeting row.
   - id: hw0
     title: HW0 — Working With Data and Claude
     launch: 2026-09-10
     due: 2026-09-17
+    url: "https://github.com/shilad/comp440-hw0"
   - id: hw1
     title: HW1 — Collective Prediction
     launch: 2026-09-15
@@ -111,7 +114,6 @@ meetings:
       - { text: Course syllabus, url: "https://docs.google.com/document/d/1I1aXkTStnQKPQGWRKp3_M79QWn5x0wKLbJn8dGIZ7hU/edit" }
       - { text: "Working with AI (course AI policy)", url: "https://docs.google.com/document/d/1Eb6qxeS2wy-9TBzL8eGk9j75iYu_yEV4VoLQaywRz8E/edit" }
       - { text: Beginning-of-semester survey, url: "https://docs.google.com/forms/d/1V2s-wjjvZy4EY8aB25mUfXf2cqgGiPgcbaXVjErRsiM/viewform" }
-      - { text: Posture on AI form, url: "https://docs.google.com/forms/d/1n1RBweYjx5icgohDUcL8sX1u7X6q0DUSpTmnEMwKXas/viewform" }
       - { text: Wisdom of Crowds experiment, url: "https://docs.google.com/forms/d/1ATwZHFZMxh8OUXXtAASAezbDOHtjkQpfSuz3wRwKEJg/viewform" }
   - topic: Ways of knowing; working with Claude; reading and evidence
     materials:
