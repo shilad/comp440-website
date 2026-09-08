@@ -27,16 +27,25 @@ calendar:
 # Sep 7). `when` may be visit_day or prior_meeting. `items` are placed on every
 # speaker row, in order; an empty list places nothing. No `due_time` — it
 # inherits calendar.due_time like everything else.
+#
+# The url here is the SAME form as `reflections.form_url` below — one form now
+# takes every reflection and the speaker questions (instructor, Sep 8). Keep the
+# two in sync; if they ever diverge it means someone changed only one of them.
 speaker_due:
   when: visit_day
   items:
-    - { label: Speaker questions due }
+    - { label: Speaker questions due, url: "https://forms.gle/SG62Y8DqHbFoD8bt6" }
 
-# Reading reflections. The obligation comes from the READING, not from the day —
-# so a reflection deadline is placed by each entry in `readings:` below, and a
-# meeting with no assigned reading correctly shows none.
+# Reflections. The obligation comes from the READING, not from the day — so a
+# reflection deadline is placed by each entry in `readings:` below, and a meeting
+# with no assigned reading correctly shows none.
+#
+# ONE form takes all of it (instructor, Sep 8): seminar reflections, reading
+# reflections and speaker questions. This is the published short link; the
+# per-form edit URL is deliberately not published here. Changing it here changes
+# every reflection link on the site, including the speaker rows above.
 reflections:
-  form_url: "https://docs.google.com/forms/d/1vX-z6k7iQbH7BWE5OgdcpLw0hmxBl2FWvoOZivI3xjU/viewform"
+  form_url: "https://forms.gle/SG62Y8DqHbFoD8bt6"
 
 # One entry per assigned reading. `date` is validated against the derived meeting
 # grid like every other deadline. Renders in the Due column as
