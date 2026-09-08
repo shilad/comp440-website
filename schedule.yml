@@ -20,7 +20,7 @@ course:
 # Declared once here as a YAML anchor and referenced everywhere with `*submit`,
 # so the links row, the speaker rows and every reading cannot drift apart. To
 # change the form, change this line only.
-submit_form: &submit "https://docs.google.com/forms/d/1h0Ve7FlHrqmb--b4kle1pzhEM4JAqETPtmJJ1JfJgLw/viewform"
+submit_form: &submit "https://forms.gle/mgKcnqzTGxNaGvteA"
 
 links:
   - { text: Submit work, url: *submit }
