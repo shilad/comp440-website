@@ -22,3 +22,15 @@
 counts:
   - { date: 2026-09-24, title: "Smail Gallery Artist Talk" }
   - { date: 2026-09-24, title: "Software Engineering Technical Interview Workshop" }
+  - { date: 2026-11-10, title: "MSCS & Society talk" }
+
+# DELIBERATELY NOT MARKED — do not add these without asking:
+#
+#   Nov 9, "Hutchinson & Wagon square-wheel bike student reception" — ruled out by
+#   the instructor Sep 9. It is the reception for the same speaker as the Nov 10
+#   talk, the evening before, which makes it the easiest thing here to add by
+#   mistake. A reception is not a talk.
+#
+#   Nov 1, "MSCS & Society Speaker Event" — undecided. Same series as the Nov 10
+#   talk that does count, so it plausibly counts, but the instructor named the
+#   Nov 10 one specifically and this file is the wrong place to guess.
