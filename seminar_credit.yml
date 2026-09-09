@@ -1,0 +1,24 @@
+# Which MSCS events count toward the capstone seminar requirement.
+#
+# The syllabus requires students to "attend and subsequently submit a short
+# reflection for at least 2 MSCS seminars, or other related presentations upon
+# instructor approval." That is a judgement call per event, so it is curated
+# here BY HAND rather than guessed from a title.
+#
+# This file is hand-edited and survives a refresh. `events.yml` is generated and
+# gets overwritten every time tools/fetch_events.py runs, so the credit list
+# cannot live there — it is matched onto the generated events at build time.
+#
+# TO ADD ONE: a date and enough of the title to identify it unambiguously.
+# The match is case-insensitive substring on that date. The build FAILS if an
+# entry matches no event or more than one, so a typo or a moved event is caught
+# rather than silently dropping the credit.
+#
+# COMP 440's own guest speakers do NOT count (instructor, Sep 9). They are part
+# of class, not a seminar the student chose to attend. They never appear here,
+# and the rail says so out loud, because a student could reasonably assume a
+# guest speaker is exactly what "attend a talk" means.
+
+counts:
+  - { date: 2026-09-24, title: "Smail Gallery Artist Talk" }
+  - { date: 2026-09-24, title: "Software Engineering Technical Interview Workshop" }

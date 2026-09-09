@@ -182,6 +182,21 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         fail(f"events.yml is {age} days old. Refresh it (tools/fetch_events.py) before publishing.")
         return ""
 
+    # Seminar credit is curated by hand in seminar_credit.yml and matched on here,
+    # because events.yml is regenerated and would lose the flag. A miss is a build
+    # failure: an event that moved or was retitled must not silently stop counting.
+    credit = yaml.safe_load((HERE / "seminar_credit.yml").read_text()) or {}
+    for want in credit.get("counts") or []:
+        hits = [e for e in evs
+                if e["date"] == want["date"]
+                and want["title"].lower() in e["title"].lower()]
+        if len(hits) != 1:
+            fail(f"seminar_credit: {want['date']} {want['title']!r} matched "
+                 f"{len(hits)} events, expected exactly 1. The event may have moved, "
+                 "been retitled, or dropped off the calendar.")
+        for h in hits:
+            h["counts"] = True
+
     # A date must not carry both an event and its own cancellation notice.
     by_date = {}
     for e in evs:
@@ -207,23 +222,33 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         loc = ev.get("location") or ""
         if len(loc) > 40:
             loc = loc[:38].rstrip() + "…"
+        cls = f'ev-{e(ev.get("kind", "other"))}' + (" counts" if ev.get("counts") else "")
+        badge = ('<span class="cred">counts toward the seminar requirement</span>'
+                 if ev.get("counts") else "")
         out.append(
-            f'<li class="ev-{e(ev.get("kind", "other"))}" data-date="{d.isoformat()}">'
+            f'<li class="{cls}" data-date="{d.isoformat()}">'
             f'<span class="when">{e(when)}</span>'
-            f'<span class="what">{e(ev["title"])}</span>'
+            + badge
+            + f'<span class="what">{e(ev["title"])}</span>'
             + (f'<span class="where">{e(loc)}</span>' if loc else "")
             + "</li>"
         )
     if not out:
         return ""
 
-    # Named honestly: the capstone requirement is seminars, and the calendar has
-    # none this term. Drops away by itself once a seminar is posted.
-    seminars = [x for x in evs if "seminar" in x["title"].lower()]
-    gap = "" if seminars else (
-        '<p class="gap"><b>No seminar dates are posted yet.</b> The capstone requirement is two '
-        "MSCS seminars with a reflection for each; the talks below are the nearest thing on the "
-        "department calendar so far. Check back.</p>"
+    # Students will not assume an event counts (instructor, Sep 9), so credit is
+    # stated positively on the events that have it and never left to inference.
+    # Two things a student would otherwise get wrong: that any talk counts, and
+    # that COMP 440's own guest speakers do.
+    n = sum(1 for x in evs if x.get("counts"))
+    gap = (
+        '<p class="gap"><b>Capstone seminar requirement:</b> attend 2, write a reflection for each. '
+        + (f"<b>{n} event{'s' if n != 1 else ''} below count{'' if n != 1 else 's'}</b>, marked ✓ — "
+           "more will be added as they are scheduled."
+           if n else "<b>None marked yet</b> — more will be added as they are scheduled.")
+        + " If an event is not marked, it does not count. "
+        "<b>COMP 440's own guest speakers do not count</b> — those are part of class. "
+        "Another talk can count if you clear it with me first.</p>"
     )
     return (
         '<aside class="rail"><h2>MSCS events</h2>'
@@ -393,6 +418,11 @@ ul.evs .where {{ display:block; color:var(--muted); font-size:.78rem }}
 /* Talks are the capstone-relevant kind, so they carry the emphasis now that the
    per-event rule is gone. */
 li.ev-talk .what {{ font-weight:600; color:var(--talk) }}
+/* Seminar credit is stated, never implied: an unmarked event does not count. */
+ul.evs li.counts .what {{ font-weight:600 }}
+.cred {{ display:block; font-size:.7rem; font-weight:600; letter-spacing:.02em;
+  color:var(--talk); text-transform:uppercase; margin:.1rem 0 .05rem }}
+.cred::before {{ content:"✓ " }}
 li.ev-cancelled {{ opacity:.55 }}
 li.ev-cancelled .what {{ text-decoration:line-through }}
 .rail .asof {{ margin:1rem 0 0; color:var(--muted); font-size:.78rem }}
