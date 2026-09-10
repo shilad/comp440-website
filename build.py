@@ -240,14 +240,10 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
     # stated positively on the events that have it and never left to inference.
     # Two things a student would otherwise get wrong: that any talk counts, and
     # that COMP 440's own guest speakers do.
-    n = sum(1 for x in evs if x.get("counts"))
     gap = (
-        '<p class="gap"><b>Capstone seminar requirement:</b> attend 2, write a reflection for each. '
-        + (f"<b>{n} event{'s' if n != 1 else ''} below count{'' if n != 1 else 's'}</b>, marked ✓ — "
-           "more will be added as they are scheduled."
-           if n else "<b>None marked yet</b> — more will be added as they are scheduled.")
-        + " If an event is not marked, it does not count. "
-        "<b>COMP 440's own guest speakers do not count</b> — those are part of class. "
+        '<p class="gap"><b>You are required to attend and write a reflection for 2 events below '
+        "marked ✓.</b> More will be added as they are scheduled. If an event is not marked, it does "
+        "not count — including <b>COMP 440's own guest speakers</b>, which are part of class. "
         "Another talk can count if you clear it with me first.</p>"
     )
     return (
