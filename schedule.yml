@@ -65,6 +65,14 @@ readings:
   - date: 2026-09-10
     cite: 'Keshav et al, "How to Read a Paper"'
     url: "http://ccr.sigcomm.org/online/files/p83-keshavA.pdf"
+  # NYT gift link: the `unlocked_article_code` is what lets students read it
+  # without a subscription, so it must be kept intact. Gift links expire, and
+  # this page is public — if it stops working, get a fresh one from the
+  # instructor rather than dropping the parameter.
+  - date: 2026-09-15
+    cite: 'New York Times on OpenAI and the Navier-Stokes problem (Sep 10, 2026)'
+    label: article
+    url: "https://www.nytimes.com/2026/09/10/science/tristan-buckmaster-openai-math-navier-stokes.html?unlocked_article_code=1.AFE.0psT.2Ar5a-FHIo9p"
 
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.

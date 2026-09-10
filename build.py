@@ -107,7 +107,10 @@ def build() -> str:
     # `reflections` policy block, so they are never repeated per reading.
     refl = data.get("reflections", {})
     for r in data.get("readings", []):
-        links = [{"text": "paper", "url": r["url"]}] if r.get("url") else []
+        # `label` names the link when "paper" would be wrong — a news article, a
+        # blog post, a video. Optional; academic papers just leave it off.
+        lbl = r.get("label", "paper")
+        links = [{"text": lbl, "url": r["url"]}] if r.get("url") else []
         if refl.get("form_url"):
             links.append({"text": "reflection", "url": refl["form_url"]})
         elif r.get("url"):
