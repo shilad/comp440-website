@@ -223,13 +223,13 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         if len(loc) > 40:
             loc = loc[:38].rstrip() + "…"
         cls = f'ev-{e(ev.get("kind", "other"))}' + (" counts" if ev.get("counts") else "")
-        badge = ('<span class="cred">counts toward the seminar requirement</span>'
+        badge = ('<span class="cred" title="Counts toward the seminar requirement"'
+                 ' aria-label="Counts toward the seminar requirement">✓</span> '
                  if ev.get("counts") else "")
         out.append(
             f'<li class="{cls}" data-date="{d.isoformat()}">'
             f'<span class="when">{e(when)}</span>'
-            + badge
-            + f'<span class="what">{e(ev["title"])}</span>'
+            + f'<span class="what">{badge}{e(ev["title"])}</span>'
             + (f'<span class="where">{e(loc)}</span>' if loc else "")
             + "</li>"
         )
@@ -241,10 +241,8 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
     # Two things a student would otherwise get wrong: that any talk counts, and
     # that COMP 440's own guest speakers do.
     gap = (
-        '<p class="gap"><b>You are required to attend and write a reflection for 2 events below '
-        "marked ✓.</b> More will be added as they are scheduled. If an event is not marked, it does "
-        "not count — including <b>COMP 440's own guest speakers</b>, which are part of class. "
-        "Another talk can count if you clear it with me first.</p>"
+        '<p class="gap">You are required to attend and write a reflection for 2 events below '
+        "marked ✓. More will be added as they are scheduled.</p>"
     )
     return (
         '<aside class="rail"><h2>MSCS events</h2>'
@@ -349,11 +347,11 @@ TEMPLATE = """<!doctype html>
 <style>
 :root {{
   --bg:#fff; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e3e3e3;
-  --accent:#7c2d12; --now:#fffbeb; --nowline:#f59e0b; --brk:#f7f7f7; --talk:#0f766e;
+  --accent:#7c2d12; --now:#fffbeb; --nowline:#f59e0b; --brk:#f7f7f7; --talk:#0f766e; --counts:#2563eb;
 }}
 @media (prefers-color-scheme:dark) {{ :root:not([data-theme=light]) {{
   --bg:#16181c; --fg:#e8e8e8; --muted:#9aa0a6; --line:#2c3038;
-  --accent:#fca5a5; --now:#2a2410; --nowline:#d97706; --brk:#1c1f24; --talk:#5eead4;
+  --accent:#fca5a5; --now:#2a2410; --nowline:#d97706; --brk:#1c1f24; --talk:#5eead4; --counts:#93c5fd;
 }} }}
 * {{ box-sizing:border-box }}
 body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }}
@@ -413,12 +411,11 @@ ul.evs .what {{ display:block }}
 ul.evs .where {{ display:block; color:var(--muted); font-size:.78rem }}
 /* Talks are the capstone-relevant kind, so they carry the emphasis now that the
    per-event rule is gone. */
-li.ev-talk .what {{ font-weight:600; color:var(--talk) }}
-/* Seminar credit is stated, never implied: an unmarked event does not count. */
-ul.evs li.counts .what {{ font-weight:600 }}
-.cred {{ display:block; font-size:.7rem; font-weight:600; letter-spacing:.02em;
-  color:var(--talk); text-transform:uppercase; margin:.1rem 0 .05rem }}
-.cred::before {{ content:"✓ " }}
+/* Colour means exactly one thing in this rail: this event counts toward the
+   seminar requirement. Talks that do NOT count are styled like anything else —
+   emphasising them too would make the blue ambiguous. */
+ul.evs li.counts .what {{ font-weight:600; color:var(--counts) }}
+.cred {{ color:var(--counts); font-weight:700 }}
 li.ev-cancelled {{ opacity:.55 }}
 li.ev-cancelled .what {{ text-decoration:line-through }}
 .rail .asof {{ margin:1rem 0 0; color:var(--muted); font-size:.78rem }}
