@@ -182,16 +182,16 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         fail(f"events.yml is {age} days old. Refresh it (tools/fetch_events.py) before publishing.")
         return ""
 
-    # Seminar credit is curated by hand in seminar_credit.yml and matched on here,
+    # Seminar credit is curated by hand in events_overrides.yml and matched on here,
     # because events.yml is regenerated and would lose the flag. A miss is a build
     # failure: an event that moved or was retitled must not silently stop counting.
-    credit = yaml.safe_load((HERE / "seminar_credit.yml").read_text()) or {}
+    credit = yaml.safe_load((HERE / "events_overrides.yml").read_text()) or {}
     for want in credit.get("counts") or []:
         hits = [e for e in evs
                 if e["date"] == want["date"]
                 and want["title"].lower() in e["title"].lower()]
         if len(hits) != 1:
-            fail(f"seminar_credit: {want['date']} {want['title']!r} matched "
+            fail(f"events_overrides counts: {want['date']} {want['title']!r} matched "
                  f"{len(hits)} events, expected exactly 1. The event may have moved, "
                  "been retitled, or dropped off the calendar.")
         for h in hits:

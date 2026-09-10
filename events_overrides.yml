@@ -1,4 +1,7 @@
-# Which MSCS events count toward the capstone seminar requirement.
+# Instructor overrides on the generated MSCS events.
+#
+# `counts:` marks an event as satisfying the capstone seminar requirement.
+# `hidden:` drops an event from the rail entirely.
 #
 # The syllabus requires students to "attend and subsequently submit a short
 # reflection for at least 2 MSCS seminars, or other related presentations upon
@@ -6,8 +9,10 @@
 # here BY HAND rather than guessed from a title.
 #
 # This file is hand-edited and survives a refresh. `events.yml` is generated and
-# gets overwritten every time tools/fetch_events.py runs, so the credit list
-# cannot live there — it is matched onto the generated events at build time.
+# gets overwritten every time tools/fetch_events.py runs, so neither list can
+# live there. `hidden:` is applied by the fetch tool, so a dropped event still
+# appears under `skipped:` in events.yml with its reason; `counts:` is matched
+# on at build time.
 #
 # TO ADD ONE: a date and enough of the title to identify it unambiguously.
 # The match is case-insensitive substring on that date. The build FAILS if an
@@ -34,3 +39,10 @@ counts:
 #   Nov 1, "MSCS & Society Speaker Event" — undecided. Same series as the Nov 10
 #   talk that does count, so it plausibly counts, but the instructor named the
 #   Nov 10 one specifically and this file is the wrong place to guess.
+
+# Events that should not appear at all. The department calendar is not curated for
+# students, so an entry can be plain wrong; hiding it here keeps it out of the rail
+# and records why, rather than someone re-adding it after the next refresh.
+hidden:
+  - { date: 2026-11-01, title: "MSCS & Society Speaker Event",
+      reason: "wrong entry on the department calendar (instructor, Sep 10)" }

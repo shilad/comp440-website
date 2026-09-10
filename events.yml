@@ -3,7 +3,7 @@
 # the feed's mix of UTC, TZID and all-day stamps. Recurring events are expanded here,
 # so each line below is one real occurrence.
 source: "https://calendar.google.com/calendar/ical/macalester.edu_k7f54d0aeqnpvqb3kjl5kvnuvg%40group.calendar.google.com/public/basic.ics"
-fetched: 2026-09-08
+fetched: 2026-09-10
 term: [2026-09-08, 2026-12-10]
 
 # Shown on the site, in the MSCS events rail.
@@ -15,14 +15,13 @@ events:
   - { date: 2026-09-18, time: "12:00pm", title: "Preceptor Training", kind: career }
   - { date: 2026-09-23, time: "4:45pm", title: "MSCS block party!!!", kind: social }
   - { date: 2026-09-24, title: "No Coffee Break", kind: cancelled }
-  - { date: 2026-09-24, time: "12:00pm", title: "Cargill internship virtual info session", location: "OLRI 254", kind: career }
+  - { date: 2026-09-24, time: "12:00pm", title: "MSCS: Cargill internship virtual info session", location: "OLRI 254", kind: career }
   - { date: 2026-09-24, time: "4:30pm", title: "Smail Gallery Artist Talk", kind: talk }
-  - { date: 2026-09-24, time: "4:45pm", title: "Software Engineering Technical Interview Workshop with pizza AND a Mac Alum", location: "OLRI 250", kind: career }
+  - { date: 2026-09-24, time: "4:45pm", title: "Career Exploration: Software Engineering Technical Interview Workshop with pizza AND a Mac Alum", location: "OLRI 250", kind: career }
   - { date: 2026-10-01, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
   - { date: 2026-10-08, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
   - { date: 2026-10-22, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
   - { date: 2026-10-29, title: "No Coffee Break", kind: cancelled }
-  - { date: 2026-11-01, time: "4:40pm", title: "MSCS & Society Speaker Event", kind: talk }
   - { date: 2026-11-05, time: "11:30am", title: "MSCS registration ice cream social", location: "Smail Gallery", kind: social }
   - { date: 2026-11-07, title: "NCNA Programming Contest", kind: career }
   - { date: 2026-11-09, time: "4:40pm", title: "Hutchinson & Wagon square-wheel bike student reception", kind: social }
@@ -36,6 +35,7 @@ events:
 # again why each one was dropped. Nothing here reaches the site.
 skipped:
   - { date: 2026-10-15, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
+  - { date: 2026-11-01, title: "MSCS & Society Speaker Event", reason: "wrong entry on the department calendar (instructor, Sep 10)" }
   - { date: 2026-11-05, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-11-26, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-12-14, title: "MSCS Fall Capstone Day", reason: "outside the term" }

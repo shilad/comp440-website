@@ -157,6 +157,20 @@ def fetch(url: str) -> str:
         return r.read().decode("utf-8", "replace")
 
 
+def hidden_rules() -> list:
+    """Instructor overrides: events that must not reach the rail at all.
+
+    Applied here rather than at build time so a dropped event still lands in
+    events.yml under `skipped:` with its reason — otherwise it silently vanishes
+    and the next refresh has no record of why.
+    """
+    path = HERE / "events_overrides.yml"
+    if not path.exists():
+        return []
+    import yaml  # only needed for the override file
+    return (yaml.safe_load(path.read_text()) or {}).get("hidden") or []
+
+
 def term_bounds() -> tuple:
     """Read the term from schedule.yml rather than typing dates here."""
     text = (HERE / "schedule.yml").read_text()
@@ -200,10 +214,20 @@ def collect(raw: str, t0: dt.date, t1: dt.date):
             masters.append(item)
 
     shown, skipped, far = [], [], 0
+    hidden = hidden_rules()
     near0, near1 = t0 - dt.timedelta(days=NEAR_DAYS), t1 + dt.timedelta(days=NEAR_DAYS)
 
     def record(start, item, origin):
         d = as_date(start)
+        for h in hidden:
+            if h["date"] == d and h["title"].lower() in (item["summary"] or "").lower():
+                h["_hit"] = True
+                skipped.append({
+                    "date": d, "time": None, "title": item["summary"], "location": "",
+                    "kind": "hidden", "origin": origin,
+                    "reason": h.get("reason") or "hidden by instructor",
+                })
+                return
         row = {
             "date": d,
             "time": None if item["all_day"] else start.strftime("%-I:%M%p").lower(),
@@ -242,6 +266,11 @@ def collect(raw: str, t0: dt.date, t1: dt.date):
                 record(o["start"], o, "override")
         else:
             record(m["start"], m, "single")
+
+    for h in hidden:
+        if not h.pop("_hit", False):
+            print(f"  WARNING: hidden rule {h['date']} {h['title']!r} matched nothing — "
+                  "the event may have been renamed or removed upstream.")
 
     shown.sort(key=lambda r: (r["date"], r["time"] or ""))
     skipped.sort(key=lambda r: (r["date"], r["title"]))
