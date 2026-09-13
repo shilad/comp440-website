@@ -3,13 +3,14 @@
 # the feed's mix of UTC, TZID and all-day stamps. Recurring events are expanded here,
 # so each line below is one real occurrence.
 source: "https://calendar.google.com/calendar/ical/macalester.edu_k7f54d0aeqnpvqb3kjl5kvnuvg%40group.calendar.google.com/public/basic.ics"
-fetched: 2026-09-10
+fetched: 2026-09-13
 term: [2026-09-08, 2026-12-10]
 
 # Shown on the site, in the MSCS events rail.
 events:
   - { date: 2026-09-10, title: "No Coffee Break - due to Convocation", kind: cancelled }
   - { date: 2026-09-16, time: "12:00pm", title: "Preceptor Training", kind: career }
+  - { date: 2026-09-16, time: "3:30pm", title: "\"The Million Dollar Problem\": A conversation about Navier-Stokes and Open AI", location: "OLRI 250", kind: other }
   - { date: 2026-09-17, time: "11:15am", title: "Welcome Back - MSCS Coffee Break - Outside Edition", location: "OLRI Rock Garden - weather permitting - Outside the north doors of OLRI and down and to the left/west", kind: social }
   - { date: 2026-09-17, time: "12:00pm", title: "Preceptor Training", kind: career }
   - { date: 2026-09-18, time: "12:00pm", title: "Preceptor Training", kind: career }
@@ -34,12 +35,38 @@ events:
 # NOT shown. Recorded with a reason so a later pass does not have to work out
 # again why each one was dropped. Nothing here reaches the site.
 skipped:
+  - { date: 2026-09-16, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-09-17, title: "RStudio Drop In Hours - Ryan", reason: "EXDATE — this instance was cancelled" }
+  - { date: 2026-09-23, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-09-24, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-09-30, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-10-01, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-10-07, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-10-08, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-10-14, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-10-15, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
+  - { date: 2026-10-15, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-10-21, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-10-22, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-10-28, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-10-29, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-11-01, title: "MSCS & Society Speaker Event", reason: "wrong entry on the department calendar (instructor, Sep 10)" }
+  - { date: 2026-11-04, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-11-05, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
+  - { date: 2026-11-05, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-11-11, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-11-12, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-11-18, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-11-19, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-11-25, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-11-26, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
+  - { date: 2026-11-26, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-12-02, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-12-03, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-12-09, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-12-10, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-12-14, title: "MSCS Fall Capstone Day", reason: "outside the term" }
   - { date: 2026-12-17, title: "No Coffee Break", reason: "outside the term" }
 
-# 811 further events in the feed fall more than 45 days outside the term
+# 812 further events in the feed fall more than 45 days outside the term
 # and are not listed individually.

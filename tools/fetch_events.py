@@ -65,6 +65,30 @@ def parse_dt(params: str, value: str):
     return naive.replace(tzinfo=ZoneInfo(tz.group(1)) if tz else LOCAL).astimezone(LOCAL), False
 
 
+def untext(value: str) -> str:
+    """Unescape an RFC 5545 TEXT value and flatten it to one line.
+
+    The feed escapes commas, semicolons and backslashes inside SUMMARY and
+    LOCATION -- `Library: 1st Floor\\, near SciQ center` -- and without this the
+    backslash reaches the rail verbatim. Resolved in a single left-to-right pass
+    rather than chained replaces, so an escaped backslash before a comma stays a
+    backslash instead of being re-read as a separator.
+
+    Embedded newlines become spaces: both fields this touches render as one line
+    in the rail, and a raw newline would also break the generated YAML.
+    """
+    out, i = [], 0
+    while i < len(value):
+        c = value[i]
+        if c == "\\" and i + 1 < len(value):
+            out.append({"n": "\n", "N": "\n"}.get(value[i + 1], value[i + 1]))
+            i += 2
+            continue
+        out.append(c)
+        i += 1
+    return " ".join("".join(out).split())
+
+
 def as_date(x):
     return x if isinstance(x, dt.date) and not isinstance(x, dt.datetime) else x.date()
 
@@ -196,8 +220,8 @@ def collect(raw: str, t0: dt.date, t1: dt.date):
             "uid": uid,
             "start": start,
             "all_day": all_day,
-            "summary": (prop(b, "SUMMARY") or ("", ""))[1],
-            "location": (prop(b, "LOCATION") or ("", ""))[1],
+            "summary": untext((prop(b, "SUMMARY") or ("", ""))[1]),
+            "location": untext((prop(b, "LOCATION") or ("", ""))[1]),
             "rrule": parse_rrule((prop(b, "RRULE") or ("", ""))[1]) if prop(b, "RRULE") else None,
             "status": (prop(b, "STATUS") or ("", ""))[1],
             "exdates": set(),
@@ -220,7 +244,14 @@ def collect(raw: str, t0: dt.date, t1: dt.date):
     def record(start, item, origin):
         d = as_date(start)
         for h in hidden:
-            if h["date"] == d and h["title"].lower() in (item["summary"] or "").lower():
+            # A rule with no `date` hides every occurrence of that title. A weekly
+            # series would otherwise need one near-identical entry per date, and
+            # the next date added upstream would silently reappear on the rail.
+            # `counts:` stays date-specific on purpose -- seminar credit is granted
+            # to one event, never to a title.
+            if h.get("date") not in (None, d):
+                continue
+            if h["title"].lower() in (item["summary"] or "").lower():
                 h["_hit"] = True
                 skipped.append({
                     "date": d, "time": None, "title": item["summary"], "location": "",
@@ -269,7 +300,7 @@ def collect(raw: str, t0: dt.date, t1: dt.date):
 
     for h in hidden:
         if not h.pop("_hit", False):
-            print(f"  WARNING: hidden rule {h['date']} {h['title']!r} matched nothing — "
+            print(f"  WARNING: hidden rule {h.get('date', 'any date')} {h['title']!r} matched nothing — "
                   "the event may have been renamed or removed upstream.")
 
     shown.sort(key=lambda r: (r["date"], r["time"] or ""))

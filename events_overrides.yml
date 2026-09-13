@@ -43,6 +43,13 @@ counts:
 # Events that should not appear at all. The department calendar is not curated for
 # students, so an entry can be plain wrong; hiding it here keeps it out of the rail
 # and records why, rather than someone re-adding it after the next refresh.
+#
+# OMIT `date` to hide every occurrence of a title — that is how a weekly series is
+# dropped. With a date it would take one entry per occurrence, and whatever the
+# department adds next term would quietly come back. Hidden events still appear
+# under `skipped:` in events.yml, one line per occurrence, with the reason below.
 hidden:
   - { date: 2026-11-01, title: "MSCS & Society Speaker Event",
       reason: "wrong entry on the department calendar (instructor, Sep 10)" }
+  - { title: "RStudio Drop In Hours",
+      reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
