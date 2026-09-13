@@ -200,6 +200,31 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         for h in hits:
             h["counts"] = True
 
+    # Event posters, curated the same way and matched the same way. The poster
+    # itself lives in the MSCS department's shared drive, so what is recorded here
+    # is the Drive id -- the /view URL is built once, below, rather than pasted in
+    # a form that could be an editor path.
+    #
+    # This build cannot check that a poster is still shared: it never touches the
+    # network, by design. Sharing is confirmed by hand before an entry is added and
+    # the date of that check is recorded on the entry, because these are other
+    # people's uploads in a department folder and a re-upload silently drops a
+    # per-file sharing exception.
+    for want in credit.get("posters") or []:
+        hits = [e for e in evs
+                if e["date"] == want["date"]
+                and want["title"].lower() in e["title"].lower()]
+        if len(hits) != 1:
+            fail(f"events_overrides posters: {want['date']} {want['title']!r} matched "
+                 f"{len(hits)} events, expected exactly 1. The event may have moved, "
+                 "been retitled, or dropped off the calendar.")
+        if not want.get("checked"):
+            fail(f"events_overrides posters: {want['date']} {want['title']!r} has no "
+                 "`checked:` date. Confirm the file is shared to anyone with the link "
+                 "before linking it from a public page, then record when you looked.")
+        for h in hits:
+            h["poster"] = f"https://drive.google.com/file/d/{want['drive_id']}/view"
+
     # A date must not carry both an event and its own cancellation notice.
     by_date = {}
     for e in evs:
@@ -229,10 +254,19 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         badge = ('<span class="cred" title="Counts toward the seminar requirement"'
                  ' aria-label="Counts toward the seminar requirement">✓</span> '
                  if ev.get("counts") else "")
+        # A poster links the title itself rather than adding a fourth element to
+        # the row. The rail was trimmed twice to stay minimal, and the one thing
+        # colour is allowed to mean here is seminar credit -- so the link inherits
+        # whatever colour its row already has and is marked by an underline alone.
+        # The ✓ stays outside the link: it is a status, not part of the name.
+        what = e(ev["title"])
+        if ev.get("poster"):
+            what = (f'<a href="{e(ev["poster"])}" title="Event poster">'
+                    f'{what}</a>')
         out.append(
             f'<li class="{cls}" data-date="{d.isoformat()}">'
             f'<span class="when">{e(when)}</span>'
-            + f'<span class="what">{badge}{e(ev["title"])}</span>'
+            + f'<span class="what">{badge}{what}</span>'
             + (f'<span class="where">{e(loc)}</span>' if loc else "")
             + "</li>"
         )
@@ -419,6 +453,12 @@ ul.evs .where {{ display:block; color:var(--muted); font-size:.78rem }}
    emphasising them too would make the blue ambiguous. */
 ul.evs li.counts .what {{ font-weight:600; color:var(--counts) }}
 .cred {{ color:var(--counts); font-weight:700 }}
+/* A poster link inherits its row's colour rather than taking the link accent,
+   so it cannot be mistaken for the blue that means seminar credit. The dotted
+   underline is the whole affordance. */
+ul.evs .what a {{ color:inherit; text-decoration:underline dotted;
+                  text-underline-offset:2px }}
+ul.evs .what a:hover, ul.evs .what a:focus {{ text-decoration:underline solid }}
 li.ev-cancelled {{ opacity:.55 }}
 li.ev-cancelled .what {{ text-decoration:line-through }}
 .rail .asof {{ margin:1rem 0 0; color:var(--muted); font-size:.78rem }}

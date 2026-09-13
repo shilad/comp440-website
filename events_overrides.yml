@@ -2,6 +2,7 @@
 #
 # `counts:` marks an event as satisfying the capstone seminar requirement.
 # `hidden:` drops an event from the rail entirely.
+# `posters:` links an event's title to its poster in the MSCS shared drive.
 #
 # The syllabus requires students to "attend and subsequently submit a short
 # reflection for at least 2 MSCS seminars, or other related presentations upon
@@ -39,6 +40,30 @@ counts:
 #   Nov 1, "MSCS & Society Speaker Event" — undecided. Same series as the Nov 10
 #   talk that does count, so it plausibly counts, but the instructor named the
 #   Nov 10 one specifically and this file is the wrong place to guess.
+
+# Event posters. Staff drop these into the MSCS shared drive's month folders
+# (`1gjYWAuEE0Lepkg3fXtToutzUtKdDl9xC`), one folder per month. Matched on date +
+# title exactly like `counts:`, and a miss is a build failure for the same reason.
+#
+# THE SHARING CHECK IS NOT OPTIONAL AND THE BUILD CANNOT DO IT. This site is
+# public; those files default to macalester.edu-only, inherited from a parent
+# folder. A poster linked in that state gives an outside visitor a Google
+# sign-in wall. Confirm the file is shared to "anyone with the link" before
+# adding an entry, and put the date you checked in `checked:` — the build
+# refuses an entry without one. Re-check if a poster is re-uploaded: a new
+# upload is a new file and does not carry the old file's sharing.
+#
+# Record `drive_id`, not a URL. The build makes the /view link, so no editor
+# path can slip in.
+#
+#   - { date: 2026-09-16, title: "Million Dollar Problem",
+#       drive_id: 1HOhbFJn9qXtIx9CZIi1TfXeCZHALtSzL, checked: 2026-09-13 }
+#
+# NONE ARE LINKED YET. All four posters in the folder were checked on Sep 13 and
+# none is shared beyond the domain, so linking any of them would have shipped a
+# sign-in wall to students. See docs/mscs-poster-inventory.md in comp440-main for
+# which file belongs to which event and what still needs flipping.
+posters: []
 
 # Events that should not appear at all. The department calendar is not curated for
 # students, so an entry can be plain wrong; hiding it here keeps it out of the rail
