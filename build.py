@@ -35,17 +35,6 @@ def derive_dates(cal: dict) -> list[dt.date]:
     return out
 
 
-def join_labels(items: list[dict]) -> str:
-    """Speaker-deadline labels as a sentence subject: 'A and b'."""
-    names = [html.escape(n[: -len(" due")] if n.endswith(" due") else n)
-             for n in (i["label"] for i in items)]
-    if not names:
-        return "Nothing"
-    if len(names) == 1:
-        return names[0]
-    return ", ".join(names[:-1]) + " and " + names[-1][0].lower() + names[-1][1:]
-
-
 def build() -> str:
     data = yaml.safe_load((HERE / "schedule.yml").read_text())
     course, cal = data["course"], data["calendar"]
@@ -125,8 +114,7 @@ def build() -> str:
         place(o["date"], o["label"], "other", o.get("url"), time=cal["due_time"])
 
     # Speaker deadlines are placed by policy, never entered by hand. A speaker day
-    # owes more than the questions, so `items` is a list; the row entries and the
-    # footer note are built from that one list and cannot drift apart.
+    # owes more than the questions, so `items` is a list.
     sq = data.get("speaker_due") or data.get("speaker_questions") or {}
     when = sq.get("when", "visit_day")
     if when not in ("visit_day", "prior_meeting"):
@@ -154,15 +142,13 @@ def build() -> str:
 
     if errors:
         return ""
-    when_txt = ("on the day of the visit" if when == "visit_day"
-                else "the class meeting before the visit")
-    t = sq.get("due_time", cal["due_time"])
-    same = t == cal["due_time"]
-    note = (f"{join_labels(items)} are due {when_txt}." if same else
-            f"{join_labels(items)} are due at <b>{html.escape(t)}</b> {when_txt}.")
-    note += (" A reading's reflection is due on the day of the class that"
-             " discusses it.")
-    return render(course, cal, rows, note)
+    # The note paragraph that used to sit above the table is gone (instructor,
+    # Sep 14). Everything it said is still enforced and still visible where it
+    # is acted on: the due time is in the Due column heading, a speaker row
+    # carries its own "Speaker questions due" entry, and a reading's reflection
+    # is placed on the class that discusses it. The paragraph restated all three
+    # before anyone had a row in front of them, which is the wrong moment.
+    return render(course, cal, rows)
 
 
 def events_rail(t0: dt.date, t1: dt.date) -> str:
@@ -348,7 +334,7 @@ def course_links(links: list) -> str:
     return f'<ul class="links">{items}</ul>'
 
 
-def render(course, cal, rows, speaker_note) -> str:
+def render(course, cal, rows) -> str:
     e = html.escape
 
     def materials(row):
@@ -418,7 +404,6 @@ def render(course, cal, rows, speaker_note) -> str:
         due_col=e(cal.get("column_time", cal["due_time"])),
         links=course_links(course.get("links") or []),
         events=events_rail(cal["first"], cal["last"]),
-        speaker_note=speaker_note,
         rows="\n".join(body),
         built=dt.date.today().isoformat(),
     )
@@ -446,11 +431,11 @@ ul.links {{ list-style:none; margin:0 0 .9rem; padding:0; display:flex; flex-wra
 ul.links a {{ font-size:.9rem; font-weight:600; color:inherit; text-decoration:none;
   border:1px solid var(--line); border-radius:999px; padding:.2rem .7rem; display:inline-block }}
 ul.links a:hover {{ border-color:currentColor }}
-.note {{ color:var(--muted); font-size:.9rem; margin:0 0 1.5rem }}
-.note b {{ color:var(--fg) }}
 table {{ border-collapse:collapse; width:100%; }}
 th,td {{ text-align:left; vertical-align:top; padding:.7rem .75rem; border-bottom:1px solid var(--line) }}
-thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); border-bottom:2px solid var(--line) }}
+thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted);
+  position:sticky; top:0; z-index:4; background:var(--bg); padding-top:.5rem; padding-bottom:.4rem;
+  box-shadow:inset 0 -2px 0 var(--line) }}
 .modrow th {{ background:var(--brk); font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); padding:.5rem .75rem; border-bottom:1px solid var(--line) }}
 .dt {{ white-space:nowrap; width:8.5rem }}
 .dt a {{ color:inherit; text-decoration:none }}
@@ -538,7 +523,6 @@ li.ev-cancelled .what {{ text-decoration:line-through }}
 <h1>{title}</h1>
 <p class="sub">{term} · {meets}</p>
 {links}
-<p class="note">Everything is due at <b>{due_time}</b> on the date shown. {speaker_note}</p>
 <div class="cols">
 <main>
 <table>
@@ -571,6 +555,25 @@ li.ev-cancelled .what {{ text-decoration:line-through }}
   btn.title = "Jump to " + when;
   btn.setAttribute("aria-label", "Jump to " + when);
   btn.hidden = false;
+
+  // Open on the current/next meeting rather than at the top of the term
+  // (instructor, Sep 14). By October the interesting row is several screens
+  // down and every visit started with the same scroll.
+  //
+  // Three things it must not fight, in order of how annoying each would be:
+  // a deep link (#sep-22 means someone asked for that row), the browser's own
+  // scroll restoration on reload or Back, and a target already on screen --
+  // scrolling a visible row to centre is movement for nothing.
+  var restored = false;
+  try {{
+    var nav = performance.getEntriesByType("navigation")[0];
+    restored = nav && nav.type === "back_forward";
+  }} catch (e) {{}}
+  if (!location.hash && !restored && window.scrollY === 0 && !inView(target)) {{
+    // Instant, not smooth: this happens before the reader has looked at
+    // anything, so animating it only delays the page they asked for.
+    target.scrollIntoView({{ block: "center" }});
+  }}
 
   function inView(el) {{
     var r = el.getBoundingClientRect();
