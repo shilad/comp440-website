@@ -462,8 +462,16 @@ tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 .cols {{ display:flex; gap:2rem; align-items:flex-start }}
 .cols main {{ flex:1 1 auto; min-width:0 }}
 .rail {{ flex:0 0 15rem; font-size:.85rem; border-left:1px solid var(--line); padding-left:1rem }}
+/* Pinned alongside the table's column headers, so the top of both columns stays
+   put as one band rather than the schedule keeping its headings and the rail
+   losing its own. The bottom margin becomes padding: sticky pins the border box,
+   and a margin below it is a gap the background does not paint, which events
+   would scroll through. Same 2px inset rule as `thead th`, for the same reason --
+   without it the pinned heading and the events under it run together. */
 .rail h2 {{ font-size:.8rem; text-transform:uppercase; letter-spacing:.06em;
-  color:var(--muted); margin:.15rem 0 .6rem; font-weight:600 }}
+  color:var(--muted); margin:.15rem 0 0; font-weight:600;
+  position:sticky; top:0; z-index:4; background:var(--bg);
+  padding:.5rem 0 .6rem; box-shadow:inset 0 -2px 0 var(--line) }}
 .rail .gap {{ margin:0 0 .8rem; color:var(--muted); line-height:1.45 }}
 .rail .gap b {{ color:var(--fg) }}
 ul.evs {{ list-style:none; margin:0; padding:0 }}
