@@ -8,6 +8,7 @@ Usage: python3 build.py
 """
 import datetime as dt
 import html
+import re
 import sys
 from pathlib import Path
 
@@ -185,10 +186,42 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         fail(f"events.yml is {age} days old. Refresh it (tools/fetch_events.py) before publishing.")
         return ""
 
+    credit = yaml.safe_load((HERE / "events_overrides.yml").read_text()) or {}
+
+    # Hand-added events. The other three override keys all MODIFY an event the
+    # feed produced; this one adds an event the feed does not carry at all,
+    # because not everything students should see is on the MSCS calendar. They
+    # are merged in here, before the matching below, so a hand-added event can
+    # carry a poster or seminar credit exactly like a generated one.
+    #
+    # Two guards, both because a hand-written event is the one kind the feed
+    # cannot correct later: an entry that duplicates something already on the
+    # calendar is a build failure (say so with `hidden:` or an override instead
+    # of two rows for one event), and the rail footer stops claiming everything
+    # came from the MSCS calendar once anything here is in it.
+    extras = credit.get("extra") or []
+    for x in extras:
+        for field in ("date", "title", "kind"):
+            if not x.get(field):
+                fail(f"events_overrides extra: an entry is missing `{field}:`.")
+        if x.get("url") and x.get("poster"):
+            fail(f"events_overrides extra: {x.get('title')!r} has both `url:` and a "
+                 "poster. The title links to one thing; pick which.")
+        dupes = [e_ for e_ in evs
+                 if e_["date"] == x["date"]
+                 and (x["title"].lower() in e_["title"].lower()
+                      or e_["title"].lower() in x["title"].lower())]
+        if dupes:
+            fail(f"events_overrides extra: {x['date']} {x['title']!r} looks like "
+                 f"{dupes[0]['title']!r}, which the calendar already carries. Hand-adding "
+                 "it would put the same event on the rail twice — use `hidden:` or an "
+                 "override on the generated one instead.")
+    evs = sorted(evs + [dict(x) for x in extras],
+                 key=lambda e_: (e_["date"], _minutes(e_.get("time"))))
+
     # Seminar credit is curated by hand in events_overrides.yml and matched on here,
     # because events.yml is regenerated and would lose the flag. A miss is a build
     # failure: an event that moved or was retitled must not silently stop counting.
-    credit = yaml.safe_load((HERE / "events_overrides.yml").read_text()) or {}
     for want in credit.get("counts") or []:
         hits = [e for e in evs
                 if e["date"] == want["date"]
@@ -260,9 +293,10 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         # whatever colour its row already has and is marked by an underline alone.
         # The ✓ stays outside the link: it is a status, not part of the name.
         what = e(ev["title"])
-        if ev.get("poster"):
-            what = (f'<a href="{e(ev["poster"])}" title="Event poster">'
-                    f'{what}</a>')
+        link = ev.get("poster") or ev.get("url")
+        if link:
+            title = "Event poster" if ev.get("poster") else "Event details"
+            what = f'<a href="{e(link)}" title="{title}">{what}</a>' 
         out.append(
             f'<li class="{cls}" data-date="{d.isoformat()}">'
             f'<span class="when">{e(when)}</span>'
@@ -285,9 +319,22 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         '<aside class="rail"><h2>MSCS events</h2>'
         + gap
         + f'<ul class="evs">{"".join(out)}</ul>'
-        + f'<p class="asof">From the MSCS Events calendar, as of {e(str(fetched))}.</p>'
-        "</aside>"
+        + f'<p class="asof">From the MSCS Events calendar, as of {e(str(fetched))}'
+        + (", plus events added by hand." if extras else ".")
+        + "</p></aside>"
     )
+
+
+def _minutes(t) -> int:
+    """Sort key for a display time like "4:40pm". All-day events sort first."""
+    if not t:
+        return -1
+    m = re.match(r"(\d{1,2}):(\d{2})\s*([ap])m", str(t).strip(), re.I)
+    if not m:
+        return -1
+    h, mi, ap = int(m.group(1)), int(m.group(2)), m.group(3).lower()
+    h = h % 12 + (12 if ap == "p" else 0)
+    return h * 60 + mi
 
 
 def course_links(links: list) -> str:

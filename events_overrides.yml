@@ -95,3 +95,35 @@ hidden:
       reason: "wrong entry on the department calendar (instructor, Sep 10)" }
   - { title: "RStudio Drop In Hours",
       reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+
+# Events the MSCS calendar does not carry at all. The three keys above modify a
+# generated event; this one adds a row the feed has no entry for, because not
+# everything students should see is on the department calendar.
+#
+# THE BAR IS HIGHER HERE THAN ANYWHERE ELSE IN THIS FILE. `counts:`, `posters:`
+# and `hidden:` can only be wrong ABOUT something the department published; a
+# wrong entry here is a wrong event, and nothing downstream will catch it. So:
+# date, time and venue come from the event's own page, never from memory, and
+# `source:` records where they were read and when.
+#
+# One row per event, not per session. A conference day with seventeen sessions is
+# one line linking out to its schedule — the rail exists to surface talks, and
+# seventeen rows would bury every other event that week.
+#
+# Seminar credit is NOT implied by being here. Nothing on this list counts toward
+# the capstone requirement unless it also appears under `counts:`, decided by the
+# instructor per event.
+#
+# `url:` links the title, in the same slot a poster would use — an event carries
+# one or the other, and the build fails if it carries both.
+extra:
+  - date: 2026-09-17
+    time: "9:00am"
+    title: "Twin Cities Startup Week: Investor Day (at Macalester)"
+    location: "OLRI, Smail Gallery, JBD Hall, Mairs"
+    kind: career
+    url: "https://www.tcstartupweek.com/thursday"
+    # 17 sessions, 9:00am-6:30pm, all at 1600 Grand. Read off the event's own
+    # schedule page 2026-09-14; the 9:00am here is the first session, not a
+    # single start time for the day.
+    source: "tcstartupweek.com/thursday, read 2026-09-14 (instructor, Sep 14)"
