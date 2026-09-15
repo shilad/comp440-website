@@ -162,7 +162,7 @@ meetings:
       - { text: RAG activity, tbd: true }
       - { text: evaluation activity, tbd: true }
   - topic: Guest speaker session
-    speaker: true
+    speaker: Frank Schilder
     materials:
       - { text: background reading (to be set with speaker), tbd: true }
 
@@ -205,7 +205,7 @@ meetings:
     materials:
       - { text: agent introduction, tbd: true }
   - topic: Guest speaker session
-    speaker: true
+    speaker: President Rivera
     materials:
       - { text: background reading (to be set with speaker), tbd: true }
   - topic: Memory, planning, control, and agent evaluation
@@ -231,7 +231,7 @@ meetings:
       - { text: in-class simulation activity, tbd: true }
       - { text: governance reading, tbd: true }
   - topic: Guest speaker session
-    speaker: true
+    speaker: Yuren (Rock) Pang
     materials:
       - { text: background reading (to be set with speaker), tbd: true }
 
