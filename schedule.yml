@@ -76,6 +76,11 @@ readings:
   - date: 2026-09-22
     cite: 'Salganik, Dodds & Watts, "Experimental Study of Inequality and Unpredictability in an Artificial Cultural Market"'
     url: "https://www.filosofitis.com.ar/archivos/experimentalmarket.pdf"
+  # Speaker day. The reading reflection and the speaker questions are both due
+  # 8:00am, as two separate submissions (instructor, Sep 7).
+  - date: 2026-09-24
+    cite: 'Cheng, Stapleton, Kawakami et al, "How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions" (CHI 2022)'
+    url: "https://dl.acm.org/doi/pdf/10.1145/3491102.3501831"
 
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
@@ -150,7 +155,8 @@ meetings:
   - topic: Guest speaker session
     speaker: Logan Stapleton
     materials:
-      - { text: background reading (to be set with speaker), tbd: true }
+      - { text: "Logan Stapleton — personal site", url: "https://loganstapleton.com/" }
+      - { text: "Logan Stapleton — Vassar faculty page", url: "https://www.vassar.edu/faculty/lstapleton" }
 
   - module: Retrieval
     topic: TF-IDF, BM25, and lexical retrieval
