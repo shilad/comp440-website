@@ -73,6 +73,9 @@ readings:
     cite: 'New York Times on OpenAI and the Navier-Stokes problem (Sep 10, 2026)'
     label: article
     url: "https://www.nytimes.com/2026/09/10/science/tristan-buckmaster-openai-math-navier-stokes.html?unlocked_article_code=1.AFE.0psT.2Ar5a-FHIo9p"
+  - date: 2026-09-22
+    cite: 'Salganik, Dodds & Watts, "Experimental Study of Inequality and Unpredictability in an Artificial Cultural Market"'
+    url: "https://www.filosofitis.com.ar/archivos/experimentalmarket.pdf"
 
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
@@ -143,7 +146,7 @@ meetings:
       - { text: "latent factors: closing segment, picked up Oct 1", tbd: true }
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
-      - { text: Salganik reading + in-class simulation, tbd: true }
+      - { text: in-class cultural-market simulation, tbd: true }
   - topic: Guest speaker session
     speaker: Logan Stapleton
     materials:
