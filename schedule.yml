@@ -134,11 +134,12 @@ meetings:
     # It is now a closing segment on Sep 17 that sets up Oct 1 (embeddings).
     topic: Ratings, aggregation, and prediction baselines
     materials:
-      - { text: recommender systems activity, tbd: true }
+      - { text: "Collective Traces slides", url: "https://docs.google.com/presentation/d/1JrSiDY4vfBrD1gZQdJ1HJBgXOH--dHrucCraZ0xR1Gg/view" }
+      - { text: "Carbonated Beverages ratings sheet", url: "https://docs.google.com/spreadsheets/d/1AuPfdv9OtiXDKi9gi6ZuplRncg6heMmzqX4d9sVPE2Q/edit" }
       - { text: "Community norms v1 — ratify or amend", tbd: true }
   - topic: Similarity, neighborhoods, and held-out evaluation
     materials:
-      - { text: similarity and evaluation activity, tbd: true }
+      - { text: "Sep 17 slides: similarity, neighborhoods, latent factors", url: "https://docs.google.com/presentation/d/1NuOWNmFWZvpGPLB601Nu1ADlKhcM5A1AadOHqKgcf8g/view" }
       - { text: "latent factors: closing segment, picked up Oct 1", tbd: true }
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
