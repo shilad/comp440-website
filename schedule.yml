@@ -155,24 +155,31 @@ meetings:
   - topic: Embeddings and semantic similarity
     materials:
       - { text: embeddings activity, tbd: true }
-  - topic: Hybrid retrieval and introductory RAG
+  # Absorbs "Retrieval evaluation and data provenance", which lost its own
+  # session when Oct 8 became a speaker day (instructor, Sep 15).
+  - topic: Hybrid retrieval, RAG, evaluation, and data provenance
     materials:
       - { text: RAG activity, tbd: true }
-  - topic: Retrieval evaluation and data provenance
+      - { text: evaluation activity, tbd: true }
+  - topic: Guest speaker session
     speaker: true
     materials:
-      - { text: evaluation activity, tbd: true }
+      - { text: background reading (to be set with speaker), tbd: true }
 
+  # THE TIGHT ONE. Fall Break takes Oct 15, so this module has three meetings,
+  # and Oct 20 becoming a speaker day leaves two for three topics. Transformers,
+  # pretraining and generation folds in here (instructor, Sep 15).
   - module: Foundation Models
-    topic: From representations and prediction to language models
+    topic: "From representations to language models: transformers, pretraining, and generation"
     materials:
       - { text: language-model overview, tbd: true }
-  - break: Fall Break
-  - topic: Transformers, pretraining, and generation
-    materials:
       - { text: foundation-model materials, tbd: true }
-  - topic: Training data, labor, authorship, and limitations
+  - break: Fall Break
+  - topic: Guest speaker session
     speaker: true
+    materials:
+      - { text: background reading (to be set with speaker), tbd: true }
+  - topic: Training data, labor, authorship, and limitations
     materials:
       - { text: data / labor reading, tbd: true }
 
@@ -187,8 +194,9 @@ meetings:
   - topic: Direct Preference Optimization and model alignment
     materials:
       - { text: DPO lab, tbd: true }
+  # Was the sixth speaker window; dropped Sep 15, so this is a full teaching day
+  # again and the module's lab meetings no longer collide with a visit.
   - topic: Blind evaluation and pluralistic alignment
-    speaker: true
     materials:
       - { text: blind evaluation, tbd: true }
 
@@ -196,15 +204,18 @@ meetings:
     topic: RAG, tools, and agent workflows
     materials:
       - { text: agent introduction, tbd: true }
+  - topic: Guest speaker session
+    speaker: true
+    materials:
+      - { text: background reading (to be set with speaker), tbd: true }
   - topic: Memory, planning, control, and agent evaluation
     materials:
       - { text: agent evaluation activity, tbd: true }
-  - topic: Human–AI collaboration and delegation
+  # Absorbs "Agents in work and organizations", displaced when the module's
+  # speaker day moved from Nov 19 to Nov 12.
+  - topic: Human–AI collaboration, delegation, and agents in organizations
     materials:
       - { text: comparative experiment, tbd: true }
-  - topic: Agents in work and organizations
-    speaker: true
-    materials:
       - { text: organizational case, tbd: true }
 
   - module: Collective Systems
@@ -212,13 +223,17 @@ meetings:
     materials:
       - { text: network analysis activity, tbd: true }
   - break: Thanksgiving Break
-  - topic: Diffusion, feedback, and agent-based simulation
+  # Absorbs governance, law and institutions, displaced when Dec 3 became a
+  # speaker day. The "and synthesis" half of that title already has a home on
+  # Dec 10, so it is not folded in twice.
+  - topic: "Diffusion, feedback, and simulation; governance, law, and institutions"
     materials:
       - { text: in-class simulation activity, tbd: true }
-  - topic: Governance, law, institutions, and synthesis
+      - { text: governance reading, tbd: true }
+  - topic: Guest speaker session
     speaker: true
     materials:
-      - { text: governance reading, tbd: true }
+      - { text: background reading (to be set with speaker), tbd: true }
 
   - module: Synthesis
     topic: Final presentations, day 1
