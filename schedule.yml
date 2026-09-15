@@ -136,7 +136,7 @@ meetings:
     materials:
       - { text: "Collective Traces slides", url: "https://docs.google.com/presentation/d/1JrSiDY4vfBrD1gZQdJ1HJBgXOH--dHrucCraZ0xR1Gg/view" }
       - { text: "Carbonated Beverages ratings sheet", url: "https://docs.google.com/spreadsheets/d/1AuPfdv9OtiXDKi9gi6ZuplRncg6heMmzqX4d9sVPE2Q/edit" }
-      - { text: "Community norms v1 — ratify or amend", tbd: true }
+      - { text: "Class AI agreements — ratify or amend", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
   - topic: Similarity, neighborhoods, and latent factors
     materials:
       - { text: "Sep 17 slides: similarity, neighborhoods, latent factors", url: "https://docs.google.com/presentation/d/1NuOWNmFWZvpGPLB601Nu1ADlKhcM5A1AadOHqKgcf8g/view" }
@@ -196,7 +196,7 @@ meetings:
     materials:
       - { text: SFT lab, tbd: true }
       - { text: preference-labeling activity, tbd: true }
-      - { text: "Community norms — reread alongside HW3", tbd: true }
+      - { text: "Class AI agreements — reread alongside HW3", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
   - topic: Direct Preference Optimization and model alignment
     materials:
       - { text: DPO lab, tbd: true }
@@ -245,4 +245,5 @@ meetings:
     topic: Final presentations, day 1
   - topic: Final presentations, day 2; course synthesis
     materials:
-      - { text: "Community norms + Day 1 shared doc — final reread", tbd: true }
+      - { text: "Class AI agreements — final reread", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
+      - { text: "Day 1 shared doc — final reread", tbd: true }
