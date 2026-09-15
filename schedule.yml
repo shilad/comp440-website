@@ -94,7 +94,7 @@ assignments:
     due: 2026-10-13
   - id: hw3
     title: HW3 — Whose Preferences Count?
-    launch: 2026-10-27
+    launch: 2026-10-29
     due: 2026-11-10
   - id: hw4
     title: HW4 — Building and Evaluating an Agent
@@ -166,29 +166,34 @@ meetings:
     materials:
       - { text: background reading (to be set with speaker), tbd: true }
 
-  # THE TIGHT ONE. Fall Break takes Oct 15, so this module has three meetings,
-  # and Oct 20 becoming a speaker day leaves two for three topics. Transformers,
-  # pretraining and generation folds in here (instructor, Sep 15).
+  # Intact again: the speaker moved off Oct 20 to Oct 27 (instructor, Sep 15),
+  # so transformers keeps its own session and Oct 13 is no longer doubled up on
+  # a day that is also HW2 due and the final-project introduction.
   - module: Foundation Models
-    topic: "From representations to language models: transformers, pretraining, and generation"
+    topic: From representations and prediction to language models
     materials:
       - { text: language-model overview, tbd: true }
-      - { text: foundation-model materials, tbd: true }
   - break: Fall Break
-  - topic: Guest speaker session
-    speaker: true
+  - topic: Transformers, pretraining, and generation
     materials:
-      - { text: background reading (to be set with speaker), tbd: true }
+      - { text: foundation-model materials, tbd: true }
   - topic: Training data, labor, authorship, and limitations
     materials:
       - { text: data / labor reading, tbd: true }
 
+  # The module opens on a speaker. Chosen over Oct 20 for spacing, to avoid the
+  # first class back from Fall Break, and because HW3 ("Whose Preferences
+  # Count?") launches two days later.
   - module: Alignment
-    topic: Instruction tuning and supervised fine-tuning
+    topic: Guest speaker session
+    speaker: Nick Vincent (tentative)
+    materials:
+      - { text: background reading (to be set with speaker), tbd: true }
+  # Absorbs "Instruction tuning and supervised fine-tuning", displaced when
+  # Oct 27 became a speaker day. Also the day HW3 now launches.
+  - topic: "Instruction tuning and supervised fine-tuning; preference data, constitutions, and disagreement"
     materials:
       - { text: SFT lab, tbd: true }
-  - topic: Preference data, constitutions, and disagreement
-    materials:
       - { text: preference-labeling activity, tbd: true }
       - { text: "Community norms — reread alongside HW3", tbd: true }
   - topic: Direct Preference Optimization and model alignment
