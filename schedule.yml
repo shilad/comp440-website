@@ -157,6 +157,7 @@ meetings:
     materials:
       - { text: "Collective Traces slides", url: "https://docs.google.com/presentation/d/1JrSiDY4vfBrD1gZQdJ1HJBgXOH--dHrucCraZ0xR1Gg/view" }
       - { text: "Sep 17 slides: similarity, neighborhoods, latent factors", url: "https://docs.google.com/presentation/d/1NuOWNmFWZvpGPLB601Nu1ADlKhcM5A1AadOHqKgcf8g/view" }
+      - { text: "Fall 2026 Pop Ratings", url: "https://claude.ai/artifact/NUyHC2avZzNwUPvou5xXbb" }
       - { text: "latent factors: closing segment, picked up Oct 1", tbd: true }
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
