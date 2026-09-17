@@ -155,6 +155,7 @@ meetings:
       - { text: "Class AI agreements — ratify or amend", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
   - topic: Similarity, neighborhoods, and latent factors
     materials:
+      - { text: "Collective Traces slides", url: "https://docs.google.com/presentation/d/1JrSiDY4vfBrD1gZQdJ1HJBgXOH--dHrucCraZ0xR1Gg/view" }
       - { text: "Sep 17 slides: similarity, neighborhoods, latent factors", url: "https://docs.google.com/presentation/d/1NuOWNmFWZvpGPLB601Nu1ADlKhcM5A1AadOHqKgcf8g/view" }
       - { text: "latent factors: closing segment, picked up Oct 1", tbd: true }
   - topic: Cultural markets, social influence, and feedback simulation
