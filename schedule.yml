@@ -74,6 +74,11 @@ readings:
     label: article
     url: "https://www.nytimes.com/2026/09/10/science/tristan-buckmaster-openai-math-navier-stokes.html?unlocked_article_code=1.AFE.0psT.2Ar5a-FHIo9p"
   - date: 2026-09-22
+    cite: 'Steck, Baltrunas, Elahi, Liang, Raimond & Basilico, "Deep Learning for Recommender Systems: A Netflix Case Study" (AI Magazine, 2021)'
+    url: "https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/view/18140"
+  # Moved from Sep 22 with the cultural-markets session (instructor, Sep 17).
+  # Nothing orphaned: no reflection had been submitted against the Sep 22 option.
+  - date: 2026-09-24
     cite: 'Salganik, Dodds & Watts, "Experimental Study of Inequality and Unpredictability in an Artificial Cultural Market"'
     url: "https://www.filosofitis.com.ar/archivos/experimentalmarket.pdf"
   # Speaker days. The reading reflection and the speaker questions are both due
@@ -158,46 +163,59 @@ meetings:
       - { text: "Collective Traces slides", url: "https://docs.google.com/presentation/d/1JrSiDY4vfBrD1gZQdJ1HJBgXOH--dHrucCraZ0xR1Gg/view" }
       - { text: "Sep 17 slides: similarity, neighborhoods, latent factors", url: "https://docs.google.com/presentation/d/1NuOWNmFWZvpGPLB601Nu1ADlKhcM5A1AadOHqKgcf8g/view" }
       - { text: "Fall 2026 Pop Ratings", url: "https://claude.ai/artifact/NUyHC2avZzNwUPvou5xXbb" }
-      - { text: "latent factors: closing segment, picked up Oct 1", tbd: true }
+      - { text: "latent factors: full session Sep 22", tbd: true }
+  # Sep 22. New session (instructor, Sep 17): latent factors stop being a closing
+  # segment on Sep 17 and get a whole day, carried through to neural models.
+  - topic: Latent factors and deep learning for recommenders
+    materials:
+      - { text: latent factors and deep recommender materials, tbd: true }
+  # Sep 24. Pushed here from Sep 22 by the session above.
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
       - { text: in-class cultural-market simulation, tbd: true }
 
-  # Retrieval starts here, two days earlier than planned: Logan Stapleton moved
-  # to Nov 24 and freed this day, and Brent Hecht needs Sep 29. Collective Traces
-  # loses nothing, because Sep 24 was a speaker day carrying no content.
+  # Sep 29. Retrieval now opens on the speaker, because deep recommenders took
+  # Sep 22 and pushed everything before Brent's fixed date one session later.
   - module: Retrieval
-    topic: TF-IDF, BM25, and lexical retrieval
-    materials:
-      - { text: lexical retrieval activity, tbd: true }
-  - topic: Guest speaker session
+    topic: Guest speaker session
     speaker: Brent Hecht
     materials:
       - { text: background reading (to be set with speaker), tbd: true }
+  # Oct 1. Keeps a full session of its own (instructor, Sep 17) rather than being
+  # folded into embeddings.
+  - topic: TF-IDF, BM25, and lexical retrieval
+    materials:
+      - { text: lexical retrieval activity, tbd: true }
+  # Oct 6.
   - topic: Embeddings and semantic similarity
     materials:
       - { text: embeddings activity, tbd: true }
-  # Absorbs "Retrieval evaluation and data provenance", which lost its own
-  # session when Oct 8 became a speaker day (instructor, Sep 15).
-  - topic: Hybrid retrieval, RAG, evaluation, and data provenance
-    materials:
-      - { text: RAG activity, tbd: true }
-      - { text: evaluation activity, tbd: true }
+  # Oct 8. Frank's date is fixed, so he sits BEFORE the RAG session now.
   - topic: Guest speaker session
     speaker: Frank Schilder (tentative)
     materials:
       - { text: background reading (to be set with speaker), tbd: true }
+  # Oct 13. Absorbs "Retrieval evaluation and data provenance", which lost its
+  # own session when Oct 8 became a speaker day (instructor, Sep 15).
+  - topic: Hybrid retrieval, RAG, evaluation, and data provenance
+    materials:
+      - { text: RAG activity, tbd: true }
+      - { text: evaluation activity, tbd: true }
+  - break: Fall Break
 
-  # Intact again: the speaker moved off Oct 20 to Oct 27 (instructor, Sep 15),
-  # so transformers keeps its own session and Oct 13 is no longer doubled up on
-  # a day that is also HW2 due and the final-project introduction.
+  # THIS MODULE PAYS FOR THE NEW Sep 22 SESSION (instructor, Sep 17). It drops
+  # from three teaching days to two so deep recommenders and lexical retrieval
+  # can each keep a full class.
+  #
+  # The fold HAS to be here and not on Oct 22. Fall Break is a fixed calendar
+  # date, and meetings are positional, so the number of entries before the break
+  # cannot change: a session added on Sep 22 must be paid for by a session
+  # removed before Oct 15. The only language-model topic before the break was
+  # this overview, so it folds forward into transformers.
   - module: Foundation Models
-    topic: From representations and prediction to language models
+    topic: "From representations to language models: transformers, pretraining, and generation"
     materials:
       - { text: language-model overview, tbd: true }
-  - break: Fall Break
-  - topic: Transformers, pretraining, and generation
-    materials:
       - { text: foundation-model materials, tbd: true }
   - topic: Training data, labor, authorship, and limitations
     materials:
