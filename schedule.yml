@@ -203,35 +203,31 @@ meetings:
       - { text: evaluation activity, tbd: true }
   - break: Fall Break
 
-  # THIS MODULE PAYS FOR THE NEW Sep 22 SESSION (instructor, Sep 17). It drops
-  # from three teaching days to two so deep recommenders and lexical retrieval
-  # can each keep a full class.
-  #
-  # The fold HAS to be here and not on Oct 22. Fall Break is a fixed calendar
-  # date, and meetings are positional, so the number of entries before the break
-  # cannot change: a session added on Sep 22 must be paid for by a session
-  # removed before Oct 15. The only language-model topic before the break was
-  # this overview, so it folds forward into transformers.
+  # Unfolded again (instructor, Sep 17). The Sep 22 session was briefly paid for
+  # by folding this overview into transformers; it no longer has to be, because
+  # training data, labor and authorship moved onto Nick Vincent's visit and gave
+  # Oct 22 back. Entry count between Fall Break and Oct 27 is unchanged, so no
+  # speaker or break moves.
   - module: Foundation Models
-    topic: "From representations to language models: transformers, pretraining, and generation"
+    topic: From representations and prediction to language models
     materials:
       - { text: language-model overview, tbd: true }
-      - { text: foundation-model materials, tbd: true }
-  - topic: Training data, labor, authorship, and limitations
+  - topic: Transformers, pretraining, and generation
     materials:
-      - { text: data / labor reading, tbd: true }
-
-  # The module opens on a speaker. Chosen over Oct 20 for spacing, to avoid the
-  # first class back from Fall Break, and because HW3 ("Whose Preferences
-  # Count?") launches two days later.
-  - module: Alignment
-    topic: Guest speaker session
+      - { text: foundation-model materials, tbd: true }
+  # Nick Vincent covers training data, labor and authorship with the class
+  # (instructor, Sep 17), so his visit closes Foundation Models rather than
+  # opening Alignment, and the topic is named on the row so students know what
+  # the day is. His date does not change.
+  - topic: "Guest speaker session: training data, labor, and authorship"
     speaker: Nick Vincent (tentative)
     materials:
-      - { text: background reading (to be set with speaker), tbd: true }
+      - { text: data / labor reading (to be set with speaker), tbd: true }
+
   # Absorbs "Instruction tuning and supervised fine-tuning", displaced when
   # Oct 27 became a speaker day. Also the day HW3 now launches.
-  - topic: "Instruction tuning and supervised fine-tuning; preference data, constitutions, and disagreement"
+  - module: Alignment
+    topic: "Instruction tuning and supervised fine-tuning; preference data, constitutions, and disagreement"
     materials:
       - { text: SFT lab, tbd: true }
       - { text: preference-labeling activity, tbd: true }
