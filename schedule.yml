@@ -106,6 +106,7 @@ assignments:
     title: HW1 — Collective Prediction
     launch: 2026-09-15
     due: 2026-10-01
+    url: "https://github.com/shilad/comp440-hw1"
   # Launch moves off Sep 29 because that day is now a whole-day guest speaker
   # with no class time to introduce an assignment. Due date skips Oct 15, which
   # is Fall Break, so the next legal deadline is Oct 20.
