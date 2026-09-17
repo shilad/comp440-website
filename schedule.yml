@@ -76,9 +76,14 @@ readings:
   - date: 2026-09-22
     cite: 'Salganik, Dodds & Watts, "Experimental Study of Inequality and Unpredictability in an Artificial Cultural Market"'
     url: "https://www.filosofitis.com.ar/archivos/experimentalmarket.pdf"
-  # Speaker day. The reading reflection and the speaker questions are both due
+  # Speaker days. The reading reflection and the speaker questions are both due
   # 8:00am, as two separate submissions (instructor, Sep 7).
-  - date: 2026-09-24
+  # No `url` yet: the build renders the reflection link alone, so students can see
+  # a reading is coming. Replace the cite once the reading is chosen with Brent.
+  - date: 2026-09-29
+    cite: 'Background reading for Brent Hecht — to be announced'
+  # Moved with Logan Stapleton from Sep 24 to Nov 24 (instructor, Sep 17).
+  - date: 2026-11-24
     cite: 'Cheng, Stapleton, Kawakami et al, "How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions" (CHI 2022)'
     url: "https://dl.acm.org/doi/pdf/10.1145/3491102.3501831"
 
@@ -95,11 +100,14 @@ assignments:
   - id: hw1
     title: HW1 — Collective Prediction
     launch: 2026-09-15
-    due: 2026-09-29
+    due: 2026-10-01
+  # Launch moves off Sep 29 because that day is now a whole-day guest speaker
+  # with no class time to introduce an assignment. Due date skips Oct 15, which
+  # is Fall Break, so the next legal deadline is Oct 20.
   - id: hw2
     title: HW2 — Representing and Retrieving Knowledge
-    launch: 2026-09-29
-    due: 2026-10-13
+    launch: 2026-10-01
+    due: 2026-10-20
   - id: hw3
     title: HW3 — Whose Preferences Count?
     launch: 2026-10-29
@@ -152,16 +160,18 @@ meetings:
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
       - { text: in-class cultural-market simulation, tbd: true }
-  - topic: Guest speaker session
-    speaker: Logan Stapleton
-    materials:
-      - { text: "Logan Stapleton — personal site", url: "https://loganstapleton.com/" }
-      - { text: "Logan Stapleton — Vassar faculty page", url: "https://www.vassar.edu/faculty/lstapleton" }
 
+  # Retrieval starts here, two days earlier than planned: Logan Stapleton moved
+  # to Nov 24 and freed this day, and Brent Hecht needs Sep 29. Collective Traces
+  # loses nothing, because Sep 24 was a speaker day carrying no content.
   - module: Retrieval
     topic: TF-IDF, BM25, and lexical retrieval
     materials:
       - { text: lexical retrieval activity, tbd: true }
+  - topic: Guest speaker session
+    speaker: Brent Hecht
+    materials:
+      - { text: background reading (to be set with speaker), tbd: true }
   - topic: Embeddings and semantic similarity
     materials:
       - { text: embeddings activity, tbd: true }
@@ -234,16 +244,21 @@ meetings:
       - { text: organizational case, tbd: true }
 
   - module: Collective Systems
-    topic: Social networks and multi-agent systems
+    topic: Guest speaker session
+    speaker: Logan Stapleton
     materials:
-      - { text: network analysis activity, tbd: true }
+      - { text: "Logan Stapleton — personal site", url: "https://loganstapleton.com/" }
+      - { text: "Logan Stapleton — Vassar faculty page", url: "https://www.vassar.edu/faculty/lstapleton" }
   - break: Thanksgiving Break
-  # Absorbs governance, law and institutions, displaced when Dec 3 became a
-  # speaker day. The "and synthesis" half of that title already has a home on
-  # Dec 10, so it is not folded in twice.
-  - topic: "Diffusion, feedback, and simulation; governance, law, and institutions"
+  # The last teaching day of the module, and the only one left: Logan takes
+  # Nov 24 and Rock takes Dec 3. Three topics want it and one day is available,
+  # so the row is honest about being undecided rather than pretending to carry
+  # all three. Social networks was displaced by Logan's move (instructor,
+  # Sep 17: "that part of the semester is pretty tba").
+  - topic: "Options: diffusion, feedback, and agent-based simulation · social networks and multi-agent systems · governance, law, and institutions"
     materials:
       - { text: in-class simulation activity, tbd: true }
+      - { text: network analysis activity, tbd: true }
       - { text: governance reading, tbd: true }
   - topic: Guest speaker session
     speaker: Yuren (Rock) Pang
