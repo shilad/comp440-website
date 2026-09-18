@@ -83,10 +83,28 @@ readings:
     url: "https://www.filosofitis.com.ar/archivos/experimentalmarket.pdf"
   # Speaker days. The reading reflection and the speaker questions are both due
   # 8:00am, as two separate submissions (instructor, Sep 7).
-  # No `url` yet: the build renders the reflection link alone, so students can see
-  # a reading is coming. Replace the cite once the reading is chosen with Brent.
+  #
+  # Set Sep 18. Four sources, one reflection — hence `sources`, not four entries.
+  # The filing is the point: Brent Hecht is named and quoted in it three times as
+  # "Microsoft's Director of Applied Science", which is the detail students are
+  # asked to find. Verified Sep 18 by extracting the text of the PDF.
+  # NYT gift link: the `unlocked_article_code` is what lets students read it
+  # without a subscription, so it must be kept intact. Gift links expire; if it
+  # stops working, get a fresh one from the instructor rather than dropping the
+  # parameter.
   - date: 2026-09-29
-    cite: 'Background reading for Brent Hecht — to be announced'
+    cite: 'background on Brent Hecht, and the News Plaintiffs brief in the OpenAI copyright MDL (Sep 17, 2026)'
+    sources:
+      - { text: his site, url: "https://brenthecht.com/" }
+      - { text: LinkedIn, url: "https://www.linkedin.com/in/brenthecht/" }
+      - { text: NYT, url: "https://www.nytimes.com/2026/09/17/technology/microsoft-openai-publishing-industry.html?unlocked_article_code=1.CFE.JvhY.hNmkpWFzgNCD&smid=url-share" }
+      - { text: court filing, url: "https://storage.courtlistener.com/recap/gov.uscourts.nysd.640396/gov.uscourts.nysd.640396.1977.1.pdf" }
+    note: >-
+      The filing runs 92 pages. Find what it says about our speaker and what it
+      says he said. You may use an AI agent to help you search it — for this
+      document only, an exception to the no-AI rule. Check whatever it hands you
+      against the filing itself, including the surrounding context, not just the
+      line it quotes. The reflection is still your own writing.
   # Moved with Logan Stapleton from Sep 24 to Nov 24 (instructor, Sep 17).
   - date: 2026-11-24
     cite: 'Cheng, Stapleton, Kawakami et al, "How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions" (CHI 2022)'

@@ -69,7 +69,7 @@ def build() -> str:
         )
     by_date = {r["date"]: r for r in rows}
 
-    def place(date, label, kind, url=None, time=None, links=None):
+    def place(date, label, kind, url=None, time=None, links=None, note=None):
         row = by_date.get(date)
         if row is None:
             fail(f"{label}: {date} is not a class meeting.")
@@ -77,7 +77,7 @@ def build() -> str:
             fail(f"{label}: {date} falls on {row['topic']}.")
         else:
             row["due"].append({"label": label, "kind": kind, "url": url,
-                               "time": time, "links": links})
+                               "time": time, "links": links, "note": note})
 
     for a in data.get("assignments", []):
         if a.get("launch"):
@@ -99,14 +99,30 @@ def build() -> str:
     for r in data.get("readings", []):
         # `label` names the link when "paper" would be wrong — a news article, a
         # blog post, a video. Optional; academic papers just leave it off.
-        lbl = r.get("label", "paper")
-        links = [{"text": lbl, "url": r["url"]}] if r.get("url") else []
+        #
+        # `sources` is for a reading assembled from several pieces — a speaker's
+        # site plus a filing plus a news story, say. It stays ONE reading with one
+        # reflection and one 8:00am; four separate `readings` entries would render
+        # four reflection links and imply four submissions. Each entry is
+        # {text, url}. `url`/`label` still work alone for the ordinary one-paper
+        # case, and the two can be combined.
+        links = []
+        if r.get("url"):
+            links.append({"text": r.get("label", "paper"), "url": r["url"]})
+        for s in r.get("sources", []):
+            if not (s.get("text") and s.get("url")):
+                fail(f'{r["date"]}: every reading source needs text and url.')
+            links.append({"text": s["text"], "url": s["url"]})
         if refl.get("form_url"):
             links.append({"text": "reflection", "url": refl["form_url"]})
-        elif r.get("url"):
+        elif links:
             fail("readings are set but reflections.form_url is missing.")
+        # `note` is an instruction that belongs to this reading and nowhere else —
+        # how to approach a hard source, an exception to a standing rule. Policy
+        # that applies to every reading belongs in `reflections`, not here.
         place(r["date"], f'Read {r["cite"]}', "reading",
-              time=refl.get("due_time", cal["due_time"]), links=links)
+              time=refl.get("due_time", cal["due_time"]), links=links,
+              note=r.get("note"))
 
     for m in data.get("milestones", []):
         place(m["date"], m["label"], "project", m.get("url"), time=cal["due_time"])
@@ -369,6 +385,10 @@ def render(course, cal, rows) -> str:
                     f'<a href="{e(l["url"])}">{e(l["text"])}</a>' for l in d["links"]
                 )
                 lbl += f' <span class="lnks">[{inner}]</span>'
+            # An instruction attached to one reading renders under it, so it is
+            # read with the thing it applies to rather than as general policy.
+            if d.get("note"):
+                lbl += f'<span class="note">{e(d["note"])}</span>'
             items += f'<li class="d-{d["kind"]}">{lbl}{at}</li>'
         return f'<ul class="due">{items}</ul>'
 
@@ -456,6 +476,7 @@ ul.due li::before {{ content:"● "; color:var(--muted) }}
 .d-speaker::before {{ color:#7c3aed !important }}
 .d-reading::before {{ color:var(--talk) !important }}
 .lnks {{ font-size:.78rem; color:var(--muted); white-space:nowrap }}
+.note {{ display:block; font-size:.78rem; color:var(--muted); margin:.2rem 0 0 }}
 tr.brk td {{ background:var(--brk); color:var(--muted) }}
 tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 .legend {{ margin-top:1.5rem; font-size:.85rem; color:var(--muted) }}
