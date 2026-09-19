@@ -113,8 +113,12 @@ def build() -> str:
             if not (s.get("text") and s.get("url")):
                 fail(f'{r["date"]}: every reading source needs text and url.')
             links.append({"text": s["text"], "url": s["url"]})
+        # The submit link is the action, the rest are things to open. `act` marks it
+        # so the renderer can style it apart; on a speaker day two obligations point
+        # at this same form and both should look like the same kind of thing.
         if refl.get("form_url"):
-            links.append({"text": "reflection", "url": refl["form_url"]})
+            links.append({"text": "Submit reflection", "url": refl["form_url"],
+                          "act": True})
         elif links:
             fail("readings are set but reflections.form_url is missing.")
         # `note` is an instruction that belongs to this reading and nowhere else —
@@ -353,6 +357,10 @@ def course_links(links: list) -> str:
 def render(course, cal, rows) -> str:
     e = html.escape
 
+    # Materials sit inside the Class column, under the topic, rather than in a
+    # column of their own: the split students kept misreading was two adjacent
+    # lists of links. "What happens in class" against "what you owe before it"
+    # is a difference of place, which needs no explaining.
     def materials(row):
         if not row["materials"]:
             return ""
@@ -365,7 +373,15 @@ def render(course, cal, rows) -> str:
                 out.append(f'<li><a href="{e(m["url"])}">{text}</a></li>')
             else:
                 out.append(f"<li>{text}</li>")
-        return f'<ul class="mat">{"".join(out)}</ul>'
+        caption = '<span class="sec">Materials</span>'
+        return f'{caption}<ul class="mat">{"".join(out)}</ul>'
+
+    # Every obligation says what kind it is, in words. The bullets this replaces
+    # were coloured per kind with nothing on the page saying what a colour meant.
+    # `other` is named too, so it is not the one unlabelled item in the column and
+    # does not read as optional.
+    KIND = {"reading": "Reading", "hw": "Homework", "project": "Project",
+            "speaker": "Speaker", "other": "Form"}
 
     def due(row):
         if not row["due"]:
@@ -376,20 +392,35 @@ def render(course, cal, rows) -> str:
             at = ""
             if d.get("time") and d["time"] != cal.get("column_time", cal["due_time"]):
                 at = f' <span class="at">{e(d["time"])}</span>'
+            kind = d["kind"]
             lbl = e(d["label"])
             if d.get("url"):
                 lbl = f'<a href="{e(d["url"])}">{lbl}</a>'
-            # A reading names its own links inline: Read X [paper | reflection]
-            if d.get("links"):
-                inner = " | ".join(
-                    f'<a href="{e(l["url"])}">{e(l["text"])}</a>' for l in d["links"]
+            out = f'<span class="kind">{e(KIND.get(kind, kind))}</span>' \
+                  f'<span class="what">{lbl}{at}</span>'
+            # A reading's sources are things to open; the submit link is the thing
+            # to do. Both are chips so neither hides inside a run of prose, and the
+            # submit one carries the accent. They wrap: the old bracketed list was
+            # `white-space:nowrap`, and one five-link row set the minimum width of
+            # this whole column.
+            chips = list(d.get("links") or [])
+            # A speaker day's questions go to the same form as the reflection, as a
+            # separate submission. Same shape, so they read as two of one thing.
+            if kind == "speaker" and d.get("url"):
+                out = f'<span class="kind">{e(KIND[kind])}</span>' \
+                      f'<span class="what">{e(d["label"])}{at}</span>'
+                chips = [{"text": "Submit questions", "url": d["url"], "act": True}]
+            if chips:
+                inner = "".join(
+                    f'<a class="chip{" act" if l.get("act") else ""}" '
+                    f'href="{e(l["url"])}">{e(l["text"])}</a>' for l in chips
                 )
-                lbl += f' <span class="lnks">[{inner}]</span>'
+                out += f'<span class="srcs">{inner}</span>'
             # An instruction attached to one reading renders under it, so it is
             # read with the thing it applies to rather than as general policy.
             if d.get("note"):
-                lbl += f'<span class="note">{e(d["note"])}</span>'
-            items += f'<li class="d-{d["kind"]}">{lbl}{at}</li>'
+                out += f'<span class="note">{e(d["note"])}</span>'
+            items += f'<li class="d-{kind}">{out}</li>'
         return f'<ul class="due">{items}</ul>'
 
     body, module = [], None
@@ -397,22 +428,31 @@ def render(course, cal, rows) -> str:
         if row["module"] != module:
             module = row["module"]
             body.append(
-                f'<tr class="modrow"><th colspan="4" scope="rowgroup">{e(module or "")}</th></tr>'
+                f'<tr class="modrow"><th colspan="3" scope="rowgroup">{e(module or "")}</th></tr>'
             )
         d = row["date"]
         anchor = d.strftime("%b-%d").lower()
-        cls = "brk" if row["is_break"] else ""
+        date_cell = (f'<td class="dt"><a href="#{anchor}">'
+                     f'{d.strftime("%a, %b %-d")}</a></td>')
+        # A break owes nothing and holds nothing, so it spans rather than carrying
+        # an empty Due cell that reads as a deadline someone forgot to fill in.
+        if row["is_break"]:
+            body.append(
+                f'<tr id="{anchor}" class="brk" data-date="{d.isoformat()}">'
+                f'{date_cell}<td class="tp" colspan="2">{e(row["topic"])}</td></tr>'
+            )
+            continue
         speaker = ""
         if row["speaker"]:
             who = (f'Guest speaker: {e(row["speaker_name"])}' if row["speaker_name"]
                    else "Guest speaker window")
             speaker = f'<span class="spk">{who}</span>'
         body.append(
-            f'<tr id="{anchor}" class="{cls}" data-date="{d.isoformat()}">'
-            f'<td class="dt"><a href="#{anchor}">{d.strftime("%a, %b %-d")}</a></td>'
-            f'<td class="tp">{e(row["topic"])}{speaker}</td>'
-            f'<td>{materials(row)}</td>'
-            f'<td>{due(row)}</td>'
+            f'<tr id="{anchor}" class="" data-date="{d.isoformat()}">'
+            f'{date_cell}'
+            f'<td class="tp">{e(row["topic"])}{speaker}{materials(row)}</td>'
+            f'<td class="du" data-label="Due {e(cal.get("column_time", cal["due_time"]))}">'
+            f'{due(row)}</td>'
             f"</tr>"
         )
 
@@ -434,24 +474,32 @@ TEMPLATE = """<!doctype html>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} — {term} Schedule</title>
 <style>
+/* `--line` is a hairline between rows and is deliberately faint (1.28:1 on the
+   page background). It must NOT carry a link underline or a chip's border: those
+   identify a control, which WCAG 1.4.11 puts at 3:1. `--ctl` is that second
+   token, measured at 3.03:1 light and 3.07:1 dark. */
 :root {{
-  --bg:#fff; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e3e3e3;
-  --accent:#7c2d12; --now:#fffbeb; --nowline:#f59e0b; --brk:#f7f7f7; --talk:#0f766e; --counts:#2563eb;
+  color-scheme:light dark;
+  --bg:#fff; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e3e3e3; --ctl:#8f8f8f;
+  --accent:#7c2d12; --now:#fffbeb; --nowline:#b45309; --brk:#f7f7f7; --talk:#0f766e; --counts:#2563eb;
 }}
 @media (prefers-color-scheme:dark) {{ :root:not([data-theme=light]) {{
-  --bg:#16181c; --fg:#e8e8e8; --muted:#9aa0a6; --line:#2c3038;
+  --bg:#16181c; --fg:#e8e8e8; --muted:#9aa0a6; --line:#2c3038; --ctl:#676e7a;
   --accent:#fca5a5; --now:#2a2410; --nowline:#d97706; --brk:#1c1f24; --talk:#5eead4; --counts:#93c5fd;
 }} }}
 * {{ box-sizing:border-box }}
 body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }}
-.wrap {{ max-width:1080px; margin:0 auto; padding:2rem 1.25rem 4rem }}
+.wrap {{ max-width:1180px; margin:0 auto; padding:2rem 1.25rem 4rem }}
 h1 {{ font-size:1.5rem; margin:0 0 .25rem }}
 .sub {{ color:var(--muted); margin:0 0 .5rem }}
 ul.links {{ list-style:none; margin:0 0 .9rem; padding:0; display:flex; flex-wrap:wrap; gap:.4rem .9rem }}
 ul.links a {{ font-size:.9rem; font-weight:600; color:inherit; text-decoration:none;
   border:1px solid var(--line); border-radius:999px; padding:.2rem .7rem; display:inline-block }}
 ul.links a:hover {{ border-color:currentColor }}
-table {{ border-collapse:collapse; width:100%; }}
+/* Fixed layout, so the Due column's width is a decision rather than a result. In
+   auto layout the widest unbreakable run in any cell sets the column, which is how
+   one five-link reading came to squeeze every other column on the page. */
+table {{ border-collapse:collapse; width:100%; table-layout:fixed }}
 th,td {{ text-align:left; vertical-align:top; padding:.7rem .75rem; border-bottom:1px solid var(--line) }}
 thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted);
   position:sticky; top:0; z-index:4; background:var(--bg); padding-top:.5rem; padding-bottom:.4rem;
@@ -460,23 +508,39 @@ thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; co
 .dt {{ white-space:nowrap; width:8.5rem }}
 .dt a {{ color:inherit; text-decoration:none }}
 .dt a:hover {{ text-decoration:underline }}
-.tp {{ width:30% }}
+.tp {{ width:36% }}
 .spk {{ display:block; font-size:.78rem; color:var(--accent); margin-top:.2rem }}
-ul.mat, ul.due {{ margin:0; padding:0; list-style:none; font-size:.9rem }}
-ul.mat li, ul.due li {{ margin:0 0 .25rem }}
+/* Nothing on this page is smaller than 12px. The sizes are 16 / 14.4 / 13.6 / 12,
+   and every caption, tag and kind label shares the bottom one. */
+.sec {{ display:block; font-size:.75rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--muted); margin:.6rem 0 .15rem }}
+ul.mat, ul.due {{ margin:0; padding:0; list-style:none }}
+ul.mat {{ font-size:.85rem }}
+ul.mat li {{ margin:0 0 .2rem }}
+ul.due {{ font-size:.9rem }}
+ul.due li {{ margin:0 0 .55rem }}
+ul.due li:last-child {{ margin-bottom:0 }}
 .tbd {{ color:var(--muted) }}
-ul.mat a, ul.due a {{ color:inherit; text-decoration:underline; text-decoration-color:var(--line);
+ul.mat a, ul.due a {{ color:inherit; text-decoration:underline; text-decoration-color:var(--ctl);
   text-underline-offset:2px }}
 ul.mat a:hover, ul.due a:hover {{ text-decoration-color:currentColor }}
 .at {{ font-size:.78rem; color:var(--muted); white-space:nowrap }}
-.tag {{ font-size:.65rem; border:1px solid var(--line); border-radius:3px; padding:0 .25rem; vertical-align:1px }}
-ul.due li::before {{ content:"● "; color:var(--muted) }}
-.d-hw::before {{ color:#dc2626 !important }}
-.d-project::before {{ color:#2563eb !important }}
-.d-speaker::before {{ color:#7c3aed !important }}
-.d-reading::before {{ color:var(--talk) !important }}
-.lnks {{ font-size:.78rem; color:var(--muted); white-space:nowrap }}
-.note {{ display:block; font-size:.78rem; color:var(--muted); margin:.2rem 0 0 }}
+.tag {{ font-size:.75rem; border:1px solid var(--ctl); border-radius:3px; padding:0 .25rem; vertical-align:1px }}
+/* The kind is said in words, so colour is not carrying it. One muted weight for
+   all four: four hues would add colour to a page already called cluttered, and
+   two of them collided with the blue the events rail uses for seminar credit. */
+.kind {{ font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--muted); margin-right:.4rem; vertical-align:1px }}
+.what {{ display:inline }}
+.srcs {{ display:flex; flex-wrap:wrap; gap:.3rem .35rem; margin:.3rem 0 0 }}
+ul.due a.chip {{ font-size:.8rem; line-height:1.3; text-decoration:none; color:inherit;
+  border:1px solid var(--ctl); border-radius:999px; padding:.15rem .6rem }}
+ul.due a.chip:hover {{ border-color:currentColor }}
+ul.due a.chip.act {{ border-color:var(--accent); color:var(--accent); font-weight:600 }}
+/* This carries rule exceptions -- the Sep 29 reading suspends the no-AI rule for
+   one document -- so it is not allowed to be the least legible text in its row. */
+.note {{ display:block; font-size:.85rem; line-height:1.45; color:var(--fg);
+  margin:.3rem 0 0; max-width:42em }}
 tr.brk td {{ background:var(--brk); color:var(--muted) }}
 tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
 .legend {{ margin-top:1.5rem; font-size:.85rem; color:var(--muted) }}
@@ -523,7 +587,9 @@ ul.evs .what a:hover, ul.evs .what a:focus {{ text-decoration:underline solid }}
 li.ev-cancelled {{ opacity:.55 }}
 li.ev-cancelled .what {{ text-decoration:line-through }}
 .rail .asof {{ margin:1rem 0 0; color:var(--muted); font-size:.78rem }}
-@media (max-width:900px) {{
+/* 1024, not 900: the rail costs the table 272px, and on a laptop that came out of
+   the Due column, which is the one that has to hold a reading's chips and note. */
+@media (max-width:1024px) {{
   .cols {{ display:block }}
   .rail {{ border-left:0; border-top:1px solid var(--line); padding:1rem 0 0; margin-top:1.5rem }}
 }}
@@ -542,11 +608,21 @@ li.ev-cancelled .what {{ text-decoration:line-through }}
 @media print {{ #today {{ display:none !important }} }}
 @media (max-width:720px) {{
   thead {{ display:none }}
-  table,tbody,tr,td {{ display:block; width:auto }}
+  table,tbody,tr,td,th {{ display:block; width:auto }}
   tr:not(.modrow) {{ border-bottom:1px solid var(--line); padding:.6rem 0 }}
   td {{ border:0; padding:.15rem .5rem }}
-  .dt {{ font-weight:600 }}
+  .dt {{ font-weight:600; width:auto }}
   .tp {{ width:auto }}
+  /* The column headings are gone at this width, so the Due block names itself.
+     Materials already carry their own caption. */
+  td.du::before {{ content:attr(data-label); display:block; font-size:.75rem;
+    font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--muted); margin:.6rem 0 .15rem }}
+  td.du:empty {{ display:none }}
+  /* Reading on a phone, not squinting: nothing shrinks just because the screen
+     did, and the chips grow to a 26px touch target. */
+  ul.mat {{ font-size:.9rem }}
+  ul.due a.chip {{ font-size:.85rem; padding:.2rem .7rem }}
 }}
 </style></head><body><div class="wrap">
 <h1>{title}</h1>
@@ -555,7 +631,8 @@ li.ev-cancelled .what {{ text-decoration:line-through }}
 <div class="cols">
 <main>
 <table>
-<thead><tr><th>Date</th><th>Topic</th><th>Class materials</th><th>Due ({due_col})</th></tr></thead>
+<colgroup><col style="width:8.5rem"><col style="width:36%"><col></colgroup>
+<thead><tr><th scope="col">Date</th><th scope="col">Class</th><th scope="col">Due ({due_col})</th></tr></thead>
 <tbody>
 {rows}
 </tbody></table>
@@ -634,7 +711,7 @@ li.ev-cancelled .what {{ text-decoration:line-through }}
 
   function place() {{
     // Below the breakpoint the rail sits under the table; leave it alone.
-    if (window.matchMedia("(max-width: 900px)").matches) {{
+    if (window.matchMedia("(max-width: 1024px)").matches) {{
       list.classList.remove("aligned");
       list.style.height = "";
       items.forEach(function (li) {{ li.style.top = ""; }});

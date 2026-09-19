@@ -195,11 +195,11 @@ meetings:
 
   # Sep 29. Retrieval now opens on the speaker, because deep recommenders took
   # Sep 22 and pushed everything before Brent's fixed date one session later.
+  # The background reading was set Sep 18 and is in `readings:` below. The TBD that
+  # stood here said it was still unset, on the same row that linked it.
   - module: Retrieval
     topic: Guest speaker session
     speaker: Brent Hecht
-    materials:
-      - { text: background reading (to be set with speaker), tbd: true }
   # Oct 1. Keeps a full session of its own (instructor, Sep 17) rather than being
   # folded into embeddings.
   - topic: TF-IDF, BM25, and lexical retrieval
