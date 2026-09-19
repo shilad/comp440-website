@@ -11,6 +11,7 @@ import html
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlencode
 
 import yaml
 
@@ -92,6 +93,25 @@ def build() -> str:
             place(a["due"], f"{a['id'].upper()} due", "hw", a.get("url"),
                   time=cal["due_time"])
 
+    # One form takes every kind of submission and branches on its first question.
+    # Prefilling that question, and the one that follows it, saves two picks and
+    # removes the chance of filing a reflection against the wrong reading.
+    #
+    # Every part is declared once in `form_prefill` and composed here; a row never
+    # writes a prefilled URL. If the block is absent, or a value is missing, this
+    # returns None and the caller falls back to the plain form link -- so the
+    # feature can be removed by deleting the block, and a stale option string
+    # costs a prefill, never a wrong answer.
+    pf = data.get("form_prefill") or {}
+
+    def prefill(kind_value, field, value):
+        if not (pf.get("responder") and pf.get("kind_field") and field
+                and kind_value and value):
+            return None
+        q = urlencode({"usp": "pp_url", pf["kind_field"]: kind_value,
+                       field: value})
+        return f'{pf["responder"]}?{q}'
+
     # A reading creates its own reflection deadline. Declared once here with the
     # citation and the paper's URL; the form URL and the time come from the
     # `reflections` policy block, so they are never repeated per reading.
@@ -117,7 +137,10 @@ def build() -> str:
         # so the renderer can style it apart; on a speaker day two obligations point
         # at this same form and both should look like the same kind of thing.
         if refl.get("form_url"):
-            links.append({"text": "Submit reflection", "url": refl["form_url"],
+            links.append({"text": "Submit reflection",
+                          "url": prefill(pf.get("reading_kind"),
+                                         pf.get("reading_field"),
+                                         r.get("form_option")) or refl["form_url"],
                           "act": True})
         elif links:
             fail("readings are set but reflections.form_url is missing.")
@@ -154,10 +177,15 @@ def build() -> str:
             fail(f"Speaker window on {row['date']} has no prior meeting.")
             continue
         target = row if when == "visit_day" else teaching[i - 1]
+        # "(tentative)" qualifies the date for readers of this page; the form's
+        # speaker list holds the bare name, so it is stripped for the prefill only.
+        who = re.sub(r"\s*\(tentative\)\s*$", "", row["speaker_name"] or "")
         for item in items:
             target["due"].append(
                 {"label": item["label"], "kind": "speaker",
-                 "time": sq.get("due_time"), "url": item.get("url")}
+                 "time": sq.get("due_time"),
+                 "url": (prefill(pf.get("speaker_kind"), pf.get("speaker_field"), who)
+                         or item.get("url"))}
             )
 
     if errors:
@@ -493,7 +521,7 @@ body {{ margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 -apple-sy
 h1 {{ font-size:1.5rem; margin:0 0 .25rem }}
 .sub {{ color:var(--muted); margin:0 0 .5rem }}
 ul.links {{ list-style:none; margin:0 0 .9rem; padding:0; display:flex; flex-wrap:wrap; gap:.4rem .9rem }}
-ul.links a {{ font-size:.9rem; font-weight:600; color:inherit; text-decoration:none;
+ul.links a {{ font-size:.9rem; color:inherit; text-decoration:none;
   border:1px solid var(--line); border-radius:999px; padding:.2rem .7rem; display:inline-block }}
 ul.links a:hover {{ border-color:currentColor }}
 /* Fixed layout, so the Due column's width is a decision rather than a result. In
@@ -512,7 +540,7 @@ thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; co
 .spk {{ display:block; font-size:.78rem; color:var(--accent); margin-top:.2rem }}
 /* Nothing on this page is smaller than 12px. The sizes are 16 / 14.4 / 13.6 / 12,
    and every caption, tag and kind label shares the bottom one. */
-.sec {{ display:block; font-size:.75rem; font-weight:700; text-transform:uppercase;
+.sec {{ display:block; font-size:.75rem; text-transform:uppercase;
   letter-spacing:.06em; color:var(--muted); margin:.6rem 0 .15rem }}
 ul.mat, ul.due {{ margin:0; padding:0; list-style:none }}
 ul.mat {{ font-size:.85rem }}
@@ -529,17 +557,17 @@ ul.mat a:hover, ul.due a:hover {{ text-decoration-color:currentColor }}
 /* The kind is said in words, so colour is not carrying it. One muted weight for
    all four: four hues would add colour to a page already called cluttered, and
    two of them collided with the blue the events rail uses for seminar credit. */
-.kind {{ font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+.kind {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.06em;
   color:var(--muted); margin-right:.4rem; vertical-align:1px }}
 .what {{ display:inline }}
 .srcs {{ display:flex; flex-wrap:wrap; gap:.3rem .35rem; margin:.3rem 0 0 }}
 ul.due a.chip {{ font-size:.8rem; line-height:1.3; text-decoration:none; color:inherit;
   border:1px solid var(--ctl); border-radius:999px; padding:.15rem .6rem }}
 ul.due a.chip:hover {{ border-color:currentColor }}
-ul.due a.chip.act {{ border-color:var(--accent); color:var(--accent); font-weight:600 }}
+ul.due a.chip.act {{ border-color:var(--accent); color:var(--accent) }}
 /* This carries rule exceptions -- the Sep 29 reading suspends the no-AI rule for
    one document -- so it is not allowed to be the least legible text in its row. */
-.note {{ display:block; font-size:.85rem; line-height:1.45; color:var(--fg);
+.note {{ display:block; font-size:.85rem; line-height:1.45; color:var(--muted);
   margin:.3rem 0 0; max-width:42em }}
 tr.brk td {{ background:var(--brk); color:var(--muted) }}
 tr.next {{ background:var(--now); box-shadow:inset 3px 0 var(--nowline) }}
@@ -616,7 +644,7 @@ li.ev-cancelled .what {{ text-decoration:line-through }}
   /* The column headings are gone at this width, so the Due block names itself.
      Materials already carry their own caption. */
   td.du::before {{ content:attr(data-label); display:block; font-size:.75rem;
-    font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+    text-transform:uppercase; letter-spacing:.06em;
     color:var(--muted); margin:.6rem 0 .15rem }}
   td.du:empty {{ display:none }}
   /* Reading on a phone, not squinting: nothing shrinks just because the screen

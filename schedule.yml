@@ -58,11 +58,28 @@ speaker_due:
 reflections:
   form_url: *submit
 
+# Prefilling the form. The short link above cannot carry parameters, so the long
+# responder URL is declared here, once, alongside the three field ids. Ids read out
+# of the published form on Sep 19, not guessed: the Forms API question ids are NOT
+# the prefill ids, and converting one to the other gives a wrong number.
+#
+# build.py composes the query string; no row ever writes a prefilled URL by hand.
+# A value that no longer matches an option prefills nothing and the student picks
+# from the dropdown as before, so drift degrades rather than misfiles.
+form_prefill:
+  responder: "https://docs.google.com/forms/d/e/1FAIpQLSeNtCoAhKUlN2Gi35X1iTyAaSF90hesSTAgKzY_0mCrpLM7sw/viewform"
+  kind_field: "entry.2143958185"
+  reading_field: "entry.1946650698"
+  speaker_field: "entry.1392500623"
+  reading_kind: "Reading reflection"
+  speaker_kind: "Speaker preparation questions"
+
 # One entry per assigned reading. `date` is validated against the derived meeting
 # grid like every other deadline. Renders in the Due column as
 # `Read <cite> [paper | reflection]`.
 readings:
   - date: 2026-09-10
+    form_option: "Sep 10 (Thu) — Keshav, How to Read a Paper,"
     cite: 'Keshav et al, "How to Read a Paper"'
     url: "http://ccr.sigcomm.org/online/files/p83-keshavA.pdf"
   # NYT gift link: the `unlocked_article_code` is what lets students read it
@@ -70,15 +87,18 @@ readings:
   # this page is public — if it stops working, get a fresh one from the
   # instructor rather than dropping the parameter.
   - date: 2026-09-15
+    form_option: "Sep 15 (Tue) — New York Times, OpenAI and the Navier-Stokes problem"
     cite: 'New York Times on OpenAI and the Navier-Stokes problem (Sep 10, 2026)'
     label: article
     url: "https://www.nytimes.com/2026/09/10/science/tristan-buckmaster-openai-math-navier-stokes.html?unlocked_article_code=1.AFE.0psT.2Ar5a-FHIo9p"
   - date: 2026-09-22
+    form_option: "Sep 22 (Tue) — Steck et al, Deep Learning for Recommender Systems: A Netflix Case Study"
     cite: 'Steck, Baltrunas, Elahi, Liang, Raimond & Basilico, "Deep Learning for Recommender Systems: A Netflix Case Study" (AI Magazine, 2021)'
     url: "https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/view/18140"
   # Moved from Sep 22 with the cultural-markets session (instructor, Sep 17).
   # Nothing orphaned: no reflection had been submitted against the Sep 22 option.
   - date: 2026-09-24
+    form_option: "Sep 24 (Thu) — Salganik et al, Inequality and Unpredictability in an Artificial Cultural Market"
     cite: 'Salganik, Dodds & Watts, "Experimental Study of Inequality and Unpredictability in an Artificial Cultural Market"'
     url: "https://www.filosofitis.com.ar/archivos/experimentalmarket.pdf"
   # Speaker days. The reading reflection and the speaker questions are both due
@@ -93,6 +113,7 @@ readings:
   # stops working, get a fresh one from the instructor rather than dropping the
   # parameter.
   - date: 2026-09-29
+    form_option: "Sep 29 (Tue) — Brent Hecht: his background, and the OpenAI copyright filing"
     cite: 'background on Brent Hecht, and the News Plaintiffs brief in the OpenAI copyright MDL (Sep 17, 2026)'
     sources:
       - { text: his site, url: "https://brenthecht.com/" }
@@ -107,6 +128,7 @@ readings:
       line it quotes. The reflection is still your own writing.
   # Moved with Logan Stapleton from Sep 24 to Nov 24 (instructor, Sep 17).
   - date: 2026-11-24
+    form_option: "Nov 24 (Tue) — Cheng, Stapleton et al, How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions"
     cite: 'Cheng, Stapleton, Kawakami et al, "How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions" (CHI 2022)'
     url: "https://dl.acm.org/doi/pdf/10.1145/3491102.3501831"
 
