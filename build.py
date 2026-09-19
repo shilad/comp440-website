@@ -824,3 +824,22 @@ if __name__ == "__main__":
             else:
                 plain += 1
     print(f"  materials: {linked} linked, {tbd} TBD, {plain} unlinked")
+
+    # Every speaker day gets a reading (instructor, Sep 19). Two of the three
+    # speaker questions are about it and both are required, so a speaker day with
+    # no reading leaves students unable to complete the form. Not a build failure
+    # -- a visit months out legitimately has none yet -- but it must be visible
+    # every build rather than remembered, because the day it matters is the day
+    # nobody is looking.
+    doc = yaml.safe_load((HERE / "schedule.yml").read_text())
+    have = {r["date"] for r in doc.get("readings") or []}
+    missing = [
+        (d, e.get("speaker"))
+        for d, e in zip(derive_dates(doc["calendar"]), doc["meetings"])
+        if e.get("speaker") and d not in have
+    ]
+    if missing:
+        print(f"  speaker days with no reading yet: {len(missing)}")
+        for d, who in missing:
+            name = who if isinstance(who, str) else "speaker to be named"
+            print(f"    {d:%a %b %-d} — {name}")
