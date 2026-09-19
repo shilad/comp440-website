@@ -133,10 +133,21 @@ def build() -> str:
             if not (s.get("text") and s.get("url")):
                 fail(f'{r["date"]}: every reading source needs text and url.')
             links.append({"text": s["text"], "url": s["url"]})
+        # On a speaker day the reading does NOT get its own reflection: it folds
+        # into the speaker questions, one submission (instructor, Sep 19 --
+        # reversing the two-submission rule of Sep 7). The reading still shows,
+        # because it is still work owed before class; what it loses is the submit
+        # chip, so the only thing to send on that day is the speaker form.
+        speaker_day = (by_date.get(r["date"]) or {}).get("speaker")
+        if speaker_day and r.get("form_option"):
+            fail(f'{r["date"]}: a speaker-day reading has no reflection of its '
+                 f'own, so `form_option` would prefill a dropdown nobody reaches. '
+                 f'Remove it.')
         # The submit link is the action, the rest are things to open. `act` marks it
-        # so the renderer can style it apart; on a speaker day two obligations point
-        # at this same form and both should look like the same kind of thing.
-        if refl.get("form_url"):
+        # so the renderer can style it apart.
+        if speaker_day:
+            pass
+        elif refl.get("form_url"):
             links.append({"text": "Submit reflection",
                           "url": prefill(pf.get("reading_kind"),
                                          pf.get("reading_field"),

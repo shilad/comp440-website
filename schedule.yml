@@ -101,8 +101,10 @@ readings:
     form_option: "Sep 24 (Thu) — Salganik et al, Inequality and Unpredictability in an Artificial Cultural Market"
     cite: 'Salganik, Dodds & Watts, "Experimental Study of Inequality and Unpredictability in an Artificial Cultural Market"'
     url: "https://www.filosofitis.com.ar/archivos/experimentalmarket.pdf"
-  # Speaker days. The reading reflection and the speaker questions are both due
-  # 8:00am, as two separate submissions (instructor, Sep 7).
+  # Speaker days take ONE submission, not two (instructor, Sep 19, reversing the
+  # Sep 7 rule). The reading is still assigned and still due before class, but it
+  # is discussed inside the speaker questions, so it carries no reflection of its
+  # own and no `form_option`. The build fails if one is added back.
   #
   # Set Sep 18. Four sources, one reflection — hence `sources`, not four entries.
   # The filing is the point: Brent Hecht is named and quoted in it three times as
@@ -112,8 +114,13 @@ readings:
   # without a subscription, so it must be kept intact. Gift links expire; if it
   # stops working, get a fresh one from the instructor rather than dropping the
   # parameter.
+  # Frank Schilder's visit. He sent this himself on Sep 16 and is revising it for
+  # a journal; it is the knowledge-graphs-and-LLMs work he offered to talk about.
+  # No `form_option`: speaker day, so it folds into the speaker questions.
+  - date: 2026-10-08
+    cite: 'Song, Bonifazi, Schilder & Schwarz, "Knowledge Graph-Assisted LLM Post-Training for Enhanced Legal Reasoning" (arXiv:2601.13806, Jan 2026)'
+    url: "https://arxiv.org/abs/2601.13806"
   - date: 2026-09-29
-    form_option: "Sep 29 (Tue) — Brent Hecht: his background, and the OpenAI copyright filing"
     cite: 'background on Brent Hecht, and the News Plaintiffs brief in the OpenAI copyright MDL (Sep 17, 2026)'
     sources:
       - { text: his site, url: "https://brenthecht.com/" }
@@ -128,7 +135,6 @@ readings:
       line it quotes. The reflection is still your own writing.
   # Moved with Logan Stapleton from Sep 24 to Nov 24 (instructor, Sep 17).
   - date: 2026-11-24
-    form_option: "Nov 24 (Tue) — Cheng, Stapleton et al, How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions"
     cite: 'Cheng, Stapleton, Kawakami et al, "How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions" (CHI 2022)'
     url: "https://dl.acm.org/doi/pdf/10.1145/3491102.3501831"
 
@@ -232,10 +238,10 @@ meetings:
     materials:
       - { text: embeddings activity, tbd: true }
   # Oct 8. Frank's date is fixed, so he sits BEFORE the RAG session now.
+  # Reading set Sep 19 from the paper Frank sent; it is in `readings:` above, so
+  # the "to be set" material that stood here is gone.
   - topic: Guest speaker session
     speaker: Frank Schilder (tentative)
-    materials:
-      - { text: background reading (to be set with speaker), tbd: true }
   # Oct 13. Absorbs "Retrieval evaluation and data provenance", which lost its
   # own session when Oct 8 became a speaker day (instructor, Sep 15).
   - topic: Hybrid retrieval, RAG, evaluation, and data provenance
