@@ -216,10 +216,15 @@ meetings:
   # Taught from two S24 decks the instructor restyled Sep 22. The SVD / Deep NN
   # deck is shared anyone-with-link can edit ON PURPOSE (instructor, Sep 22):
   # students fill in its blank definition slides in class, so it links to /edit.
+  # The news-discussion sign-up doc links to /edit for the same reason
+  # (instructor, Sep 22): students write their own name on a date. It is shared
+  # to the macalester.edu domain (can edit), not anyone-with-link, so the public
+  # link asks for a Macalester sign-in and the names on it are not public.
   - topic: Latent factors and deep learning for recommenders
     materials:
       - { text: "Item & User Based Recommenders slides", url: "https://docs.google.com/presentation/d/1BMGZpEFfJss8duIAiyT6G_LsYIyUxK_4ziwPgpB5xtQ/view" }
       - { text: "SVD / Deep NN Recommenders slides (editable: you fill in the definition slides)", url: "https://docs.google.com/presentation/d/1P9ufLav-Va9IYIuZIRxX3J_0k712EKzI_yyq3hsG1Bw/edit" }
+      - { text: "News discussions: how they work, and sign-up (editable; sign in with your Macalester account to add your name)", url: "https://docs.google.com/document/d/1drmgg3orsKxBdwXElLnVBiWZ6KX5jpCx-TikBjgYwMo/edit" }
   # Sep 24. Pushed here from Sep 22 by the session above.
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
