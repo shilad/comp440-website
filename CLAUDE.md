@@ -5,11 +5,12 @@ Live at **https://shilad.github.io/comp440-website/**. Instructor: Shilad Sen.
 
 ## Who owns what
 
-- **This repo is owned by the schedule-site session.** Structure, `build.py`, `schedule.yml`,
-  rendering, deploy. Other sessions: report issues, don't push.
-- **Curriculum and course administration are owned by the course-admin session**
-  (`comp440-main`). *What* happens on a given day is theirs. *How the schedule is modeled and
-  rendered* is this repo's.
+- **This repo is edited directly from the course-admin session** (`shilad/comp440-main`, where it
+  is mounted as the `website/` submodule). The schedule-site session that originally owned it is
+  gone (instructor, Sep 22). Whoever edits keeps the invariants below and runs `build.py` before
+  every push.
+- **Curriculum and course administration** — *what* happens on a given day — are decided in
+  `comp440-main`. *How the schedule is modeled and rendered* is this repo's concern.
 - **Course facts come from the instructor.** Classroom, deadlines, grading, speaker
   confirmations, LMS URLs. Leave them TBD rather than filling them in — a plausible invention is
   worse here than a visible gap, because students act on this page.
@@ -64,9 +65,9 @@ the build assigns dates to the `meetings` list in order.
    path.
 5. **Status stays honest.** `tbd: true` renders visibly as TBD. Don't dress a plan as done.
 
-## Requesting a schedule change from another session
+## Writing a schedule change
 
-Send the **YAML fragment you want**, not a description of it. Prose relays lose details — a
+Work from the **YAML fragment you want**, not a description of it. Prose loses details — a
 request once described a doc as "Working with Claude (Fall 2026)" when the file was actually
 titled "Working with AI (Fall 2026)", and the wrong title would have shipped to students.
 
@@ -81,10 +82,9 @@ Include the Drive file ID for anything to be linked, so it can be verified rathe
     drive_id: 1Eb6qxeS2wy-9TBzL8eGk9j75iYu_yEV4VoLQaywRz8E }
 ```
 
-What happens to such a request: anything inside this repo's ownership is applied directly. Any
-asserted course fact is verified against the primary source first — Drive for a document's title
-and sharing, the instructor for a policy. A brand-new student-facing surface (a whole new page)
-goes back to the instructor before it is built.
+Before it ships: any asserted course fact is verified against the primary source first — Drive for
+a document's title and sharing, the instructor for a policy. A brand-new student-facing surface (a
+whole new page) goes back to the instructor before it is built.
 
 ## Build
 
