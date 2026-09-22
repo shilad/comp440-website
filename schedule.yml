@@ -213,9 +213,13 @@ meetings:
       - { text: "latent factors: full session Sep 22", tbd: true }
   # Sep 22. New session (instructor, Sep 17): latent factors stop being a closing
   # segment on Sep 17 and get a whole day, carried through to neural models.
+  # Taught from two S24 decks the instructor restyled Sep 22. The SVD / Deep NN
+  # deck is shared anyone-with-link CAN EDIT, so it stays TBD here until that is
+  # changed to viewer; a public link to an editable deck is not shipped.
   - topic: Latent factors and deep learning for recommenders
     materials:
-      - { text: latent factors and deep recommender materials, tbd: true }
+      - { text: "Item & User Based Recommenders slides", url: "https://docs.google.com/presentation/d/1BMGZpEFfJss8duIAiyT6G_LsYIyUxK_4ziwPgpB5xtQ/view" }
+      - { text: "SVD / Deep NN Recommenders slides (link once sharing is viewer)", tbd: true }
   # Sep 24. Pushed here from Sep 22 by the session above.
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
