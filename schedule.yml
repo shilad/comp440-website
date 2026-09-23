@@ -251,7 +251,8 @@ meetings:
   # sign-up doc linked on the Sep 22 row, read Sep 23. The row is TBD until the
   # student's article arrives, a week before the class; then it becomes
   # `Name leads discussion on "Title" (Outlet, date)` with the url, as on Sep 24.
-  # Dates with no leader yet (Oct 13, Oct 22, Nov 17, Dec 1) carry nothing.
+  # Dates with no leader yet (Oct 13, Oct 22, Dec 1) carry nothing. Colin took
+  # Nov 17 overnight Sep 22–23; his row was added the morning of Sep 23.
   - topic: TF-IDF, BM25, and lexical retrieval
     materials:
       - { text: lexical retrieval activity, tbd: true }
@@ -328,6 +329,7 @@ meetings:
   - topic: Memory, planning, control, and agent evaluation
     materials:
       - { text: agent evaluation activity, tbd: true }
+      - { text: Colin leads discussion on a news article, tbd: true }
   # Absorbs "Agents in work and organizations", displaced when the module's
   # speaker day moved from Nov 19 to Nov 12.
   - topic: Human–AI collaboration, delegation, and agents in organizations
