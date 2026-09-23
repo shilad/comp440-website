@@ -226,9 +226,17 @@ meetings:
       - { text: "SVD / Deep NN Recommenders slides (editable: you fill in the definition slides)", url: "https://docs.google.com/presentation/d/1P9ufLav-Va9IYIuZIRxX3J_0k712EKzI_yyq3hsG1Bw/edit" }
       - { text: "News discussions: how they work, and sign-up (editable; sign in with your Macalester account to add your name)", url: "https://docs.google.com/document/d/1drmgg3orsKxBdwXElLnVBiWZ6KX5jpCx-TikBjgYwMo/edit" }
   # Sep 24. Pushed here from Sep 22 by the session above.
+  # First news discussion (sign-up doc on the Sep 22 row). Nayla emailed the
+  # article Sep 22 as this share link; it carries no gift code, so a reader
+  # without NYT access may hit the paywall. Title supplied by the instructor
+  # Sep 23. No reflection is attached: a news discussion is led in class, not
+  # written up (instructor, Sep 23), so it is a material here, not a reading.
+  # nytimes.com is not reachable from the editing sandbox (403), so the link
+  # is unverified.
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
       - { text: in-class cultural-market simulation, tbd: true }
+      - { text: 'Nayla leads discussion on "I Gave My Life Over to Meta’s A.I. Agent and Was Blown Away" (NYT, Sep 22)', url: "https://www.nytimes.com/2026/09/22/technology/meta-muse-ai-agent.html?smid=nytcore-ios-share" }
 
   # Sep 29. Retrieval now opens on the speaker, because deep recommenders took
   # Sep 22 and pushed everything before Brent's fixed date one session later.
