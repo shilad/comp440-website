@@ -247,13 +247,20 @@ meetings:
     speaker: Brent Hecht
   # Oct 1. Keeps a full session of its own (instructor, Sep 17) rather than being
   # folded into embeddings.
+  # News-discussion leaders (instructor, Sep 23): each name comes from the
+  # sign-up doc linked on the Sep 22 row, read Sep 23. The row is TBD until the
+  # student's article arrives, a week before the class; then it becomes
+  # `Name leads discussion on "Title" (Outlet, date)` with the url, as on Sep 24.
+  # Dates with no leader yet (Oct 13, Oct 22, Nov 17, Dec 1) carry nothing.
   - topic: TF-IDF, BM25, and lexical retrieval
     materials:
       - { text: lexical retrieval activity, tbd: true }
+      - { text: Shaylee leads discussion on a news article, tbd: true }
   # Oct 6.
   - topic: Embeddings and semantic similarity
     materials:
       - { text: embeddings activity, tbd: true }
+      - { text: Tu leads discussion on a news article, tbd: true }
   # Oct 8. Frank's date is fixed, so he sits BEFORE the RAG session now.
   # Reading set Sep 19 from the paper Frank sent; it is in `readings:` above, so
   # the "to be set" material that stood here is gone.
@@ -276,6 +283,7 @@ meetings:
     topic: From representations and prediction to language models
     materials:
       - { text: language-model overview, tbd: true }
+      - { text: Nadezhda leads discussion on a news article, tbd: true }
   - topic: Transformers, pretraining, and generation
     materials:
       - { text: foundation-model materials, tbd: true }
@@ -296,19 +304,23 @@ meetings:
       - { text: SFT lab, tbd: true }
       - { text: preference-labeling activity, tbd: true }
       - { text: "Class AI agreements — reread alongside HW3", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
+      - { text: Kaif leads discussion on a news article, tbd: true }
   - topic: Direct Preference Optimization and model alignment
     materials:
       - { text: DPO lab, tbd: true }
+      - { text: Oscar leads discussion on a news article, tbd: true }
   # Was the sixth speaker window; dropped Sep 15, so this is a full teaching day
   # again and the module's lab meetings no longer collide with a visit.
   - topic: Blind evaluation and pluralistic alignment
     materials:
       - { text: blind evaluation, tbd: true }
+      - { text: Claire leads discussion on a news article, tbd: true }
 
   - module: Agents
     topic: RAG, tools, and agent workflows
     materials:
       - { text: agent introduction, tbd: true }
+      - { text: Dino leads discussion on a news article, tbd: true }
   - topic: Guest speaker session
     speaker: President Rivera
     materials:
@@ -322,6 +334,7 @@ meetings:
     materials:
       - { text: comparative experiment, tbd: true }
       - { text: organizational case, tbd: true }
+      - { text: Owen leads discussion on a news article, tbd: true }
 
   - module: Collective Systems
     topic: Guest speaker session
