@@ -10,6 +10,7 @@ import datetime as dt
 import html
 import re
 import sys
+import textwrap
 from pathlib import Path
 from urllib.parse import urlencode
 
@@ -393,8 +394,23 @@ def course_links(links: list) -> str:
     return f'<ul class="links">{items}</ul>'
 
 
+# A material's title longer than this is cut at a word boundary and ends in an
+# ellipsis (instructor, Sep 23). 72 characters is under two lines of the Class
+# column on a laptop; a 110-character title was taking three and pushing the
+# whole row down. The full title is kept on the element as `title=`, so hovering
+# shows it, and the link still opens the thing itself. A rendering choice, so it
+# lives here and not in schedule.yml.
+TITLE_MAX = 72
+
+
 def render(course, cal, rows) -> str:
     e = html.escape
+
+    def clip(text):
+        """Return (shown, full): full is the untrimmed text when it was cut, else None."""
+        if len(text) <= TITLE_MAX:
+            return text, None
+        return textwrap.shorten(text, TITLE_MAX, placeholder="…"), text
 
     # Materials sit inside the Class column, under the topic, rather than in a
     # column of their own: the split students kept misreading was two adjacent
@@ -405,13 +421,15 @@ def render(course, cal, rows) -> str:
             return ""
         out = []
         for m in row["materials"]:
-            text = e(str(m.get("text", "")))
+            shown, full = clip(str(m.get("text", "")))
+            text = e(shown)
+            tip = f' title="{e(full)}"' if full else ""
             if m.get("tbd"):
-                out.append(f'<li class="tbd">{text} <span class="tag">TBD</span></li>')
+                out.append(f'<li class="tbd"{tip}>{text} <span class="tag">TBD</span></li>')
             elif m.get("url"):
-                out.append(f'<li><a href="{e(m["url"])}">{text}</a></li>')
+                out.append(f'<li><a href="{e(m["url"])}"{tip}>{text}</a></li>')
             else:
-                out.append(f"<li>{text}</li>")
+                out.append(f"<li{tip}>{text}</li>")
         caption = '<span class="sec">Materials</span>'
         return f'{caption}<ul class="mat">{"".join(out)}</ul>'
 
@@ -554,6 +572,14 @@ thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; co
 .sec {{ display:block; font-size:.75rem; text-transform:uppercase;
   letter-spacing:.06em; color:var(--muted); margin:.6rem 0 .15rem }}
 ul.mat, ul.due {{ margin:0; padding:0; list-style:none }}
+/* One small muted dot per item (instructor, Sep 23), hung in the margin so a
+   wrapped line indents under the text, not under the dot. The same dot in both
+   lists: an item is an item whichever column it sits in. Drawn here rather than
+   with `list-style:disc`, whose marker takes the text colour and whose size
+   cannot be set in every browser. */
+ul.mat li, ul.due li {{ position:relative; padding-left:.9em }}
+ul.mat li::before, ul.due li::before {{ content:"•"; position:absolute; left:0;
+  color:var(--muted) }}
 ul.mat {{ font-size:.85rem }}
 ul.mat li {{ margin:0 0 .2rem }}
 ul.due {{ font-size:.9rem }}
