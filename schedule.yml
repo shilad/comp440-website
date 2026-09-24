@@ -270,7 +270,10 @@ meetings:
   - topic: TF-IDF, BM25, and lexical retrieval
     materials:
       - { text: lexical retrieval activity, tbd: true }
-      - { text: Shaylee leads discussion on a news article, tbd: true }
+      # Shaylee's article arrived Thu Sep 24 8:55am by email, a gift link that
+      # opens without a subscription. nytimes.com returns 403 from the editing
+      # sandbox, so the link is unverified from here.
+      - { text: 'Shaylee leads discussion on "The Quiet Way A.I. Is Hitting the Work Force" (NYT, Sep 16)', url: "https://www.nytimes.com/2026/09/16/business/ai-raises-hiring.html?unlocked_article_code=1.DlE.jOpm.BM3cPwVUaFNn&smid=url-share" }
   # Oct 6.
   - topic: Embeddings and semantic similarity
     materials:
