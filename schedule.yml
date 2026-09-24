@@ -248,6 +248,10 @@ meetings:
       # Deck: the instructor's 2026 copy of the S24 Feedback Effects deck, shared
       # anyone-with-link reader (checked Sep 23 11:20pm).
       - { text: "Feedback Effects in Recommender Systems slides", url: "https://docs.google.com/presentation/d/1h6M8o1ATQyEcPV_Q_ygjBVVjPGU5D4A2_2NGMRsNbMs/view" }
+      # A Claude artifact: two simulated students doing the activity with its Claude
+      # tutor. The instructor shared it by link Sep 24; the link returned HTTP 200
+      # without signing in (checked Sep 24, 12:16pm).
+      - { text: "Two simulated students working through this activity (full conversations and scores)", url: "https://claude.ai/artifact/XrLQqrMB2JK64Vw1Zs8Xny" }
       # The activity's launch line and its Oct 6 due entry come from
       # `assignments:` above, so the repo link is declared once.
       - { text: 'Nayla leads discussion on "I Gave My Life Over to Meta’s A.I. Agent and Was Blown Away" (NYT, Sep 22)', url: "https://www.nytimes.com/2026/09/22/technology/meta-muse-ai-agent.html?smid=nytcore-ios-share" }
