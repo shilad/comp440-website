@@ -91,8 +91,11 @@ def build() -> str:
                     {"text": f"Launch: {a['title']}", "url": a.get("url")}
                 ]
         if a.get("due"):
-            place(a["due"], f"{a['id'].upper()} due", "hw", a.get("url"),
-                  time=cal["due_time"])
+            # `kind` defaults to homework; an in-class activity says `kind: activity`
+            # so its due entry is labelled as one. `label` overrides the ID-derived
+            # "HW1 due" text for an assignment whose ID is not its name.
+            place(a["due"], a.get("label") or f"{a['id'].upper()} due",
+                  a.get("kind", "hw"), a.get("url"), time=cal["due_time"])
 
     # One form takes every kind of submission and branches on its first question.
     # Prefilling that question, and the one that follows it, saves two picks and
@@ -437,7 +440,7 @@ def render(course, cal, rows) -> str:
     # were coloured per kind with nothing on the page saying what a colour meant.
     # `other` is named too, so it is not the one unlabelled item in the column and
     # does not read as optional.
-    KIND = {"reading": "Reading", "hw": "Homework", "project": "Project",
+    KIND = {"reading": "Reading", "hw": "Homework", "activity": "Activity", "project": "Project",
             "speaker": "Speaker", "other": "Form"}
 
     def due(row):

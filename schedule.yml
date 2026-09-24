@@ -153,6 +153,16 @@ assignments:
     launch: 2026-09-15
     due: 2026-10-01
     url: "https://github.com/shilad/comp440-hw1"
+  # The Sep 24 in-class activity. Due date, "individual" and "counts as one
+  # reading reflection or activity" are the README's, set by the instructor
+  # Sep 23 night. Submitted through the form's "Activity submission" option.
+  - id: ratings-influence
+    title: "Activity — Ratings and Social Influence, a simulated market with Claude"
+    label: Ratings and Social Influence activity due
+    kind: activity
+    launch: 2026-09-24
+    due: 2026-10-06
+    url: "https://github.com/shilad/comp440-ratings-influence"
   # Launch moves off Sep 29 because that day is now a whole-day guest speaker
   # with no class time to introduce an assignment. Due date skips Oct 15, which
   # is Fall Break, so the next legal deadline is Oct 20.
@@ -235,10 +245,11 @@ meetings:
   # is unverified.
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
-      # The in-class activity (instructor, Sep 23 night): a GitHub repo students
-      # fork and work through with Claude. Public per the session's repo listing.
-      # Its README still carries [TBD: weight] and a TBD due date (Oct 6).
-      - { text: "Activity: Ratings and Social Influence, a simulated market with Claude (fork the repo in class)", url: "https://github.com/shilad/comp440-ratings-influence" }
+      # Deck: the instructor's 2026 copy of the S24 Feedback Effects deck, shared
+      # anyone-with-link reader (checked Sep 23 11:20pm).
+      - { text: "Feedback Effects in Recommender Systems slides", url: "https://docs.google.com/presentation/d/1h6M8o1ATQyEcPV_Q_ygjBVVjPGU5D4A2_2NGMRsNbMs/view" }
+      # The activity's launch line and its Oct 6 due entry come from
+      # `assignments:` above, so the repo link is declared once.
       - { text: 'Nayla leads discussion on "I Gave My Life Over to Meta’s A.I. Agent and Was Blown Away" (NYT, Sep 22)', url: "https://www.nytimes.com/2026/09/22/technology/meta-muse-ai-agent.html?smid=nytcore-ios-share" }
 
   # Sep 29. Retrieval now opens on the speaker, because deep recommenders took
