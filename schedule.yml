@@ -235,7 +235,10 @@ meetings:
   # is unverified.
   - topic: Cultural markets, social influence, and feedback simulation
     materials:
-      - { text: in-class cultural-market simulation, tbd: true }
+      # The in-class activity (instructor, Sep 23 night): a GitHub repo students
+      # fork and work through with Claude. Public per the session's repo listing.
+      # Its README still carries [TBD: weight] and a TBD due date (Oct 6).
+      - { text: "Activity: Ratings and Social Influence, a simulated market with Claude (fork the repo in class)", url: "https://github.com/shilad/comp440-ratings-influence" }
       - { text: 'Nayla leads discussion on "I Gave My Life Over to Meta’s A.I. Agent and Was Blown Away" (NYT, Sep 22)', url: "https://www.nytimes.com/2026/09/22/technology/meta-muse-ai-agent.html?smid=nytcore-ios-share" }
 
   # Sep 29. Retrieval now opens on the speaker, because deep recommenders took
