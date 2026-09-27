@@ -163,17 +163,16 @@ assignments:
     launch: 2026-09-24
     due: 2026-10-06
     url: "https://github.com/shilad/comp440-ratings-influence"
-  # The retrieval homework became a one-day in-class activity on Oct 13
-  # (instructor, Sep 27), to give the final project more time; its grade weight
-  # moved to the project. Due at the next class, as the Sep 24 activity was.
-  # The two later homeworks were renumbered the same day: alignment is now HW2,
-  # the agent assignment HW3. Neither had launched.
+  # The retrieval homework became a one-day in-class activity (instructor,
+  # Sep 27), to give the final project more time; its grade weight moved to the
+  # project. It runs Oct 22, with the RAG class it belongs to, and is finished
+  # in class, so it has no `due:` (the syllabus: in-class activities are due by
+  # the end of the session). The two later homeworks were renumbered the same
+  # day: alignment is now HW2, the agent assignment HW3. Neither had launched.
   - id: retrieval
-    title: "Activity — Representing and Retrieving Knowledge"
-    label: Retrieval activity due
+    title: "Activity — Representing and Retrieving Knowledge (done in class)"
     kind: activity
-    launch: 2026-10-13
-    due: 2026-10-20
+    launch: 2026-10-22
   - id: hw2
     title: HW2 — Whose Preferences Count?
     launch: 2026-10-29
@@ -294,26 +293,26 @@ meetings:
   # the "to be set" material that stood here is gone.
   - topic: Guest speaker session
     speaker: Frank Schilder (tentative)
-  # Oct 13. Absorbs "Retrieval evaluation and data provenance", which lost its
-  # own session when Oct 8 became a speaker day (instructor, Sep 15).
-  # The RAG and evaluation activities that stood here are now the one retrieval
-  # activity, whose launch line comes from `assignments:` (instructor, Sep 27).
-  - topic: Hybrid retrieval, RAG, evaluation, and data provenance
-  - break: Fall Break
-
-  # Unfolded again (instructor, Sep 17). The Sep 22 session was briefly paid for
-  # by folding this overview into transformers; it no longer has to be, because
-  # training data, labor and authorship moved onto Nick Vincent's visit and gave
-  # Oct 22 back. Entry count between Fall Break and Oct 27 is unchanged, so no
-  # speaker or break moves.
+  # Sep 27 (instructor): the RAG class moved from Oct 13 to Oct 22, after the
+  # classes on how language models generate text, and the two language-model
+  # classes each moved up one meeting. So Foundation Models now opens Oct 13,
+  # before Fall Break, and Retrieval ends with Frank Schilder on Oct 8. Only
+  # topics moved between these three rows; the entry count between Oct 8 and
+  # Oct 27 is unchanged, so no speaker or break moves. News-discussion leaders
+  # stay on their signed-up dates: Nadezhda on Oct 20; none on Oct 13 or Oct 22.
   - module: Foundation Models
     topic: From representations and prediction to language models
     materials:
       - { text: language-model overview, tbd: true }
-      - { text: Nadezhda leads discussion on a news article, tbd: true }
+  - break: Fall Break
   - topic: Transformers, pretraining, and generation
     materials:
       - { text: foundation-model materials, tbd: true }
+      - { text: Nadezhda leads discussion on a news article, tbd: true }
+  # Absorbs "Retrieval evaluation and data provenance", which lost its own
+  # session when Oct 8 became a speaker day (instructor, Sep 15). The retrieval
+  # activity's launch line comes from `assignments:`.
+  - topic: Hybrid retrieval, RAG, evaluation, and data provenance
   # Nick Vincent covers training data, labor and authorship with the class
   # (instructor, Sep 17), so his visit closes Foundation Models rather than
   # opening Alignment, and the topic is named on the row so students know what
