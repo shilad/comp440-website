@@ -163,25 +163,31 @@ assignments:
     launch: 2026-09-24
     due: 2026-10-06
     url: "https://github.com/shilad/comp440-ratings-influence"
-  # Launch moves off Sep 29 because that day is now a whole-day guest speaker
-  # with no class time to introduce an assignment. Due date skips Oct 15, which
-  # is Fall Break, so the next legal deadline is Oct 20.
-  - id: hw2
-    title: HW2 — Representing and Retrieving Knowledge
-    launch: 2026-10-01
+  # The retrieval homework became a one-day in-class activity on Oct 13
+  # (instructor, Sep 27), to give the final project more time; its grade weight
+  # moved to the project. Due at the next class, as the Sep 24 activity was.
+  # The two later homeworks were renumbered the same day: alignment is now HW2,
+  # the agent assignment HW3. Neither had launched.
+  - id: retrieval
+    title: "Activity — Representing and Retrieving Knowledge"
+    label: Retrieval activity due
+    kind: activity
+    launch: 2026-10-13
     due: 2026-10-20
-  - id: hw3
-    title: HW3 — Whose Preferences Count?
+  - id: hw2
+    title: HW2 — Whose Preferences Count?
     launch: 2026-10-29
     due: 2026-11-10
-  - id: hw4
-    title: HW4 — Building and Evaluating an Agent
+  - id: hw3
+    title: HW3 — Building and Evaluating an Agent
     launch: 2026-11-10
     due: 2026-11-19
 
 milestones:
   - { date: 2026-10-13, label: Final project introduced }
-  - { date: 2026-11-12, label: Final project proposal due }
+  # Moved up from Nov 12 (instructor, Sep 27): the time freed by the retrieval
+  # homework goes to the project, and the proposal no longer falls inside HW3.
+  - { date: 2026-10-29, label: Final project proposal due }
   - { date: 2026-11-24, label: Final project update }
   - { date: 2026-12-03, label: Project rehearsal }
   - { date: 2026-12-08, label: Final presentation materials }
@@ -290,10 +296,9 @@ meetings:
     speaker: Frank Schilder (tentative)
   # Oct 13. Absorbs "Retrieval evaluation and data provenance", which lost its
   # own session when Oct 8 became a speaker day (instructor, Sep 15).
+  # The RAG and evaluation activities that stood here are now the one retrieval
+  # activity, whose launch line comes from `assignments:` (instructor, Sep 27).
   - topic: Hybrid retrieval, RAG, evaluation, and data provenance
-    materials:
-      - { text: RAG activity, tbd: true }
-      - { text: evaluation activity, tbd: true }
   - break: Fall Break
 
   # Unfolded again (instructor, Sep 17). The Sep 22 session was briefly paid for
@@ -319,13 +324,13 @@ meetings:
       - { text: data / labor reading (to be set with speaker), tbd: true }
 
   # Absorbs "Instruction tuning and supervised fine-tuning", displaced when
-  # Oct 27 became a speaker day. Also the day HW3 now launches.
+  # Oct 27 became a speaker day. Also the day HW2 (alignment) now launches.
   - module: Alignment
     topic: "Instruction tuning and supervised fine-tuning; preference data, constitutions, and disagreement"
     materials:
       - { text: SFT lab, tbd: true }
       - { text: preference-labeling activity, tbd: true }
-      - { text: "Class AI agreements — reread alongside HW3", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
+      - { text: "Class AI agreements — reread alongside HW2", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
       - { text: Kaif leads discussion on a news article, tbd: true }
   - topic: Direct Preference Optimization and model alignment
     materials:
