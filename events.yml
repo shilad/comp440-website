@@ -3,7 +3,7 @@
 # the feed's mix of UTC, TZID and all-day stamps. Recurring events are expanded here,
 # so each line below is one real occurrence.
 source: "https://calendar.google.com/calendar/ical/macalester.edu_k7f54d0aeqnpvqb3kjl5kvnuvg%40group.calendar.google.com/public/basic.ics"
-fetched: 2026-09-22
+fetched: 2026-09-28
 term: [2026-09-08, 2026-12-10]
 
 # Shown on the site, in the MSCS events rail.
@@ -24,7 +24,7 @@ events:
   - { date: 2026-09-27, title: "Due today: MSCS Student Advisory Board applications", kind: other }
   - { date: 2026-09-30, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
   - { date: 2026-10-01, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
-  - { date: 2026-10-01, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
+  - { date: 2026-10-01, time: "11:15am", title: "MSCS Coffee Break: chat about Grad School (or just chat)", location: "OLRI Smail Gallery", kind: social }
   - { date: 2026-10-07, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
   - { date: 2026-10-08, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-10-08, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
@@ -33,9 +33,10 @@ events:
   - { date: 2026-10-21, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
   - { date: 2026-10-22, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-10-22, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
+  - { date: 2026-10-27, time: "11:00am", title: "Macalester Major Fair", kind: other }
   - { date: 2026-10-28, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
-  - { date: 2026-10-29, title: "No Coffee Break", kind: cancelled }
   - { date: 2026-10-29, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
+  - { date: 2026-10-29, title: "No Coffee Break", kind: cancelled }
   - { date: 2026-10-29, time: "3:30pm", title: "Computer Science Tea", location: "OLRI 258", kind: other }
   - { date: 2026-11-04, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
   - { date: 2026-11-05, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
@@ -48,8 +49,8 @@ events:
   - { date: 2026-11-12, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-11-12, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
   - { date: 2026-11-18, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
-  - { date: 2026-11-19, title: "No Coffee Break", kind: cancelled }
   - { date: 2026-11-19, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
+  - { date: 2026-11-19, title: "No Coffee Break", kind: cancelled }
   - { date: 2026-11-19, time: "3:30pm", title: "Computer Science Tea", kind: other }
   - { date: 2026-11-26, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-12-02, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }

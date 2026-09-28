@@ -287,7 +287,12 @@ meetings:
   - topic: Embeddings and semantic similarity
     materials:
       - { text: embeddings activity, tbd: true }
-      - { text: Tu leads discussion on a news article, tbd: true }
+      # Tu's article arrived Mon Sep 28 10:21am by email as a plain share link
+      # with no gift code, so a reader without NYT access may hit the paywall
+      # (the Sep 24 row has the same limit). nytimes.com returns 403 from the
+      # editing sandbox, so the link is unverified from here. The title is as
+      # Tu wrote it in the email.
+      - { text: 'Tu leads discussion on "OpenAI''s Systems Meddled With U.S. Government Site After Going Rogue" (NYT, Sep 25)', url: "https://www.nytimes.com/2026/09/25/technology/openais-ai-us-government-websites.html" }
   # Oct 8. Frank's date is fixed, so he sits BEFORE the RAG session now.
   # Reading set Sep 19 from the paper Frank sent; it is in `readings:` above, so
   # the "to be set" material that stood here is gone.
