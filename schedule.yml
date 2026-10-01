@@ -165,17 +165,24 @@ assignments:
     url: "https://github.com/shilad/comp440-ratings-influence"
   # The retrieval homework became a one-day in-class activity (instructor,
   # Sep 27), to give the final project more time; its grade weight moved to the
-  # project. It runs Oct 22, with the RAG class it belongs to, and is finished
-  # in class, so it has no `due:` (the syllabus: in-class activities are due by
-  # the end of the session). The two later homeworks were renumbered the same
-  # day: alignment is now HW2, the agent assignment HW3. Neither had launched.
+  # project. It is finished in class, so it has no `due:` (the syllabus:
+  # in-class activities are due by the end of the session). The two later
+  # homeworks were renumbered the same day: alignment is now HW2, the agent
+  # assignment HW3.
+  #
+  # Oct 1 (instructor, "Coming up next" slide at the end of today's Word
+  # Embeddings section): the activity moves from Oct 22 to Tue Oct 13, "we will
+  # return to retrieval ... with a hands-on activity". HW2 is released Tue Oct 6,
+  # with the intro to language models that helps launch it (was Oct 29). The
+  # slide gives no new HW2 due date, so Nov 10 stands until the instructor says
+  # otherwise.
   - id: retrieval
     title: "Activity — Representing and Retrieving Knowledge (done in class)"
     kind: activity
-    launch: 2026-10-22
+    launch: 2026-10-13
   - id: hw2
     title: HW2 — Whose Preferences Count?
-    launch: 2026-10-29
+    launch: 2026-10-06
     due: 2026-11-10
   - id: hw3
     title: HW3 — Building and Evaluating an Agent
@@ -268,25 +275,41 @@ meetings:
   - module: Retrieval
     topic: Guest speaker session
     speaker: Brent Hecht
-  # Oct 1. Keeps a full session of its own (instructor, Sep 17) rather than being
-  # folded into embeddings.
+  # Oct 1. Taught TF-IDF and word embeddings together (instructor's decks,
+  # edited the morning of Oct 1), so the Oct 6 embeddings session is no longer
+  # needed. The retrieval activity that stood here as a TBD is the Oct 13
+  # hands-on activity, whose launch line comes from `assignments:`.
+  # Both decks checked Oct 1: Word Embeddings is anyone-with-link reader;
+  # Intro to Text Processing is shared to the macalester.edu domain only, so
+  # its link asks for a Macalester sign-in and the text says so.
+  # The calculator is the link on the Word Embeddings slides ("Play with it at
+  # http://vectors.nlpl.eu/explore/embeddings/en/calculator/"). Linked as
+  # https: that returned HTTP 200 with the title "WebVectors: Semantic
+  # Calculator" on Oct 1; the http form returned 503 through the sandbox proxy.
   # News-discussion leaders (instructor, Sep 23): each name comes from the
   # sign-up doc linked on the Sep 22 row, read Sep 23. The row is TBD until the
   # student's article arrives, a week before the class; then it becomes
   # `Name leads discussion on "Title" (Outlet, date)` with the url, as on Sep 24.
   # Dates with no leader yet (Oct 13, Oct 22, Dec 1) carry nothing. Colin took
   # Nov 17 overnight Sep 22–23; his row was added the morning of Sep 23.
-  - topic: TF-IDF, BM25, and lexical retrieval
+  - topic: TF-IDF and word embeddings
     materials:
-      - { text: lexical retrieval activity, tbd: true }
+      - { text: "Intro to Text Processing slides (TF-IDF; Macalester sign-in)", url: "https://docs.google.com/presentation/d/1Z9QfD_sB8y70mcANX1rAVB-Irr6a1QG0mR1IZoV0Gpw/view" }
+      - { text: "Word Embeddings slides", url: "https://docs.google.com/presentation/d/1fAH1OJ_7LFECPNGmXUm34UN1n3_5AeBaGlNKPbuXwnY/view" }
+      - { text: "WebVectors Semantic Calculator (word arithmetic with embeddings)", url: "https://vectors.nlpl.eu/explore/embeddings/en/calculator/" }
       # Shaylee's article arrived Thu Sep 24 8:55am by email, a gift link that
       # opens without a subscription. nytimes.com returns 403 from the editing
       # sandbox, so the link is unverified from here.
       - { text: 'Shaylee leads discussion on "The Quiet Way A.I. Is Hitting the Work Force" (NYT, Sep 16)', url: "https://www.nytimes.com/2026/09/16/business/ai-raises-hiring.html?unlocked_article_code=1.DlE.jOpm.BM3cPwVUaFNn&smid=url-share" }
-  # Oct 6.
-  - topic: Embeddings and semantic similarity
+  # Oct 6. Embeddings were taught Oct 1, so this day takes the intro to
+  # language models (moved up from Oct 13; instructor, Oct 1) and HW2 launches
+  # here (see `assignments:`). Foundation Models therefore opens here, and
+  # Frank Schilder's visit on Oct 8 falls inside it. Tu stays on this date, the
+  # one he signed up for.
+  - module: Foundation Models
+    topic: From representations and prediction to language models
     materials:
-      - { text: embeddings activity, tbd: true }
+      - { text: language-model overview, tbd: true }
       # Tu's article arrived Mon Sep 28 10:21am by email as a plain share link
       # with no gift code, so a reader without NYT access may hit the paywall
       # (the Sep 24 row has the same limit). nytimes.com returns 403 from the
@@ -300,15 +323,15 @@ meetings:
     speaker: Frank Schilder (tentative)
   # Sep 27 (instructor): the RAG class moved from Oct 13 to Oct 22, after the
   # classes on how language models generate text, and the two language-model
-  # classes each moved up one meeting. So Foundation Models now opens Oct 13,
-  # before Fall Break, and Retrieval ends with Frank Schilder on Oct 8. Only
-  # topics moved between these three rows; the entry count between Oct 8 and
-  # Oct 27 is unchanged, so no speaker or break moves. News-discussion leaders
-  # stay on their signed-up dates: Nadezhda on Oct 20; none on Oct 13 or Oct 22.
-  - module: Foundation Models
-    topic: From representations and prediction to language models
-    materials:
-      - { text: language-model overview, tbd: true }
+  # classes each moved up one meeting. Only topics moved between these three
+  # rows; the entry count between Oct 8 and Oct 27 is unchanged, so no speaker
+  # or break moves. News-discussion leaders stay on their signed-up dates:
+  # Nadezhda on Oct 20; none on Oct 13 or Oct 22.
+  # Oct 1 (instructor): the language-model intro moved again, to Oct 6, and this
+  # day became the return to retrieval with the hands-on activity, whose launch
+  # line comes from `assignments:`. The final project is still introduced here.
+  # Again only topics moved, within rows; no entry was added or removed.
+  - topic: "Lexical and embedding-based retrieval: hands-on activity"
   - break: Fall Break
   - topic: Transformers, pretraining, and generation
     materials:
@@ -316,7 +339,8 @@ meetings:
       - { text: Nadezhda leads discussion on a news article, tbd: true }
   # Absorbs "Retrieval evaluation and data provenance", which lost its own
   # session when Oct 8 became a speaker day (instructor, Sep 15). The retrieval
-  # activity's launch line comes from `assignments:`.
+  # activity that ran here moved to Oct 13 (instructor, Oct 1); the RAG class
+  # itself stays.
   - topic: Hybrid retrieval, RAG, evaluation, and data provenance
   # Nick Vincent covers training data, labor and authorship with the class
   # (instructor, Sep 17), so his visit closes Foundation Models rather than
@@ -328,7 +352,8 @@ meetings:
       - { text: data / labor reading (to be set with speaker), tbd: true }
 
   # Absorbs "Instruction tuning and supervised fine-tuning", displaced when
-  # Oct 27 became a speaker day. Also the day HW2 (alignment) now launches.
+  # Oct 27 became a speaker day. HW2 (alignment) launched here until Oct 1,
+  # when it moved up to Oct 6; it is still running on this day.
   - module: Alignment
     topic: "Instruction tuning and supervised fine-tuning; preference data, constitutions, and disagreement"
     materials:
