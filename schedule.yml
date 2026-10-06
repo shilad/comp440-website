@@ -337,6 +337,12 @@ meetings:
   # the "to be set" material that stood here is gone.
   - topic: Guest speaker session
     speaker: Frank Schilder (tentative)
+    materials:
+      # Added Oct 6 at the instructor's ask. Found by web search: the profile
+      # titled "Frank Schilder - Thomson Reuters", St Paul, Minnesota (the other
+      # Frank Schilders on LinkedIn are in the Netherlands). LinkedIn answers
+      # scripts with its bot-block code 999, so the link is unverified from here.
+      - { text: "Frank Schilder on LinkedIn", url: "https://www.linkedin.com/in/frank-schilder-8230a52/" }
   # Sep 27 (instructor): the RAG class moved from Oct 13 to Oct 22, after the
   # classes on how language models generate text, and the two language-model
   # classes each moved up one meeting. Only topics moved between these three
