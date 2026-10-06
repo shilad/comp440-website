@@ -174,8 +174,14 @@ assignments:
   # Embeddings section): the activity moves from Oct 22 to Tue Oct 13, "we will
   # return to retrieval ... with a hands-on activity". HW2 is released Tue Oct 6,
   # with the intro to language models that helps launch it (was Oct 29). HW2
-  # runs three weeks (instructor, Oct 1), so it is due Tue Oct 27 (was Nov 10),
-  # the same morning as Nick Vincent's speaker questions.
+  # runs three weeks (instructor, Oct 1), so it was due Tue Oct 27 (was Nov 10).
+  #
+  # Oct 6 (instructor): HW2 is handed in in stages. Step 0 (setup) stays due
+  # Thu Oct 8, as the HW2 README has it. Part 1 is due WEDNESDAY Oct 14, a day
+  # the class does not meet ("yes, that's weird"); the Thursday after is Fall
+  # Break. Hence `off_grid`, which shows it on Oct 13 with its own day. Part 2 is
+  # due Thu Oct 29 (was Oct 27). Each part links to its own instructions page in
+  # the public repo, read from `main` on Oct 6.
   - id: retrieval
     title: "Activity — Representing and Retrieving Knowledge (done in class)"
     kind: activity
@@ -183,7 +189,14 @@ assignments:
   - id: hw2
     title: HW2 — Whose Preferences Count?
     launch: 2026-10-06
-    due: 2026-10-27
+    url: "https://github.com/shilad/comp440-hw2"
+    parts:
+      - { label: HW2 Step 0 (setup) due, due: 2026-10-08,
+          url: "https://github.com/shilad/comp440-hw2/blob/main/instructions/step0.md" }
+      - { label: HW2 Part 1 due, due: 2026-10-14, off_grid: true,
+          url: "https://github.com/shilad/comp440-hw2/blob/main/instructions/part1.md" }
+      - { label: HW2 Part 2 due, due: 2026-10-29,
+          url: "https://github.com/shilad/comp440-hw2/blob/main/instructions/part2.md" }
   - id: hw3
     title: HW3 — Building and Evaluating an Agent
     launch: 2026-11-10
@@ -301,15 +314,17 @@ meetings:
       # opens without a subscription. nytimes.com returns 403 from the editing
       # sandbox, so the link is unverified from here.
       - { text: 'Shaylee leads discussion on "The Quiet Way A.I. Is Hitting the Work Force" (NYT, Sep 16)', url: "https://www.nytimes.com/2026/09/16/business/ai-raises-hiring.html?unlocked_article_code=1.DlE.jOpm.BM3cPwVUaFNn&smid=url-share" }
-  # Oct 6. Embeddings were taught Oct 1, so this day takes the intro to
-  # language models (moved up from Oct 13; instructor, Oct 1) and HW2 launches
-  # here (see `assignments:`). Foundation Models therefore opens here, and
-  # Frank Schilder's visit on Oct 8 falls inside it. Tu stays on this date, the
-  # one he signed up for.
+  # Oct 6. HW2 launches here (see `assignments:`), so Foundation Models opens
+  # here and Frank Schilder's visit on Oct 8 falls inside it. Tu stays on this
+  # date, the one he signed up for. The agenda is the instructor's, set the
+  # morning of Oct 6: NLP embeddings from the Word Embeddings deck linked on
+  # Oct 1, evaluating LLMs, then the HW2 introduction. It replaces the intro to
+  # language models planned here on Oct 1.
   - module: Foundation Models
-    topic: From representations and prediction to language models
+    topic: "NLP embeddings; evaluating LLMs; introducing HW2"
     materials:
-      - { text: language-model overview, tbd: true }
+      - { text: "Word Embeddings slides", url: "https://docs.google.com/presentation/d/1fAH1OJ_7LFECPNGmXUm34UN1n3_5AeBaGlNKPbuXwnY/view" }
+      - { text: evaluating-LLMs materials, tbd: true }
       # Tu's article arrived Mon Sep 28 10:21am by email as a plain share link
       # with no gift code, so a reader without NYT access may hit the paywall
       # (the Sep 24 row has the same limit). nytimes.com returns 403 from the
@@ -353,7 +368,8 @@ meetings:
 
   # Absorbs "Instruction tuning and supervised fine-tuning", displaced when
   # Oct 27 became a speaker day. HW2 (alignment) launched here until Oct 1,
-  # when it moved up to Oct 6; it is due Oct 27, so it is finished by this day.
+  # when it moved up to Oct 6. Its Part 2 is due the morning of this class
+  # (instructor, Oct 6), the same morning as the project proposal.
   - module: Alignment
     topic: "Instruction tuning and supervised fine-tuning; preference data, constitutions, and disagreement"
     materials:

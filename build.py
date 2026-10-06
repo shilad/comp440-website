@@ -71,15 +71,34 @@ def build() -> str:
         )
     by_date = {r["date"]: r for r in rows}
 
-    def place(date, label, kind, url=None, time=None, links=None, note=None):
-        row = by_date.get(date)
+    def place(date, label, kind, url=None, time=None, links=None, note=None,
+              off_grid=False):
+        row, day = by_date.get(date), None
+        # A deadline on a day the class does not meet must say `off_grid: true`,
+        # so a mistyped date still fails (instructor, Oct 6: HW2 Part 1 is due
+        # Wed Oct 14, before Fall Break). It is still checked against the grid: a
+        # weekday inside the term, shown with its own day on the meeting before it.
+        if off_grid:
+            prior = [r for r in rows if r["date"] < date]
+            if row is not None:
+                fail(f"{label}: {date} is a class meeting; drop `off_grid`.")
+                return
+            if date > cal["last"] or date.weekday() > 4 or not prior:
+                fail(f"{label}: off-grid {date} must be a weekday after the "
+                     f"first meeting and inside the term.")
+                return
+            row, day = prior[-1], date.strftime("%a, %b %-d")
+            if row["is_break"]:
+                fail(f"{label}: the meeting before {date} is {row['topic']}.")
+                return
         if row is None:
             fail(f"{label}: {date} is not a class meeting.")
         elif row["is_break"]:
             fail(f"{label}: {date} falls on {row['topic']}.")
         else:
             row["due"].append({"label": label, "kind": kind, "url": url,
-                               "time": time, "links": links, "note": note})
+                               "time": time, "links": links, "note": note,
+                               "day": day})
 
     for a in data.get("assignments", []):
         if a.get("launch"):
@@ -90,12 +109,19 @@ def build() -> str:
                 row["materials"] = list(row["materials"]) + [
                     {"text": f"Launch: {a['title']}", "url": a.get("url")}
                 ]
-        if a.get("due"):
-            # `kind` defaults to homework; an in-class activity says `kind: activity`
-            # so its due entry is labelled as one. `label` overrides the ID-derived
-            # "HW1 due" text for an assignment whose ID is not its name.
-            place(a["due"], a.get("label") or f"{a['id'].upper()} due",
-                  a.get("kind", "hw"), a.get("url"), time=cal["due_time"])
+        # `kind` defaults to homework; an in-class activity says `kind: activity`
+        # so its due entry is labelled as one. `label` overrides the ID-derived
+        # "HW1 due" text for an assignment whose ID is not its name. An assignment
+        # handed in in stages lists them under `parts`, each with its own label,
+        # due date and optional url; it then has no `due` of its own.
+        if a.get("due") and a.get("parts"):
+            fail(f"{a['id']}: give `due` or `parts`, not both.")
+        parts = a.get("parts") or ([{"due": a["due"], "label": a.get("label")}]
+                                   if a.get("due") else [])
+        for p in parts:
+            place(p["due"], p.get("label") or f"{a['id'].upper()} due",
+                  a.get("kind", "hw"), p.get("url") or a.get("url"),
+                  time=cal["due_time"], off_grid=p.get("off_grid", False))
 
     # One form takes every kind of submission and branches on its first question.
     # Prefilling that question, and the one that follows it, saves two picks and
@@ -449,9 +475,11 @@ def render(course, cal, rows) -> str:
         items = ""
         for d in row["due"]:
             # The column header states the common time; annotate only exceptions.
-            at = ""
+            # An off-grid deadline also names its own day, since the row's is not it.
+            when = [d["day"]] if d.get("day") else []
             if d.get("time") and d["time"] != cal.get("column_time", cal["due_time"]):
-                at = f' <span class="at">{e(d["time"])}</span>'
+                when.append(d["time"])
+            at = f' <span class="at">{e(", ".join(when))}</span>' if when else ""
             kind = d["kind"]
             lbl = e(d["label"])
             if d.get("url"):
