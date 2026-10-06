@@ -176,8 +176,9 @@ assignments:
   # with the intro to language models that helps launch it (was Oct 29). HW2
   # runs three weeks (instructor, Oct 1), so it was due Tue Oct 27 (was Nov 10).
   #
-  # Oct 6 (instructor): HW2 is handed in in stages. Step 0 (setup) stays due
-  # Thu Oct 8, as the HW2 README has it. Part 1 is due WEDNESDAY Oct 14, a day
+  # Oct 6 (instructor): HW2 is handed in in stages. Part 0 (setup; the README
+  # called it Step 0, renamed by the instructor Oct 6) stays due Thu Oct 8, as
+  # the HW2 README has it. Part 1 is due WEDNESDAY Oct 14, a day
   # the class does not meet ("yes, that's weird"); the Thursday after is Fall
   # Break. Hence `off_grid`, which shows it on Oct 13 with its own day. Part 2 is
   # due Thu Oct 29 (was Oct 27). Each part links to its own instructions page in
@@ -191,7 +192,7 @@ assignments:
     launch: 2026-10-06
     url: "https://github.com/shilad/comp440-hw2"
     parts:
-      - { label: HW2 Step 0 (setup) due, due: 2026-10-08,
+      - { label: HW2 Part 0 (setup) due, due: 2026-10-08,
           url: "https://github.com/shilad/comp440-hw2/blob/main/instructions/step0.md" }
       - { label: HW2 Part 1 due, due: 2026-10-14, off_grid: true,
           url: "https://github.com/shilad/comp440-hw2/blob/main/instructions/part1.md" }
