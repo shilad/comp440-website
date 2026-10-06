@@ -77,6 +77,22 @@ posters:
       drive_id: 1VG_sp4g1ZB8pM8AjAJVP7JBsIOX49X4v, checked: 2026-09-13 }
   - { date: 2026-11-10, title: "MSCS & Society talk",
       drive_id: 15lgsdcB8eAV8sIu6VfUhSznNdM2Ubin_, checked: 2026-09-13 }
+  # Added Oct 6 from the October folder (`1454k9XbnOnOcPuZKdyrFEiztJ0Dl66iT`). Each
+  # matched to its event by the date, time and room printed on it, and verified
+  # macalester.edu domain-reader via the Drive API the same day.
+  - { date: 2026-10-08, title: "meet some profs",
+      drive_id: 19kAVZjiAv0qaGB-BekM4pruBPzda4JL4, checked: 2026-10-06 }
+  - { date: 2026-10-08, title: "Advanced LaTeX",
+      drive_id: 1nsD27Eh-0Na7zTuXeLym005egkTMzsa5, checked: 2026-10-06 }
+  # Filed as "Designing for Disability Panel"; the poster itself reads "Designing
+  # for Accessibility", Oct 8, 12:00-1:00pm, Library 250.
+  - { date: 2026-10-08, title: "Designing for Accessibility",
+      drive_id: 1ewhiuhNV0WT7mhsJXJ1k4mojDvr5wLrX, checked: 2026-10-06 }
+  - { date: 2026-10-13, title: "Game Night",
+      drive_id: 1Go_23n0lsGG1BU-O7MksvrpA3_icXEXB, checked: 2026-10-06 }
+  # NOT LINKED from the same folder: "Grad school coffee break 2026.pdf", for the
+  # Oct 1 coffee break, already past when found; and "Math Problem Solving
+  # Portrait.png", a weekly Wednesday drop-in, which would take one entry per week.
 
 # NOT LINKED: "POSTER Job & Internship Fair Macalester Fall 2026.jpg"
 # (1R02HxndsicWEWDDIucEACTDDJnbcvbtc), a college-wide Career Exploration event on
