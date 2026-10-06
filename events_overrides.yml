@@ -29,6 +29,12 @@ counts:
   - { date: 2026-09-24, title: "Smail Gallery Artist Talk" }
   - { date: 2026-09-24, title: "Software Engineering Technical Interview Workshop" }
   - { date: 2026-11-10, title: "MSCS & Society talk" }
+  # Four more, all marked by the instructor Oct 6 when the refresh that day first
+  # showed them on the department calendar.
+  - { date: 2026-10-08, title: "Designing for Accessibility" }
+  - { date: 2026-10-21, title: "MSCS Seminar Speaker: Michael Pearce" }
+  - { date: 2026-11-02, title: "MSCS Seminar Speaker: Priscilla Jimenez" }
+  - { date: 2026-12-10, title: "MSCS Honors 5-minute talks" }
 
 # DELIBERATELY NOT MARKED — do not add these without asking:
 #
@@ -36,10 +42,6 @@ counts:
 #   the instructor Sep 9. It is the reception for the same speaker as the Nov 10
 #   talk, the evening before, which makes it the easiest thing here to add by
 #   mistake. A reception is not a talk.
-#
-#   Nov 1, "MSCS & Society Speaker Event" — undecided. Same series as the Nov 10
-#   talk that does count, so it plausibly counts, but the instructor named the
-#   Nov 10 one specifically and this file is the wrong place to guess.
 
 # Event posters. Staff drop these into the MSCS shared drive's month folders
 # (`1gjYWAuEE0Lepkg3fXtToutzUtKdDl9xC`), one folder per month. Matched on date +
@@ -90,9 +92,10 @@ posters:
 # dropped. With a date it would take one entry per occurrence, and whatever the
 # department adds next term would quietly come back. Hidden events still appear
 # under `skipped:` in events.yml, one line per occurrence, with the reason below.
+#
+# Removed Oct 6: the Nov 1 "MSCS & Society Speaker Event", hidden Sep 10 as a wrong
+# entry, is no longer on the department calendar, so its rule matched nothing.
 hidden:
-  - { date: 2026-11-01, title: "MSCS & Society Speaker Event",
-      reason: "wrong entry on the department calendar (instructor, Sep 10)" }
   - { title: "RStudio Drop In Hours",
       reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
 
