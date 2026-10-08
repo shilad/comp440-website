@@ -304,8 +304,10 @@ meetings:
   # sign-up doc linked on the Sep 22 row, read Sep 23. The row is TBD until the
   # student's article arrives, a week before the class; then it becomes
   # `Name leads discussion on "Title" (Outlet, date)` with the url, as on Sep 24.
-  # Dates with no leader yet (Oct 13, Oct 22, Dec 1) carry nothing. Colin took
+  # Dates with no leader yet (Oct 22, Dec 1) carry nothing. Colin took
   # Nov 17 overnight Sep 22–23; his row was added the morning of Sep 23.
+  # Lorenzo signed up for Oct 13 later on Sep 23 and was missed then; his row
+  # was added Oct 8 with his article.
   - topic: TF-IDF and word embeddings
     materials:
       - { text: "Intro to Text Processing slides (TF-IDF; Macalester sign-in)", url: "https://docs.google.com/presentation/d/1Z9QfD_sB8y70mcANX1rAVB-Irr6a1QG0mR1IZoV0Gpw/view" }
@@ -354,6 +356,13 @@ meetings:
   # line comes from `assignments:`. The final project is still introduced here.
   # Again only topics moved, within rows; no entry was added or removed.
   - topic: "Lexical and embedding-based retrieval: hands-on activity"
+    materials:
+      # Lorenzo's article arrived Wed Oct 7 4:30pm by email as a plain link with
+      # no gift code, so a reader without NYT access may hit the paywall. His
+      # email gave no headline, and nytimes.com returns 403 from the editing
+      # sandbox, so the text describes the article instead of quoting a title;
+      # the date is the one in the URL. The link is unverified from here.
+      - { text: "Lorenzo leads discussion on an article about the Hugging Face hack (NYT, Sep 25)", url: "https://www.nytimes.com/2026/09/25/technology/openai-hugging-face-hack.html" }
   - break: Fall Break
   - topic: Transformers, pretraining, and generation
     materials:
