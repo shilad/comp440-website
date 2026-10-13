@@ -101,6 +101,15 @@ readings:
     form_option: "Sep 24 (Thu) — Salganik et al, Inequality and Unpredictability in an Artificial Cultural Market"
     cite: 'Salganik, Dodds & Watts, "Experimental Study of Inequality and Unpredictability in an Artificial Cultural Market"'
     url: "https://www.filosofitis.com.ar/archivos/experimentalmarket.pdf"
+  # Assigned Oct 13 (instructor), the day it was introduced in class; the
+  # reflection is due the next class, Oct 20. Authors and title as the page
+  # credits them when fetched Oct 13 (HTTP 200); the page shows no date.
+  # `form_option` matches the dropdown option added to the form the same day.
+  - date: 2026-10-20
+    form_option: "Oct 20 (Tue) — Larsen et al, AI 2040: Plan A"
+    cite: 'Larsen, Dean, Halstead, Lifland, Greenblatt & Kokotajlo, "AI 2040: Plan A" (AI Futures Project)'
+    label: article
+    url: "https://ai-2040.com/"
   # Speaker days take ONE submission, not two (instructor, Sep 19, reversing the
   # Sep 7 rule). The reading is still assigned and still due before class, but it
   # is discussed inside the speaker questions, so it carries no reflection of its
