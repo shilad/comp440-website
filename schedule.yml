@@ -220,7 +220,10 @@ milestones:
   - { date: 2026-10-13, label: Final project introduced }
   # Moved up from Nov 12 (instructor, Sep 27): the time freed by the retrieval
   # homework goes to the project, and the proposal no longer falls inside HW3.
-  # Moved from Oct 29 to Tue Nov 3 (instructor, Oct 13).
+  # Moved from Oct 29 to Tue Nov 3 (instructor, Oct 13). FP0 (Getting Started)
+  # had no date until Oct 13, when the instructor set it to the same morning,
+  # as a separate submission.
+  - { date: 2026-11-03, label: "Final project FP0 (Getting Started) due" }
   - { date: 2026-11-03, label: Final project proposal due }
   - { date: 2026-11-24, label: Final project update }
   - { date: 2026-12-03, label: Project rehearsal }
