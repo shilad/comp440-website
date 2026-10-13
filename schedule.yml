@@ -183,10 +183,14 @@ assignments:
   # Break. Hence `off_grid`, which shows it on Oct 13 with its own day. Part 2 is
   # due Thu Oct 29 (was Oct 27). Each part links to its own instructions page in
   # the public repo, read from `main` on Oct 6.
+  #
+  # Oct 13 (instructor, the morning of): the activity moves again, from Oct 13
+  # to Tue Oct 20. Oct 13 became HW2 discussion and working time, the final
+  # project introduction, and a discussion of "AI 2040: Plan A".
   - id: retrieval
     title: "Activity — Representing and Retrieving Knowledge (done in class)"
     kind: activity
-    launch: 2026-10-13
+    launch: 2026-10-20
   - id: hw2
     title: HW2 — Whose Preferences Count?
     launch: 2026-10-06
@@ -355,8 +359,16 @@ meetings:
   # day became the return to retrieval with the hands-on activity, whose launch
   # line comes from `assignments:`. The final project is still introduced here.
   # Again only topics moved, within rows; no entry was added or removed.
-  - topic: "Lexical and embedding-based retrieval: hands-on activity"
+  # Oct 13 (instructor, the morning of): this day became HW2 discussion and
+  # working time, the final project introduction, and a discussion of "AI 2040:
+  # Plan A". The activity moved to Oct 20, and the transformers class it
+  # displaced folded into Oct 22. Only topics moved; no entry was added or
+  # removed, so no speaker or break moved. Lorenzo stays on his signed-up date.
+  # The Plan A page returned the title "AI 2040: Plan A" and the AI Futures
+  # Project credit when fetched Oct 13.
+  - topic: "HW2 discussion and working time; introducing the final project; AI 2040: Plan A"
     materials:
+      - { text: '"AI 2040: Plan A" (AI Futures Project)', url: "https://ai-2040.com/" }
       # Lorenzo's article arrived Wed Oct 7 4:30pm by email as a plain link with
       # no gift code, so a reader without NYT access may hit the paywall. His
       # email gave no headline, and nytimes.com returns 403 from the editing
@@ -364,9 +376,10 @@ meetings:
       # the date is the one in the URL. The link is unverified from here.
       - { text: "Lorenzo leads discussion on an article about the Hugging Face hack (NYT, Sep 25)", url: "https://www.nytimes.com/2026/09/25/technology/openai-hugging-face-hack.html" }
   - break: Fall Break
-  - topic: Transformers, pretraining, and generation
+  # Oct 13 (instructor): the retrieval activity moved here from Oct 13; its
+  # launch line comes from `assignments:`. Transformers moved to Oct 22.
+  - topic: "Lexical and embedding-based retrieval: hands-on activity"
     materials:
-      - { text: foundation-model materials, tbd: true }
       # Nadezhda's article was passed on by the instructor Oct 12. The link
       # returned HTTP 200 from the editing sandbox that day; the title and date
       # are the page's own headline and publish date.
@@ -374,8 +387,11 @@ meetings:
   # Absorbs "Retrieval evaluation and data provenance", which lost its own
   # session when Oct 8 became a speaker day (instructor, Sep 15). The retrieval
   # activity that ran here moved to Oct 13 (instructor, Oct 1); the RAG class
-  # itself stays.
-  - topic: Hybrid retrieval, RAG, evaluation, and data provenance
+  # itself stays. Oct 13 (instructor): the transformers class folds in here,
+  # displaced from Oct 20 by the retrieval activity.
+  - topic: "Transformers and generation; hybrid retrieval and RAG"
+    materials:
+      - { text: foundation-model materials, tbd: true }
   # Nick Vincent covers training data, labor and authorship with the class
   # (instructor, Sep 17), so his visit closes Foundation Models rather than
   # opening Alignment, and the topic is named on the row so students know what
