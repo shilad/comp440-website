@@ -220,7 +220,8 @@ milestones:
   - { date: 2026-10-13, label: Final project introduced }
   # Moved up from Nov 12 (instructor, Sep 27): the time freed by the retrieval
   # homework goes to the project, and the proposal no longer falls inside HW3.
-  - { date: 2026-10-29, label: Final project proposal due }
+  # Moved from Oct 29 to Tue Nov 3 (instructor, Oct 13).
+  - { date: 2026-11-03, label: Final project proposal due }
   - { date: 2026-11-24, label: Final project update }
   - { date: 2026-12-03, label: Project rehearsal }
   - { date: 2026-12-08, label: Final presentation materials }
@@ -413,7 +414,8 @@ meetings:
   # Absorbs "Instruction tuning and supervised fine-tuning", displaced when
   # Oct 27 became a speaker day. HW2 (alignment) launched here until Oct 1,
   # when it moved up to Oct 6. Its Part 2 is due the morning of this class
-  # (instructor, Oct 6), the same morning as the project proposal.
+  # (instructor, Oct 6). The project proposal was due the same morning until
+  # Oct 13, when it moved to Nov 3.
   - module: Alignment
     topic: "Instruction tuning and supervised fine-tuning; preference data, constitutions, and disagreement"
     materials:
