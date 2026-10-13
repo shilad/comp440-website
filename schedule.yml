@@ -381,6 +381,10 @@ meetings:
   # Project credit when fetched Oct 13.
   - topic: "HW2 discussion and working time; introducing the final project; AI 2040: Plan A"
     materials:
+      # Added Oct 13 at the instructor's ask. Drive metadata that day: titled
+      # "Comp 440 F26 - Overview of Final Project", shared anyone-with-link
+      # reader. It links the FP0 doc students copy.
+      - { text: "Final project overview", url: "https://docs.google.com/document/d/193339YYYhrbhcZIdwtxXuBO5Do5ftGiF-zO9h4hQUb0/view" }
       - { text: '"AI 2040: Plan A" (AI Futures Project)', url: "https://ai-2040.com/" }
       # Lorenzo's article arrived Wed Oct 7 4:30pm by email as a plain link with
       # no gift code, so a reader without NYT access may hit the paywall. His
