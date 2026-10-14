@@ -372,11 +372,22 @@ def events_rail(t0: dt.date, t1: dt.date) -> str:
         if link:
             title = "Event poster" if ev.get("poster") else "Event details"
             what = f'<a href="{e(link)}" title="{title}">{what}</a>' 
+        # A hand-added event may carry the organizers' own description and an RSVP
+        # link. Both sit in a collapsed <details> so the row stays three lines tall
+        # until a student opens it; the RSVP is its own link because the title's one
+        # link slot belongs to the poster or event page.
+        more = ""
+        if ev.get("blurb") or ev.get("rsvp"):
+            rsvp = (f' <a href="{e(ev["rsvp"])}">{e(ev.get("rsvp_text") or "RSVP")}</a>'
+                    if ev.get("rsvp") else "")
+            more = (f'<details class="blurb"><summary>About</summary>'
+                    f'<p>{e(ev.get("blurb") or "")}{rsvp}</p></details>')
         out.append(
             f'<li class="{cls}" data-date="{d.isoformat()}">'
             f'<span class="when">{e(when)}</span>'
             + f'<span class="what">{badge}{what}</span>'
             + (f'<span class="where">{e(loc)}</span>' if loc else "")
+            + more
             + "</li>"
         )
     if not out:
@@ -680,6 +691,9 @@ ul.evs li.counts .what {{ font-weight:600; color:var(--counts) }}
 ul.evs .what a {{ color:inherit; text-decoration:underline dotted;
                   text-underline-offset:2px }}
 ul.evs .what a:hover, ul.evs .what a:focus {{ text-decoration:underline solid }}
+ul.evs details.blurb {{ font-size:.78rem; color:var(--muted) }}
+ul.evs details.blurb summary {{ cursor:pointer }}
+ul.evs details.blurb p {{ margin:.3rem 0 0; line-height:1.4; color:var(--fg) }}
 li.ev-cancelled {{ opacity:.55 }}
 li.ev-cancelled .what {{ text-decoration:line-through }}
 .rail .asof {{ margin:1rem 0 0; color:var(--muted); font-size:.78rem }}
@@ -850,6 +864,8 @@ li.ev-cancelled .what {{ text-decoration:line-through }}
   function relayout() {{ clearTimeout(pending); pending = setTimeout(place, 80); }}
   place();
   addEventListener("resize", relayout);
+  // Opening an event's About text makes its row taller; push the rows below it down.
+  list.addEventListener("toggle", place, true);
   // Fonts landing late change row heights, so measure again once they have.
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
 }})();

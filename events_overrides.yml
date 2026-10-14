@@ -35,6 +35,8 @@ counts:
   - { date: 2026-10-21, title: "MSCS Seminar Speaker: Michael Pearce" }
   - { date: 2026-11-02, title: "MSCS Seminar Speaker: Priscilla Jimenez" }
   - { date: 2026-12-10, title: "MSCS Honors 5-minute talks" }
+  # Added Oct 14 at the instructor's ask, as a seminar talk (Todoist 6hmC5f59hM6hPr25).
+  - { date: 2026-10-28, title: "Critical Dialogue on AI" }
 
 # DELIBERATELY NOT MARKED — do not add these without asking:
 #
@@ -146,3 +148,18 @@ extra:
     # schedule page 2026-09-14; the 9:00am here is the first session, not a
     # single start time for the day.
     source: "tcstartupweek.com/thursday, read 2026-09-14 (instructor, Sep 14)"
+  # `blurb:` is the organizers' own text, verbatim; `rsvp:` links their RSVP form.
+  # Both render inside a collapsed "About" under the row.
+  - date: 2026-10-28
+    time: "4:45pm"
+    title: "Critical Dialogue on AI: environmental impacts of data centers"
+    location: "Flemming Room, Kagin first floor"
+    kind: talk
+    blurb: "Join the Lealtad-Suzuki Center for Social Justice (LSC) for the first Critical Dialogue (CD) of the semester on Wednesday, October 28th at 4:45pm in the Flemming Room (Kagin first floor). We will discuss the environmental impacts of data centers as Artificial Intelligence (AI) becomes more ubiquitous in our everyday lives. Hear from Krystal Two Bulls, Executive Director of Honor the Earth, get additional perspectives from other attendees, and reflect on your engagement with AI. CDs are open to all campus - students, staff, and faculty. Dinner provided. RSVP here."
+    rsvp: "https://forms.gle/x1wfzL1o2863GmNz8"
+    rsvp_text: "RSVP: Critical Dialogue on AI"
+    # Read off the LSC's announcement email (Sam Taitel, Oct 14), forwarded to
+    # Shilad; added at his ask (Todoist 6hmC5f59hM6hPr25). Not on the MSCS calendar
+    # as of the Oct 14 dry-run refresh. If it appears there, the duplicate guard
+    # above fails the build: move blurb/rsvp to that event or hide one.
+    source: "LSC announcement email, Oct 14 (instructor, Oct 14)"
