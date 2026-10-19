@@ -105,7 +105,9 @@ readings:
   # reflection is due the next class, Oct 20. Authors and title as the page
   # credits them when fetched Oct 13 (HTTP 200); the page shows no date.
   # `form_option` matches the dropdown option added to the form the same day.
-  - date: 2026-10-20
+  # Oct 19 (instructor): the Plan A discussion and this reflection move from
+  # Tue Oct 20 to Thu Oct 22; Oct 20 is the retrieval activity.
+  - date: 2026-10-22
     form_option: "Oct 20 (Tue) — Larsen et al, AI 2040: Plan A"
     cite: 'Larsen, Dean, Halstead, Lifland, Greenblatt & Kokotajlo, "AI 2040: Plan A" (AI Futures Project)'
     label: article
@@ -405,8 +407,10 @@ meetings:
   # session when Oct 8 became a speaker day (instructor, Sep 15). The retrieval
   # activity that ran here moved to Oct 13 (instructor, Oct 1); the RAG class
   # itself stays. Oct 13 (instructor): the transformers class folds in here,
-  # displaced from Oct 20 by the retrieval activity.
-  - topic: "Transformers and generation; hybrid retrieval and RAG"
+  # displaced from Oct 20 by the retrieval activity. Oct 19 (instructor): the
+  # discussion of "AI 2040: Plan A" moves here from Oct 20, with its reflection.
+  # Only a topic moved; no entry was added or removed.
+  - topic: "Transformers and generation; hybrid retrieval and RAG; discussion of AI 2040: Plan A"
     materials:
       - { text: foundation-model materials, tbd: true }
   # Nick Vincent covers training data, labor and authorship with the class
