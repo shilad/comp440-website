@@ -95,6 +95,13 @@ posters:
   # NOT LINKED from the same folder: "Grad school coffee break 2026.pdf", for the
   # Oct 1 coffee break, already past when found; and "Math Problem Solving
   # Portrait.png", a weekly Wednesday drop-in, which would take one entry per week.
+  # Added Oct 20 from the same folder: "Flyer for Michael Pearce with Speaker
+  # Photo (11 x 8.5 in).pdf". The flyer reads Wed Oct 21, 3:30-4:30pm, Olin Rice
+  # 254, "What do voters really want?", and the department's Oct 14 announcement
+  # links this same file for the talk. Verified macalester.edu domain-reader via
+  # the Drive API the same day.
+  - { date: 2026-10-21, title: "Michael Pearce",
+      drive_id: 1cZZFydvQiFKb15fbvPbJz9k-Zj7MSGHj, checked: 2026-10-20 }
 
 # NOT LINKED: "POSTER Job & Internship Fair Macalester Fall 2026.jpg"
 # (1R02HxndsicWEWDDIucEACTDDJnbcvbtc), a college-wide Career Exploration event on

@@ -345,7 +345,9 @@ meetings:
   # sign-up doc linked on the Sep 22 row, read Sep 23. The row is TBD until the
   # student's article arrives, a week before the class; then it becomes
   # `Name leads discussion on "Title" (Outlet, date)` with the url, as on Sep 24.
-  # Dates with no leader yet (Oct 22, Dec 1) carry nothing. Colin took
+  # Dates with no leader yet (Dec 1) carry nothing. Laurice took Oct 22,
+  # which had no leader on Sep 23; the row was added Oct 20 with the article.
+  # Colin took
   # Nov 17 overnight Sep 22–23; his row was added the morning of Sep 23.
   # Lorenzo signed up for Oct 13 later on Sep 23 and was missed then; his row
   # was added Oct 8 with his article.
@@ -435,6 +437,11 @@ meetings:
   - topic: "Transformers and generation; hybrid retrieval and RAG; discussion of AI 2040: Plan A"
     materials:
       - { text: foundation-model materials, tbd: true }
+      # Laurice emailed the article to the instructor Oct 20. The link returned
+      # HTTP 200 from the editing sandbox that day; the title and date are the
+      # page's own headline and publish date. The email also attached an ad-free
+      # PDF copy, which is not linked here.
+      - { text: 'Laurice leads discussion on "Brazilian bricklayer’s dream girl turns out to be AI-generated" (New York Post, Oct 17)', url: "https://nypost.com/2026/10/17/world-news/brazilian-bricklayers-dream-girl-turns-out-to-be-ai-generated/" }
   # Nick Vincent covers training data, labor and authorship with the class
   # (instructor, Sep 17), so his visit closes Foundation Models rather than
   # opening Alignment, and the topic is named on the row so students know what
