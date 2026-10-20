@@ -144,6 +144,14 @@ readings:
       document only, an exception to the no-AI rule. Check whatever it hands you
       against the filing itself, including the surrounding context, not just the
       line it quotes. The reflection is still your own writing.
+  # Nick Vincent's visit. Set Oct 20 (instructor) as the required reading; an
+  # optional second post sits on his row as a material. Title, author and date
+  # (Oct 11, 2026) are the page's own, fetched Oct 20 (HTTP 200).
+  # No `form_option`: speaker day, so it folds into the speaker questions.
+  - date: 2026-10-27
+    cite: 'Vincent, "How We Might Build “Augment, Don’t Replace” AI" (Data Leverage, Oct 11, 2026)'
+    label: post
+    url: "https://dataleverage.substack.com/p/how-we-might-build-augment-dont-replace"
   # Moved with Logan Stapleton from Sep 24 to Nov 24 (instructor, Sep 17).
   - date: 2026-11-24
     cite: 'Cheng, Stapleton, Kawakami et al, "How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions" (CHI 2022)'
@@ -417,10 +425,20 @@ meetings:
   # (instructor, Sep 17), so his visit closes Foundation Models rather than
   # opening Alignment, and the topic is named on the row so students know what
   # the day is. His date does not change.
+  # Oct 20 (instructor): "Nick is our speaker a week from today", so the
+  # "(tentative)" is dropped. His required reading is in `readings:` above, so
+  # the "to be set" material that stood here is gone. Homepage fetched Oct 20
+  # (HTTP 200, "Nicholas Vincent | Data Leverage & Public AI"); the LinkedIn URL
+  # is the one that page links. LinkedIn blocks scripts, so it is unverified
+  # beyond that. The optional post is an unpublished Substack draft shared by
+  # link: on Oct 20 it opened without a login and was titled as below, by Nick
+  # Vincent. If he publishes it, swap in the published URL.
   - topic: "Guest speaker session: training data, labor, and authorship"
-    speaker: Nick Vincent (tentative)
+    speaker: Nick Vincent
     materials:
-      - { text: data / labor reading (to be set with speaker), tbd: true }
+      - { text: "Nick Vincent — personal site", url: "https://nickmvincent.com/" }
+      - { text: "Nick Vincent on LinkedIn", url: "https://www.linkedin.com/in/nicholas-vincent-93594a81/" }
+      - { text: 'Optional reading: Vincent, "A simple, “one question framework” to promote an attributive view of human-centered AI" (Data Leverage, draft)', url: "https://dataleverage.substack.com/p/76a711cd-7e41-44f0-8449-a2801339f294" }
 
   # Absorbs "Instruction tuning and supervised fine-tuning", displaced when
   # Oct 27 became a speaker day. HW2 (alignment) launched here until Oct 1,
