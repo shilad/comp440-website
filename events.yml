@@ -3,7 +3,7 @@
 # the feed's mix of UTC, TZID and all-day stamps. Recurring events are expanded here,
 # so each line below is one real occurrence.
 source: "https://calendar.google.com/calendar/ical/macalester.edu_k7f54d0aeqnpvqb3kjl5kvnuvg%40group.calendar.google.com/public/basic.ics"
-fetched: 2026-10-12
+fetched: 2026-10-20
 term: [2026-09-08, 2026-12-10]
 
 # Shown on the site, in the MSCS events rail.
@@ -34,7 +34,7 @@ events:
   - { date: 2026-10-08, time: "3:30pm", title: "Computer Science Tea", location: "OLRI 258", kind: other }
   - { date: 2026-10-13, time: "5:00pm", title: "MSCS SAB Game Night", location: "OLRI 258", kind: social }
   - { date: 2026-10-21, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
-  - { date: 2026-10-21, time: "3:30pm", title: "MSCS Seminar Speaker: Michael Pearce", kind: talk }
+  - { date: 2026-10-21, time: "3:30pm", title: "MSCS Seminar Speaker: Michael Pearce - WHAT DO VOTERS REALLY WANT?", kind: talk }
   - { date: 2026-10-22, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-10-22, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
   - { date: 2026-10-27, time: "11:00am", title: "Macalester Major Fair", kind: other }
@@ -45,7 +45,7 @@ events:
   - { date: 2026-11-02, time: "4:40pm", title: "MSCS Seminar Speaker: Priscilla Jimenez", kind: talk }
   - { date: 2026-11-04, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
   - { date: 2026-11-05, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
-  - { date: 2026-11-05, time: "11:30am", title: "MSCS registration ice cream social", location: "Smail Gallery", kind: social }
+  - { date: 2026-11-05, time: "11:15am", title: "MSCS registration ice cream social", location: "Smail Gallery", kind: social }
   - { date: 2026-11-05, time: "3:30pm", title: "Computer Science Tea", location: "OLRI 258", kind: other }
   - { date: 2026-11-07, title: "NCNA Programming Contest", kind: career }
   - { date: 2026-11-09, time: "4:40pm", title: "Hutchinson & Wagon square-wheel bike student reception", kind: social }
@@ -80,10 +80,10 @@ skipped:
   - { date: 2026-10-07, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-10-08, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-10-14, title: "Math Problem Solving", reason: "EXDATE — this instance was cancelled" }
-  - { date: 2026-10-14, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-10-15, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-10-15, title: "Math Problem of the Week (attached) due by 5pm", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-10-15, title: "RStudio Drop In Hours - Ryan", reason: "EXDATE — this instance was cancelled" }
+  - { date: 2026-10-19, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-10-21, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-10-22, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-10-28, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
