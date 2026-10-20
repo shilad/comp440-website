@@ -109,9 +109,9 @@ readings:
   # Tue Oct 20 to Thu Oct 22; Oct 20 is the retrieval activity.
   # Oct 20 (instructor): the form's option keeps its "Oct 20 (Tue)" label,
   # because some students had already submitted against it. The editing
-  # session renamed it to "Oct 22 (Thu)" by mistake on Oct 20; its attempt to
-  # rename it back was blocked, so the instructor restores it by hand. Until
-  # then the reflection link's prefill selects nothing.
+  # session renamed it to "Oct 22 (Thu)" by mistake on Oct 20 and renamed it
+  # back the same day at the instructor's ask (read back with get_form).
+  # Reflections filed in between carry the "Oct 22 (Thu)" label.
   - date: 2026-10-22
     form_option: "Oct 20 (Tue) — Larsen et al, AI 2040: Plan A"
     cite: 'Larsen, Dean, Halstead, Lifland, Greenblatt & Kokotajlo, "AI 2040: Plan A" (AI Futures Project)'
