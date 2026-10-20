@@ -437,11 +437,13 @@ meetings:
   - topic: "Transformers and generation; hybrid retrieval and RAG; discussion of AI 2040: Plan A"
     materials:
       - { text: foundation-model materials, tbd: true }
-      # Laurice emailed the article to the instructor Oct 20. The link returned
-      # HTTP 200 from the editing sandbox that day; the title and date are the
-      # page's own headline and publish date. The email also attached an ad-free
-      # PDF copy, which is not linked here.
-      - { text: 'Laurice leads discussion on "Brazilian bricklayer’s dream girl turns out to be AI-generated" (New York Post, Oct 17)', url: "https://nypost.com/2026/10/17/world-news/brazilian-bricklayers-dream-girl-turns-out-to-be-ai-generated/" }
+      # Laurice emailed the article to the instructor Oct 20, with the nypost.com
+      # link (https://nypost.com/2026/10/17/world-news/brazilian-bricklayers-dream-girl-turns-out-to-be-ai-generated/,
+      # HTTP 200 from the editing sandbox that day) and an ad-free PDF copy. The
+      # instructor chose the PDF (Oct 20): saved from the email to Drive, moved
+      # to Fall 2026, shared macalester.edu domain-reader, read back via the
+      # Drive API the same day. Title and date are the page's own.
+      - { text: 'Laurice leads discussion on "Brazilian bricklayer’s dream girl turns out to be AI-generated" (New York Post, Oct 17; PDF, Macalester sign-in)', url: "https://drive.google.com/file/d/1BpK8YBZ4I4YauyoGSM3v0WZrDqL79TlE/view" }
   # Nick Vincent covers training data, labor and authorship with the class
   # (instructor, Sep 17), so his visit closes Foundation Models rather than
   # opening Alignment, and the topic is named on the row so students know what
