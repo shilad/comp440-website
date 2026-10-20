@@ -107,13 +107,13 @@ readings:
   # `form_option` matches the dropdown option added to the form the same day.
   # Oct 19 (instructor): the Plan A discussion and this reflection move from
   # Tue Oct 20 to Thu Oct 22; Oct 20 is the retrieval activity.
-  # Oct 20 (instructor): the form's option keeps its "Oct 20 (Tue)" label,
-  # because some students had already submitted against it. The editing
-  # session renamed it to "Oct 22 (Thu)" by mistake on Oct 20 and renamed it
-  # back the same day at the instructor's ask (read back with get_form).
-  # Reflections filed in between carry the "Oct 22 (Thu)" label.
+  # Oct 20 (instructor): the form's option is renamed to "Oct 22 (Thu)" to match
+  # the due date (read back with get_form). Reflections already filed carry the
+  # old "Oct 20 (Tue) — Larsen et al, AI 2040: Plan A" label, so when they are
+  # processed, merge both labels as one reading (the process-reflections skill
+  # in comp440-main says so).
   - date: 2026-10-22
-    form_option: "Oct 20 (Tue) — Larsen et al, AI 2040: Plan A"
+    form_option: "Oct 22 (Thu) — Larsen et al, AI 2040: Plan A"
     cite: 'Larsen, Dean, Halstead, Lifland, Greenblatt & Kokotajlo, "AI 2040: Plan A" (AI Futures Project)'
     label: article
     url: "https://ai-2040.com/"
