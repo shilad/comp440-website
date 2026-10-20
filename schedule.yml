@@ -107,6 +107,11 @@ readings:
   # `form_option` matches the dropdown option added to the form the same day.
   # Oct 19 (instructor): the Plan A discussion and this reflection move from
   # Tue Oct 20 to Thu Oct 22; Oct 20 is the retrieval activity.
+  # Oct 20 (instructor): the form's option keeps its "Oct 20 (Tue)" label,
+  # because some students had already submitted against it. The editing
+  # session renamed it to "Oct 22 (Thu)" by mistake on Oct 20; its attempt to
+  # rename it back was blocked, so the instructor restores it by hand. Until
+  # then the reflection link's prefill selects nothing.
   - date: 2026-10-22
     form_option: "Oct 20 (Tue) — Larsen et al, AI 2040: Plan A"
     cite: 'Larsen, Dean, Halstead, Lifland, Greenblatt & Kokotajlo, "AI 2040: Plan A" (AI Futures Project)'
@@ -206,10 +211,19 @@ assignments:
   # Oct 13 (instructor, the morning of): the activity moves again, from Oct 13
   # to Tue Oct 20. Oct 13 became HW2 discussion and working time, the final
   # project introduction, and a discussion of "AI 2040: Plan A".
+  #
+  # Oct 20 (instructor): the activity runs in class today and is due Thu Oct 22
+  # at 8:00am, so it now has a `due:`, and it links its public template repo
+  # (built Oct 19; `main` is what students fork). Submitted through the form's
+  # "Activity submission" option, with the activity's name and the repo URL, as
+  # the README says.
   - id: retrieval
-    title: "Activity — Representing and Retrieving Knowledge (done in class)"
+    title: "Activity — Representing and Retrieving Knowledge"
+    label: Representing and Retrieving Knowledge activity due
     kind: activity
     launch: 2026-10-20
+    due: 2026-10-22
+    url: "https://github.com/shilad/comp440-retrieval"
   - id: hw2
     title: HW2 — Whose Preferences Count?
     launch: 2026-10-06
