@@ -474,7 +474,16 @@ meetings:
       - { text: SFT lab, tbd: true }
       - { text: preference-labeling activity, tbd: true }
       - { text: "Class AI agreements — reread alongside HW2", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
-      - { text: Kaif leads discussion on a news article, tbd: true }
+      # Kaif emailed the instructor Oct 21, 10:37pm: a research post from
+      # Emergence AI rather than a news article, plus the company's Season 2
+      # video, and asked that the class look at both. The instructor asked for
+      # them on the site Oct 22. The post returned HTTP 200 from the editing
+      # sandbox that day; its title and date are the page's own. YouTube
+      # rate-limited the sandbox (429), so the video's title and channel come
+      # from YouTube's oEmbed lookup, which returned 200; its upload date was
+      # not checked, so none is given.
+      - { text: 'Kaif leads discussion on "Emergence World: A Laboratory for Evaluating Long-horizon Agent Autonomy" (Emergence AI, May 14)', url: "https://www.emergence.ai/blog/emergence-world-a-laboratory-for-evaluating-long-horizon-agent-autonomy" }
+      - { text: 'For the same discussion: "Emergence World Season 2 - What we discovered" (Emergence AI, YouTube video)', url: "https://www.youtube.com/watch?v=LTtbTEufPGA" }
   - topic: Direct Preference Optimization and model alignment
     materials:
       - { text: DPO lab, tbd: true }
