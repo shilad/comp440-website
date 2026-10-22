@@ -256,6 +256,12 @@ milestones:
 
 other_due:
   - { date: 2026-09-10, label: Beginning-of-semester survey, url: "https://docs.google.com/forms/d/1V2s-wjjvZy4EY8aB25mUfXf2cqgGiPgcbaXVjErRsiM/viewform" }
+  # Oct 22 (instructor): a short form for final project preferences (who to
+  # work with or not), due before the next class. Form id
+  # 13_XYAJuCuFetqZ_1tyKaN8naNWvvco9U7l6hvOxmoFE, "COMP 440 F26: Final Project
+  # Preferences", published and accepting responses; the responder link below
+  # returned HTTP 200 from the editing sandbox on Oct 22.
+  - { date: 2026-10-27, label: Final project preferences form, url: "https://docs.google.com/forms/d/e/1FAIpQLScRl6EbXAKeLSBxyt26rz9_3BESzmODbk67PwSUuBCMdv6weA/viewform" }
 
 # `speaker: true` marks a guest-speaker window. The `speaker_due` block above
 # decides what is placed on it and when — never type a speaker deadline by hand.
