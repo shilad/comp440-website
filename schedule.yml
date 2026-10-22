@@ -434,9 +434,12 @@ meetings:
   # displaced from Oct 20 by the retrieval activity. Oct 19 (instructor): the
   # discussion of "AI 2040: Plan A" moves here from Oct 20, with its reflection.
   # Only a topic moved; no entry was added or removed.
-  - topic: "Transformers and generation; hybrid retrieval and RAG; discussion of AI 2040: Plan A"
+  # Oct 22 (instructor, the morning of): no foundation-model material today.
+  # Transformers, generation, hybrid retrieval and RAG come back in a later
+  # class, not yet chosen, so they leave this row and are on no row for now.
+  # Today is the news discussion, Plan A, and forming final project teams.
+  - topic: "News discussion; AI 2040: Plan A; forming final project teams"
     materials:
-      - { text: foundation-model materials, tbd: true }
       # Laurice emailed the article to the instructor Oct 20, with the nypost.com
       # link (https://nypost.com/2026/10/17/world-news/brazilian-bricklayers-dream-girl-turns-out-to-be-ai-generated/,
       # HTTP 200 from the editing sandbox that day) and an ad-free PDF copy. The
@@ -468,12 +471,17 @@ meetings:
   # when it moved up to Oct 6. Its Part 2 is due the morning of this class
   # (instructor, Oct 6). The project proposal was due the same morning until
   # Oct 13, when it moved to Nov 3.
-  - module: Alignment
-    topic: "Instruction tuning and supervised fine-tuning; preference data, constitutions, and disagreement"
+  # Oct 22 (instructor): the instructor is away this day, so it becomes final
+  # project working time, and Kaif still leads his discussion. The alignment
+  # topics that stood here (instruction tuning and SFT; preference data,
+  # constitutions, and disagreement) move into Nov 3 and Nov 5, which are
+  # reworked around alignment in depth, so the Alignment module now starts
+  # Nov 3. The SFT lab and preference-labeling placeholders and the "reread
+  # alongside HW2" link to the class AI agreements were dropped at his answer
+  # that the row should carry nothing else. HW2 Part 2 is still due this
+  # morning (its date lives on the assignment).
+  - topic: "Final project working time"
     materials:
-      - { text: SFT lab, tbd: true }
-      - { text: preference-labeling activity, tbd: true }
-      - { text: "Class AI agreements — reread alongside HW2", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
       # Kaif emailed the instructor Oct 21, 10:37pm: a research post from
       # Emergence AI rather than a news article, plus the company's Season 2
       # video, and asked that the class look at both. The instructor asked for
@@ -484,15 +492,20 @@ meetings:
       # not checked, so none is given.
       - { text: 'Kaif leads discussion on "Emergence World: A Laboratory for Evaluating Long-horizon Agent Autonomy" (Emergence AI, May 14)', url: "https://www.emergence.ai/blog/emergence-world-a-laboratory-for-evaluating-long-horizon-agent-autonomy" }
       - { text: 'For the same discussion: "Emergence World Season 2 - What we discovered" (Emergence AI, YouTube video)', url: "https://www.youtube.com/watch?v=LTtbTEufPGA" }
-  - topic: Direct Preference Optimization and model alignment
+  # Oct 22 (instructor): Nov 3 and Nov 5 are reworked around AI alignment in
+  # depth, taking in the topics Oct 29 gave up. The split of topics between
+  # the two days follows the old rows; the materials are being redone, so the
+  # DPO lab and blind-evaluation placeholders became one TBD per day.
+  - module: Alignment
+    topic: "AI alignment in depth: instruction tuning, preference data, constitutions, and DPO"
     materials:
-      - { text: DPO lab, tbd: true }
+      - { text: alignment materials, tbd: true }
       - { text: Oscar leads discussion on a news article, tbd: true }
   # Was the sixth speaker window; dropped Sep 15, so this is a full teaching day
   # again and the module's lab meetings no longer collide with a visit.
-  - topic: Blind evaluation and pluralistic alignment
+  - topic: "AI alignment in depth: disagreement, blind evaluation, and pluralistic alignment"
     materials:
-      - { text: blind evaluation, tbd: true }
+      - { text: alignment materials, tbd: true }
       - { text: Claire leads discussion on a news article, tbd: true }
 
   - module: Agents
