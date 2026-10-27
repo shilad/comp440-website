@@ -471,6 +471,12 @@ meetings:
       - { text: "Nick Vincent — personal site", url: "https://nickmvincent.com/" }
       - { text: "Nick Vincent on LinkedIn", url: "https://www.linkedin.com/in/nicholas-vincent-93594a81/" }
       - { text: 'Optional reading: Vincent, "A simple, “one question framework” to promote an attributive view of human-centered AI" (Data Leverage, draft)', url: "https://dataleverage.substack.com/p/76a711cd-7e41-44f0-8449-a2801339f294" }
+      # Oct 27 (instructor): the anonymous survey on the Claude-driven homework and
+      # activities, taken in class today. Google Form 1W-K0Pd6JIkm5QYw5po58EtVdCbzgfB-I0e2tNcYUXrU,
+      # titled "COMP 440 F26: Working With Claude Survey (Anonymous)", published Oct 27.
+      # Its responder link answers with a Google sign-in page (HTTP 401; an unknown
+      # form id gives 404), so it is live and limited to signed-in accounts.
+      - { text: "Working With Claude Survey (anonymous)", url: "https://docs.google.com/forms/d/e/1FAIpQLSfOkrHHZh3MguRRJXHcaChwkr_rnNfPucRaREDAljB6qQwvJQ/viewform" }
 
   # Absorbs "Instruction tuning and supervised fine-tuning", displaced when
   # Oct 27 became a speaker day. HW2 (alignment) launched here until Oct 1,
