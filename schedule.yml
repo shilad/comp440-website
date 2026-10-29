@@ -521,7 +521,16 @@ meetings:
   - topic: "AI alignment in depth: disagreement, blind evaluation, and pluralistic alignment"
     materials:
       - { text: alignment materials, tbd: true }
-      - { text: Claire leads discussion on a news article, tbd: true }
+      # Claire emailed the instructor Oct 28, 1:03pm: a discussion of AI
+      # infrastructure and the spread of US data centers, with three links. She
+      # sent the NYT piece as a plain link; the instructor supplied this gift
+      # link Oct 29. nytimes.com returns 403 from the editing sandbox, so the
+      # link is unverified and no headline is quoted; the date is the one in
+      # the URL. The Esri page (Esri's WhereNext magazine) returned 403 and the
+      # map 429 from the sandbox, so both are unverified too.
+      - { text: "Claire leads discussion on an opinion piece about data centers and US infrastructure (NYT, Sep 15)", url: "https://www.nytimes.com/2026/09/15/opinion/data-centers-americans-infrastructure.html?unlocked_article_code=1.MVE.RaLD.r72C3ow7CX1f&smid=url-share" }
+      - { text: "For the same discussion: AI and data centers (Esri WhereNext)", url: "https://www.esri.com/about/newsroom/publications/wherenext/ai-and-data-centers" }
+      - { text: "For the same discussion: map of US data centers (datacentermap.com)", url: "https://www.datacentermap.com/usa/" }
 
   - module: Agents
     topic: RAG, tools, and agent workflows
