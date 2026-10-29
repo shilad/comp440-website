@@ -515,7 +515,12 @@ meetings:
     topic: "AI alignment in depth: instruction tuning, preference data, constitutions, and DPO"
     materials:
       - { text: alignment materials, tbd: true }
-      - { text: Oscar leads discussion on a news article, tbd: true }
+      # Oscar emailed the article Oct 28, 8:46pm, as a plain link. Business
+      # Insider marks it not free to read, so the instructor supplied this gift
+      # link Oct 29 and confirmed it opens. It returned HTTP 200 from the
+      # editing sandbox that day; the title and date are the page's own
+      # headline and publish date.
+      - { text: 'Oscar leads discussion on "We went inside Amazon''s robot-powered warehouse to see if machines are taking jobs. What we found surprised us." (Business Insider, Oct 28)', url: "https://www.businessinsider.com/amazon-robot-warehouse-where-jobs-changing-ai-robotics-workers-2026-9?gift-id=YJZr2iet4Zw8V6LHBelk7Q" }
   # Was the sixth speaker window; dropped Sep 15, so this is a full teaching day
   # again and the module's lab meetings no longer collide with a visit.
   - topic: "AI alignment in depth: disagreement, blind evaluation, and pluralistic alignment"
