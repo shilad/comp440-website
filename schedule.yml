@@ -233,9 +233,12 @@ assignments:
   # overview. Its /view link returned HTTP 200 without sign-in from the editing
   # sandbox, with that title. Submitted through the form's "Activity
   # submission" option, with the activity's name and the repository URL.
+  # Renamed the same night (instructor): the Doc's heading became "Reimagine
+  # Learning With Claude", and the file, the name students write in the form's
+  # box and these two lines were changed to match.
   - id: reimagine
-    title: "Activity — Reimagining How We Work With Claude"
-    label: Reimagining How We Work With Claude activity due
+    title: "Activity — Reimagine Learning With Claude"
+    label: Reimagine Learning With Claude activity due
     kind: activity
     launch: 2026-11-03
     due: 2026-11-05
