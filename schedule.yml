@@ -511,10 +511,16 @@ meetings:
   # depth, taking in the topics Oct 29 gave up. The split of topics between
   # the two days follows the old rows; the materials are being redone, so the
   # DPO lab and blind-evaluation placeholders became one TBD per day.
-  - module: Alignment
-    topic: "AI alignment in depth: instruction tuning, preference data, constitutions, and DPO"
+  # Nov 2, 10:47pm (instructor): he is on jury duty starting Nov 3, so Nov 3
+  # becomes "Reimagine homework with Claude" and Nov 5 tentatively becomes the
+  # introduction to agents, falling back to working time on FP1 (the proposal,
+  # due Nov 10) if he still has jury duty. Both alignment-in-depth topics and
+  # their "alignment materials" TBDs are off the schedule; where alignment goes
+  # next is his call and was not settled. The Alignment module heading is
+  # gone with them, and the Agents heading moves up from Nov 10 to Nov 5.
+  # Oscar and Claire still lead their discussions, and FP0 is still due Nov 3.
+  - topic: "Reimagine homework with Claude"
     materials:
-      - { text: alignment materials, tbd: true }
       # Oscar emailed the article Oct 28, 8:46pm, as a plain link. Business
       # Insider marks it not free to read, so the instructor supplied this gift
       # link Oct 29 and confirmed it opens. It returned HTTP 200 from the
@@ -523,9 +529,9 @@ meetings:
       - { text: 'Oscar leads discussion on "We went inside Amazon''s robot-powered warehouse to see if machines are taking jobs. What we found surprised us." (Business Insider, Oct 28)', url: "https://www.businessinsider.com/amazon-robot-warehouse-where-jobs-changing-ai-robotics-workers-2026-9?gift-id=YJZr2iet4Zw8V6LHBelk7Q" }
   # Was the sixth speaker window; dropped Sep 15, so this is a full teaching day
   # again and the module's lab meetings no longer collide with a visit.
-  - topic: "AI alignment in depth: disagreement, blind evaluation, and pluralistic alignment"
+  - module: Agents
+    topic: "Introduction to agents (tentative; if Shilad has jury duty, final project working time on FP1, the proposal)"
     materials:
-      - { text: alignment materials, tbd: true }
       # Claire first sent three links on US data centers (Oct 28, posted Oct 29).
       # She changed her topic completely Oct 29, 12:28pm, to militarism and AI,
       # and the instructor said yes; the data-center links were removed. The NPR
@@ -533,8 +539,7 @@ meetings:
       # and date are the page's own headline and publish date.
       - { text: 'Claire leads discussion on "Cloaked in anonymity, Israeli soldiers describe mass civilian killings in ''NAZA''" (NPR, Oct 2)', url: "https://www.npr.org/2026/10/02/nx-s1-5987714/naza-review-israel-palestine" }
 
-  - module: Agents
-    topic: RAG, tools, and agent workflows
+  - topic: RAG, tools, and agent workflows
     materials:
       - { text: agent introduction, tbd: true }
       - { text: Dino leads discussion on a news article, tbd: true }
