@@ -161,6 +161,14 @@ readings:
   - date: 2026-11-24
     cite: 'Cheng, Stapleton, Kawakami et al, "How Child Welfare Workers Reduce Racial Disparities in Algorithmic Decisions" (CHI 2022)'
     url: "https://dl.acm.org/doi/pdf/10.1145/3491102.3501831"
+  # President Rivera's visit. Set Nov 3 (instructor), who gave the PubMed link.
+  # Authors, title, journal and date (May 14, 2025) are the page's own, fetched
+  # Nov 3 (HTTP 200). PubMed marks it a free PMC article, so the full text is
+  # one click from the abstract. She is not an author; it is background for her
+  # talk. No `form_option`: speaker day, so it folds into the speaker questions.
+  - date: 2026-11-12
+    cite: 'Azad, Warman, McGraw & Saria, "Lessons from Henrietta Lacks inform a transparency framework to catalyze generative artificial intelligence in medicine" (npj Digital Medicine, 2025)'
+    url: "https://pubmed.ncbi.nlm.nih.gov/40369180/"
 
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
@@ -562,10 +570,18 @@ meetings:
     materials:
       - { text: agent introduction, tbd: true }
       - { text: Dino leads discussion on a news article, tbd: true }
+  # Nov 3 (instructor): her reading is in `readings:` above, so the "to be set"
+  # material that stood here is gone, and her two pages are added. The
+  # Macalester page returned HTTP 200 on Nov 3, titled "President Suzanne
+  # Rivera". The LinkedIn profile was found by web search: "Suzanne M. Rivera,
+  # Ph.D. - Macalester College", educated at Brown, which matches the BA from
+  # Brown on her Macalester biography. LinkedIn answers scripts with its
+  # bot-block code 999, so the link is unverified beyond that.
   - topic: Guest speaker session
     speaker: President Rivera
     materials:
-      - { text: background reading (to be set with speaker), tbd: true }
+      - { text: "Suzanne Rivera — Macalester president's page", url: "https://www.macalester.edu/president/" }
+      - { text: "Suzanne Rivera on LinkedIn", url: "https://www.linkedin.com/in/suzannemrivera/" }
   - topic: Memory, planning, control, and agent evaluation
     materials:
       - { text: agent evaluation activity, tbd: true }
