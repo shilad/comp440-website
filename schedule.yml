@@ -224,6 +224,22 @@ assignments:
     launch: 2026-10-20
     due: 2026-10-22
     url: "https://github.com/shilad/comp440-retrieval"
+  # Nov 2, late (instructor, who is at jury duty Nov 3): the Nov 3 class is this
+  # activity, in groups of 2 or 3, due 8:00am Thu Nov 5. Students redesign how
+  # a COMP 440 activity uses Claude and prototype it on a clean copy of the
+  # retrieval activity. The brief is a Google Doc in Drive's Fall 2026 folder,
+  # titled "COMP 440 F26 Activity: Reimagining How We Work With Claude", set the
+  # same night to view-only for anyone with the link, like the final project
+  # overview. Its /view link returned HTTP 200 without sign-in from the editing
+  # sandbox, with that title. Submitted through the form's "Activity
+  # submission" option, with the activity's name and the repository URL.
+  - id: reimagine
+    title: "Activity — Reimagining How We Work With Claude"
+    label: Reimagining How We Work With Claude activity due
+    kind: activity
+    launch: 2026-11-03
+    due: 2026-11-05
+    url: "https://docs.google.com/document/d/1saQkXUoMMlH2Gwi_HhV2wXlIhvnfZFtgnBMbRDbTCP0/view"
   - id: hw2
     title: HW2 — Whose Preferences Count?
     launch: 2026-10-06
