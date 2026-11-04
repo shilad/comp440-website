@@ -569,7 +569,13 @@ meetings:
   - topic: RAG, tools, and agent workflows
     materials:
       - { text: agent introduction, tbd: true }
-      - { text: Dino leads discussion on a news article, tbd: true }
+      # Dino emailed the article Nov 4, 11:38am, as a plain nytimes.com link,
+      # and offered a PDF. nytimes.com answers the editing sandbox with 403 and
+      # a web search did not find the piece, so neither the link nor a headline
+      # is verified: the row describes the article, in his words, rather than
+      # quoting a title. The date is the one in the URL. A plain NYT link with
+      # no gift code may be paywalled for some students.
+      - { text: 'Dino leads discussion on an article about AI-generated images in the media and news (New York Times, Oct 21)', url: "https://www.nytimes.com/2026/10/21/insider/trump-ai-videos-photos.html" }
   # Nov 3 (instructor): her reading is in `readings:` above, so the "to be set"
   # material that stood here is gone, and her two pages are added. The
   # Macalester page returned HTTP 200 on Nov 3, titled "President Suzanne
