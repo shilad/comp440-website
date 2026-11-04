@@ -569,7 +569,14 @@ meetings:
   - topic: RAG, tools, and agent workflows
     materials:
       - { text: agent introduction, tbd: true }
-      - { text: Dino leads discussion on a news article, tbd: true }
+      # Dino emailed the article Nov 4, 11:38am, as a plain link: a piece on
+      # AI images in media and news, which he chose to discuss how to stay
+      # alert to AI-generated images. It carries no gift code, so a reader
+      # without NYT access may hit the paywall; he offered a PDF. nytimes.com
+      # is blocked from the editing sandbox, so the link and the headline are
+      # unverified, and the row describes the article rather than titling it,
+      # as on Oct 13. The date is the one in the URL.
+      - { text: "Dino leads discussion on an article about AI-generated images in the news (NYT, Oct 21)", url: "https://www.nytimes.com/2026/10/21/insider/trump-ai-videos-photos.html" }
   # Nov 3 (instructor): her reading is in `readings:` above, so the "to be set"
   # material that stood here is gone, and her two pages are added. The
   # Macalester page returned HTTP 200 on Nov 3, titled "President Suzanne
