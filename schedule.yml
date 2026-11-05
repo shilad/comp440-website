@@ -278,7 +278,10 @@ milestones:
   # groups get feedback on FP0 before they write it. FP0 stays Nov 3. Both are
   # submitted through the form's "Final project submission" option.
   - { date: 2026-11-03, label: "Final project FP0 (Getting Started) due" }
-  - { date: 2026-11-10, label: Final project proposal due }
+  # Nov 4: linked to the FP1 brief, "COMP 440 FP1: Final Project Proposal",
+  # shared anyone-with-link reader; its /view link returned HTTP 200 with that
+  # title without sign-in from the editing sandbox that night.
+  - { date: 2026-11-10, label: Final project proposal due, url: "https://docs.google.com/document/d/1TGKYhGMjE6q3uu1VjHbcODAIgcagxR54gtr2fobpx6s/view" }
   - { date: 2026-11-24, label: Final project update }
   - { date: 2026-12-03, label: Project rehearsal }
   - { date: 2026-12-08, label: Final presentation materials }
