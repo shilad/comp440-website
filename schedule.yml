@@ -564,6 +564,14 @@ meetings:
   - module: Agents
     topic: Introduction to agents
     materials:
+      # Nov 4 (instructor: "share and link everything"). The Agents deck is
+      # shared anyone-with-link reader; its /view link returned HTTP 200 with
+      # the title "2026 - COMP 440 Agents" without sign-in that night. The group
+      # slides deck is macalester.edu can-edit (students write on it in class),
+      # so it answers 401 without sign-in, as intended; hence /edit and the
+      # sign-in note, as on the SVD and TF-IDF rows.
+      - { text: "Agents slides", url: "https://docs.google.com/presentation/d/1qH7Sibyq5jN3CfW894bP09RV0e9-1xgD2SMYEFhhObI/view" }
+      - { text: "Group slides for the design activity (editable; Macalester sign-in)", url: "https://docs.google.com/presentation/d/1KrCr5scODxE7ws9DoBzUJfdPvyD1JpVaTppHw1sWp1I/edit" }
       # Claire first sent three links on US data centers (Oct 28, posted Oct 29).
       # She changed her topic completely Oct 29, 12:28pm, to militarism and AI,
       # and the instructor said yes; the data-center links were removed. The NPR
