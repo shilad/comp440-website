@@ -556,8 +556,10 @@ meetings:
       - { text: 'Oscar leads discussion on "We went inside Amazon''s robot-powered warehouse to see if machines are taking jobs. What we found surprised us." (Business Insider, Oct 28)', url: "https://www.businessinsider.com/amazon-robot-warehouse-where-jobs-changing-ai-robotics-workers-2026-9?gift-id=YJZr2iet4Zw8V6LHBelk7Q" }
   # Was the sixth speaker window; dropped Sep 15, so this is a full teaching day
   # again and the module's lab meetings no longer collide with a visit.
+  # Nov 4 (instructor): jury duty is done, so the class is on and the FP1
+  # working-time fallback is dropped.
   - module: Agents
-    topic: "Introduction to agents (tentative; if Shilad has jury duty, final project working time on FP1, the proposal)"
+    topic: Introduction to agents
     materials:
       # Claire first sent three links on US data centers (Oct 28, posted Oct 29).
       # She changed her topic completely Oct 29, 12:28pm, to militarism and AI,
