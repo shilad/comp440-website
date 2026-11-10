@@ -588,6 +588,11 @@ meetings:
   - topic: RAG, tools, and agent workflows
     materials:
       - { text: agent introduction, tbd: true }
+      # Nov 10 (instructor: "link them for today"). The group slides deck, renamed
+      # that day to "2026 - COMP 440 Agents Group Slides" (same file as the Nov 5
+      # link), now opens on the memory activity; the anchor is its instructions
+      # slide. macalester.edu can-edit, so 401 without sign-in, as intended.
+      - { text: "Group slides for the memory activity (editable; Macalester sign-in)", url: "https://docs.google.com/presentation/d/1KrCr5scODxE7ws9DoBzUJfdPvyD1JpVaTppHw1sWp1I/edit#slide=id.mem_intro" }
       # Dino emailed the article Nov 4, 11:38am, as a plain nytimes.com link,
       # and offered a PDF. nytimes.com answers the editing sandbox with 403 and
       # a web search did not find the piece, so neither the link nor a headline
