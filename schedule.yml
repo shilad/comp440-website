@@ -262,10 +262,16 @@ assignments:
           url: "https://github.com/shilad/comp440-hw2/blob/main/instructions/part1.md" }
       - { label: HW2 Part 2 due, due: 2026-10-29,
           url: "https://github.com/shilad/comp440-hw2/blob/main/instructions/part2.md" }
+  # Nov 10 (instructor, launch day): HW3 is "Checking Claims Against Wikipedia",
+  # the title in its own README. It lives in the public repository
+  # shilad/comp440-hw3 (students fork `main`), and everything in it is due
+  # 8:00am Tue Nov 24 (was Thu Nov 19), as the README says. The repository
+  # page returned HTTP 200 without sign-in the same morning.
   - id: hw3
-    title: HW3 — Building and Evaluating an Agent
+    title: HW3 — Checking Claims Against Wikipedia
     launch: 2026-11-10
-    due: 2026-11-19
+    due: 2026-11-24
+    url: "https://github.com/shilad/comp440-hw3"
 
 milestones:
   - { date: 2026-10-13, label: Final project introduced }
