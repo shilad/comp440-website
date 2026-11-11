@@ -265,11 +265,13 @@ assignments:
   # Nov 10 (instructor): HW3 is "Checking Claims Against Wikipedia", the title
   # in its own README, and everything in it is due 8:00am Tue Nov 24 (was Thu
   # Nov 19). The link to its repository was on this entry for part of the
-  # morning and was taken off again the same morning at the instructor's ask:
-  # he releases the homework himself that evening. When he does, the entry
-  # gets its `url:` line back.
+  # morning and was taken off again the same morning at the instructor's ask.
+  # Nov 11 (instructor, 12:34am: "release the homework when you are done"):
+  # the link is back, after his edits to the homework's outline were merged
+  # and checked.
   - id: hw3
     title: HW3 — Checking Claims Against Wikipedia
+    url: "https://github.com/shilad/comp440-hw3"
     launch: 2026-11-10
     due: 2026-11-24
 
