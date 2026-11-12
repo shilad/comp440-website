@@ -3,7 +3,7 @@
 # the feed's mix of UTC, TZID and all-day stamps. Recurring events are expanded here,
 # so each line below is one real occurrence.
 source: "https://calendar.google.com/calendar/ical/macalester.edu_k7f54d0aeqnpvqb3kjl5kvnuvg%40group.calendar.google.com/public/basic.ics"
-fetched: 2026-11-03
+fetched: 2026-11-12
 term: [2026-09-08, 2026-12-10]
 
 # Shown on the site, in the MSCS events rail.
@@ -33,14 +33,14 @@ events:
   - { date: 2026-10-08, time: "3:30pm", title: "Computer Science Tea", location: "OLRI 258", kind: other }
   - { date: 2026-10-08, time: "3:30pm", title: "Computer Science Tea", location: "OLRI 258", kind: other }
   - { date: 2026-10-13, time: "5:00pm", title: "MSCS SAB Game Night", location: "OLRI 258", kind: social }
-  - { date: 2026-10-21, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
   - { date: 2026-10-21, time: "3:30pm", title: "MSCS Seminar Speaker: Michael Pearce - WHAT DO VOTERS REALLY WANT?", kind: talk }
+  - { date: 2026-10-21, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
   - { date: 2026-10-22, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-10-22, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
   - { date: 2026-10-27, time: "11:00am", title: "Macalester Major Fair", kind: other }
   - { date: 2026-10-28, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
-  - { date: 2026-10-29, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-10-29, title: "No Coffee Break", kind: cancelled }
+  - { date: 2026-10-29, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-10-29, time: "3:30pm", title: "Computer Science Tea", location: "OLRI 258", kind: other }
   - { date: 2026-11-02, time: "4:40pm", title: "MSCS Seminar Speaker: Priscilla Jimenez", kind: talk }
   - { date: 2026-11-04, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
@@ -50,14 +50,16 @@ events:
   - { date: 2026-11-07, title: "NCNA Programming Contest", kind: career }
   - { date: 2026-11-09, time: "4:40pm", title: "Hutchinson & Wagon square-wheel bike student reception", kind: social }
   - { date: 2026-11-10, time: "4:40pm", title: "MSCS & Society talk - Stan Wagon", kind: talk }
+  - { date: 2026-11-11, time: "3:30pm", title: "MSCS Seminar Varsha Koushik: Customization: An Integral Design Construct", kind: talk }
   - { date: 2026-11-11, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
+  - { date: 2026-11-12, title: "No Coffee Break", kind: cancelled }
   - { date: 2026-11-12, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
-  - { date: 2026-11-12, time: "11:15am", title: "MSCS Coffee Break", location: "Smail Gallery", kind: social }
   - { date: 2026-11-14, title: "Heuer Math Competition", kind: other }
   - { date: 2026-11-16, time: "4:40pm", title: "MSCS SAB Student Lightning Talks", location: "OLRI 254", kind: other }
+  - { date: 2026-11-17, time: "5:00pm", title: "MSCS SAB Game Night", location: "OLRI 258", kind: social }
   - { date: 2026-11-18, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
-  - { date: 2026-11-19, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-11-19, title: "No Coffee Break", kind: cancelled }
+  - { date: 2026-11-19, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-11-19, time: "3:30pm", title: "Computer Science Tea", kind: other }
   - { date: 2026-11-26, title: "Math Problem of the Week (attached) due by 5pm", kind: other }
   - { date: 2026-12-02, time: "3:30pm", title: "Math Problem Solving", location: "OLRI 245", kind: other }
@@ -93,6 +95,7 @@ skipped:
   - { date: 2026-11-05, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-11-05, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-11-11, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-11-12, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-11-12, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-11-18, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-11-19, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
@@ -100,13 +103,13 @@ skipped:
   - { date: 2026-11-25, title: "RStudio Drop In Hours - Ryan", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-11-26, title: "MSCS Coffee Break", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-11-26, title: "RStudio Drop In Hours - Ryan", reason: "EXDATE — this instance was cancelled" }
-  - { date: 2026-12-02, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
-  - { date: 2026-12-03, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
+  - { date: 2026-12-02, title: "RStudio Drop In Hours - Ryan", reason: "EXDATE — this instance was cancelled" }
+  - { date: 2026-12-03, title: "RStudio Drop In Hours - Ryan", reason: "EXDATE — this instance was cancelled" }
   - { date: 2026-12-09, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-12-10, title: "RStudio Drop In Hours - Ryan", reason: "weekly tutoring hours, not a department event (instructor, Sep 13). 22 occurrences would more than double the rail and bury the talks it exists to surface." }
   - { date: 2026-12-14, title: "MSCS Fall Capstone Day", reason: "outside the term" }
   - { date: 2026-12-15, title: "Sophomore MSCS major donut prize", reason: "outside the term" }
   - { date: 2026-12-17, title: "No Coffee Break", reason: "outside the term" }
 
-# 812 further events in the feed fall more than 45 days outside the term
+# 813 further events in the feed fall more than 45 days outside the term
 # and are not listed individually.
