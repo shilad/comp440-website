@@ -617,14 +617,26 @@ meetings:
   - topic: Memory, planning, control, and agent evaluation
     materials:
       - { text: agent evaluation activity, tbd: true }
-      - { text: Colin leads discussion on a news article, tbd: true }
+      # Colin emailed the article Wed Nov 11, 8:29pm, as this link. It returned
+      # HTTP 200 from the editing sandbox on Nov 12 and the full text showed in
+      # a browser with no sign-in. The title and date are the page's own
+      # headline and publish date; the page credits The Cool Down as the
+      # source and Yahoo Tech as the publisher.
+      - { text: 'Colin leads discussion on "AI teacher throws tantrum after being corrected on spelling of ''seventeen''" (The Cool Down via Yahoo Tech, Nov 7)', url: "https://tech.yahoo.com/ai/deals/articles/ai-teacher-throws-tantrum-being-120700038.html" }
   # Absorbs "Agents in work and organizations", displaced when the module's
   # speaker day moved from Nov 19 to Nov 12.
   - topic: Human–AI collaboration, delegation, and agents in organizations
     materials:
       - { text: comparative experiment, tbd: true }
       - { text: organizational case, tbd: true }
-      - { text: Owen leads discussion on a news article, tbd: true }
+      # Owen emailed the article Wed Nov 11, 2:25pm, as this link, and the
+      # instructor approved it that evening. It returned HTTP 200 from the
+      # editing sandbox on Nov 12 and the full text showed in a browser with no
+      # sign-in. The page marks itself as not free to read and carries a hidden
+      # "complete the form to unlock this article" block, so a reader may be
+      # asked to register after some number of views. The title and date are
+      # the page's own headline and publish date.
+      - { text: 'Owen leads discussion on "New York Launches AI Safety Center Ahead of RAISE Act Deadline" (PYMNTS, Nov 11)', url: "https://www.pymnts.com/news/artificial-intelligence/2026/new-york-launches-ai-safety-center-ahead-of-raise-act-deadline/" }
 
   - module: Collective Systems
     topic: Guest speaker session
