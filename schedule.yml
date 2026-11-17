@@ -663,8 +663,21 @@ meetings:
       - { text: 'Colin leads discussion on "AI teacher throws tantrum after being corrected on spelling of ''seventeen''" (The Cool Down via Yahoo Tech, Nov 7)', url: "https://tech.yahoo.com/ai/deals/articles/ai-teacher-throws-tantrum-being-120700038.html" }
   # Absorbs "Agents in work and organizations", displaced when the module's
   # speaker day moved from Nov 19 to Nov 12.
-  - topic: Human–AI collaboration, delegation, and agents in organizations
+  # Nov 17 (instructor): the first 30 minutes are a visit to Professor Lesley
+  # Lavery's political polarization class, for a student-led discussion on AI
+  # and workers' rights. The time, the room (HUM 214) and the format are from
+  # the organizing student's emails of Nov 12 and Nov 16. He asked for the room
+  # to be on the schedule itself, so it is in the topic, which is not clipped
+  # the way a material's title is. No student in that class is named here or in
+  # the Doc. The Doc was created Nov 17 in Drive's Fall 2026 folder, id
+  # 11pwryWVeGgyFpwbaI09-frgEi3ySbzlA638LC-jnvZI, shared view-only to anyone
+  # with the link; its /view URL returned HTTP 200 with no sign-in from the
+  # editing sandbox that day. Of the seven articles it lists, five returned
+  # HTTP 200 with the listed headline; civilrights.org and washingtontimes.com
+  # answered the sandbox with 403, so those two are unverified.
+  - topic: "First 30 minutes (1:20 to 1:50pm) in HUM 214: joint discussion on AI and workers' rights with Professor Lavery's political polarization class. Then in OLRI 241: Human–AI collaboration, delegation, and agents in organizations"
     materials:
+      - { text: "Details and optional readings for the joint discussion", url: "https://docs.google.com/document/d/11pwryWVeGgyFpwbaI09-frgEi3ySbzlA638LC-jnvZI/view" }
       - { text: comparative experiment, tbd: true }
       - { text: organizational case, tbd: true }
       # Owen's news discussion stood here until Nov 17, when the instructor
