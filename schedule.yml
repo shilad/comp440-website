@@ -290,7 +290,13 @@ milestones:
   # shared anyone-with-link reader; its /view link returned HTTP 200 with that
   # title without sign-in from the editing sandbox that night.
   - { date: 2026-11-10, label: Final project proposal due, url: "https://docs.google.com/document/d/1TGKYhGMjE6q3uu1VjHbcODAIgcagxR54gtr2fobpx6s/view" }
-  - { date: 2026-11-24, label: Final project update }
+  # Nov 17 (instructor): FP2, the five-minute check-in presentations, goes on
+  # Tue Dec 1, in class. It replaces "Final project update", which stood on
+  # Nov 24, Logan Stapleton's visit, where there was no class time for it. The
+  # link is the project overview Doc, whose FP2 section lists what to cover;
+  # its /view link returned HTTP 200 with that title without sign-in from the
+  # editing sandbox on Nov 17. There is no separate FP2 brief this term.
+  - { date: 2026-12-01, label: "Final project FP2: five-minute check-ins, in class", url: "https://docs.google.com/document/d/193339YYYhrbhcZIdwtxXuBO5Do5ftGiF-zO9h4hQUb0/view" }
   - { date: 2026-12-03, label: Project rehearsal }
   - { date: 2026-12-08, label: Final presentation materials }
   - { date: 2026-12-10, label: Final presentation materials }
@@ -650,7 +656,9 @@ meetings:
   # so the row is honest about being undecided rather than pretending to carry
   # all three. Social networks was displaced by Logan's move (instructor,
   # Sep 17: "that part of the semester is pretty tba").
-  - topic: "Options: diffusion, feedback, and agent-based simulation · social networks and multi-agent systems · governance, law, and institutions"
+  # Nov 17 (instructor): the final project check-ins (FP2) open this class.
+  # What fills the rest is still undecided, so the options stay as they were.
+  - topic: "Final project check-ins (FP2); options for the rest: diffusion, feedback, and agent-based simulation · social networks and multi-agent systems · governance, law, and institutions"
     materials:
       - { text: in-class simulation activity, tbd: true }
       - { text: network analysis activity, tbd: true }
