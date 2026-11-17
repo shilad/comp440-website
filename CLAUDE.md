@@ -45,6 +45,9 @@ the build assigns dates to the `meetings` list in order.
 - **Insert a session** — add an entry, push `last` out by one meeting.
 - **Reorder topics** — move entries; dates follow position.
 - **Move a deadline** — change `due:` on the assignment. Declared once, in one place.
+- **A deadline in finals week** — add `finals: true` to the milestone. Its date is checked against
+  `calendar.finals` (the college's final examination period, from the registrar's calendar) and it
+  is shown on the last meeting with its own day. Without the flag a date after `last` fails.
 - **Add a speaker** — `speaker: true` for an unnamed window, or `speaker: Their Name`.
   "Speaker questions due" is placed automatically per the `speaker_questions` policy.
   Never enter it by hand.

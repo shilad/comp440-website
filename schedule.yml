@@ -35,6 +35,13 @@ calendar:
   days: [Tue, Thu]
   first: 2026-09-08
   last: 2026-12-10
+  # Macalester's final examination period, from the registrar's academic
+  # calendar (https://www.macalester.edu/registrar/academiccalendars/, read
+  # Nov 17: classes end Mon Dec 14, study day Tue Dec 15, finals Wed Dec 16 to
+  # Sat Dec 19). The course has no final exam meeting. This is here so that a
+  # deadline in finals week, marked `finals: true`, is checked like every other
+  # date instead of being typed into a label.
+  finals: { first: 2026-12-16, last: 2026-12-19 }
   # ONE deadline for everything: homework, project milestones, reading
   # reflections, speaker questions, forms. Stated here, rendered in the Due
   # column heading, and never repeated on a row. If some future item ever needs
@@ -296,10 +303,18 @@ milestones:
   # link is the project overview Doc, whose FP2 section lists what to cover;
   # its /view link returned HTTP 200 with that title without sign-in from the
   # editing sandbox on Nov 17. There is no separate FP2 brief this term.
-  - { date: 2026-12-01, label: "Final project FP2: five-minute check-ins, in class", url: "https://docs.google.com/document/d/193339YYYhrbhcZIdwtxXuBO5Do5ftGiF-zO9h4hQUb0/view" }
+  # Nov 17 (instructor), later the same day: the check-ins are 5 to 10 minutes
+  # a group and are what Dec 1 is. The overview Doc still said "5 minute limit
+  # (strict!)" when read on Nov 16; changing the Doc is the instructor's call.
+  - { date: 2026-12-01, label: "Final project FP2: 5 to 10 minute check-ins, in class", url: "https://docs.google.com/document/d/193339YYYhrbhcZIdwtxXuBO5Do5ftGiF-zO9h4hQUb0/view" }
   - { date: 2026-12-03, label: Project rehearsal }
-  - { date: 2026-12-08, label: Final presentation materials }
+  # Nov 17 (instructor): all presentations are on Thu Dec 10, so Dec 8 no
+  # longer carries presentation materials. FP4, the supplemental materials
+  # (code or report), is due the last day of finals, Sat Dec 19. It follows the
+  # one 8:00am deadline like everything else. `finals: true` checks the date
+  # against calendar.finals and shows it on the last meeting with its own day.
   - { date: 2026-12-10, label: Final presentation materials }
+  - { date: 2026-12-19, label: "Final project FP4 (supplemental materials) due", finals: true, url: "https://docs.google.com/document/d/193339YYYhrbhcZIdwtxXuBO5Do5ftGiF-zO9h4hQUb0/view" }
 
 other_due:
   - { date: 2026-09-10, label: Beginning-of-semester survey, url: "https://docs.google.com/forms/d/1V2s-wjjvZy4EY8aB25mUfXf2cqgGiPgcbaXVjErRsiM/viewform" }
@@ -665,20 +680,25 @@ meetings:
   # all three. Social networks was displaced by Logan's move (instructor,
   # Sep 17: "that part of the semester is pretty tba").
   # Nov 17 (instructor): the final project check-ins (FP2) open this class.
-  # What fills the rest is still undecided, so the options stay as they were.
-  - topic: "Final project check-ins (FP2); options for the rest: diffusion, feedback, and agent-based simulation · social networks and multi-agent systems · governance, law, and institutions"
-    materials:
-      - { text: in-class simulation activity, tbd: true }
-      - { text: network analysis activity, tbd: true }
-      - { text: governance reading, tbd: true }
+  # Later the same day: the check-ins are 5 to 10 minutes a group and are the
+  # whole day. The three options that stood here (diffusion, feedback, and
+  # agent-based simulation · social networks and multi-agent systems ·
+  # governance, law, and institutions) and their three TBD materials are off
+  # the schedule; no other teaching day in this module is left to carry them.
+  - topic: "Final project check-ins (FP2): 5 to 10 minutes per group"
   - topic: Guest speaker session
     speaker: Yuren (Rock) Pang
     materials:
       - { text: background reading (to be set with speaker), tbd: true }
 
+  # Nov 17 (instructor): Dec 8 is a project work day with the course
+  # evaluation and the wrap-up; all presentations are on Dec 10. Until then
+  # the two days were "Final presentations, day 1" and "day 2; course
+  # synthesis". The two rereads belonged to the synthesis, so they moved to
+  # Dec 8 with it.
   - module: Synthesis
-    topic: Final presentations, day 1
-  - topic: Final presentations, day 2; course synthesis
+    topic: Final project working time; course evaluation; course wrap-up
     materials:
       - { text: "Class AI agreements — final reread", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
       - { text: "Day 1 shared doc — final reread", tbd: true }
+  - topic: Final project presentations (FP3)

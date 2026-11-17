@@ -72,8 +72,35 @@ def build() -> str:
     by_date = {r["date"]: r for r in rows}
 
     def place(date, label, kind, url=None, time=None, links=None, note=None,
-              off_grid=False):
+              off_grid=False, finals=False):
         row, day = by_date.get(date), None
+        # A deadline in finals week falls after the last meeting, so it can be
+        # neither a class meeting nor `off_grid` (instructor, Nov 17: FP4 is due
+        # the last day of finals). It says `finals: true` and is checked against
+        # `calendar.finals`, the college's final examination period, declared
+        # once. It is shown on the last meeting with its own day.
+        if finals:
+            period = cal.get("finals") or {}
+            first, last = period.get("first"), period.get("last")
+            if not (first and last):
+                fail(f"{label}: `finals: true` needs calendar.finals "
+                     f"with `first` and `last`.")
+                return
+            if not (cal["last"] < first <= last):
+                fail(f"calendar.finals ({first} to {last}) must come after the "
+                     f"last meeting ({cal['last']}), first before last.")
+                return
+            if not (first <= date <= last):
+                fail(f"{label}: {date} is outside the finals period "
+                     f"({first} to {last}).")
+                return
+            if off_grid:
+                fail(f"{label}: give `finals` or `off_grid`, not both.")
+                return
+            row, day = rows[-1], date.strftime("%a, %b %-d")
+            if row["is_break"]:
+                fail(f"{label}: the last meeting is {row['topic']}.")
+                return
         # A deadline on a day the class does not meet must say `off_grid: true`,
         # so a mistyped date still fails (instructor, Oct 6: HW2 Part 1 is due
         # Wed Oct 14, before Fall Break). It is still checked against the grid: a
@@ -193,7 +220,8 @@ def build() -> str:
               note=r.get("note"))
 
     for m in data.get("milestones", []):
-        place(m["date"], m["label"], "project", m.get("url"), time=cal["due_time"])
+        place(m["date"], m["label"], "project", m.get("url"), time=cal["due_time"],
+              finals=m.get("finals", False))
     for o in data.get("other_due", []):
         place(o["date"], o["label"], "other", o.get("url"), time=cal["due_time"])
 
