@@ -313,8 +313,13 @@ milestones:
   # (code or report), is due the last day of finals, Sat Dec 19. It follows the
   # one 8:00am deadline like everything else. `finals: true` checks the date
   # against calendar.finals and shows it on the last meeting with its own day.
+  # Later on Nov 17 (instructor): FP4 links the FP3 / FP4 brief instead of the
+  # overview Doc. The brief is the past-term Doc updated in place that day,
+  # "Comp 440 F26 - Final Project FP3 / FP4", shared anyone-with-link reader;
+  # its /view link returned HTTP 200 with that title without sign-in from the
+  # editing sandbox.
   - { date: 2026-12-10, label: Final presentation materials }
-  - { date: 2026-12-19, label: "Final project FP4 (supplemental materials) due", finals: true, url: "https://docs.google.com/document/d/193339YYYhrbhcZIdwtxXuBO5Do5ftGiF-zO9h4hQUb0/view" }
+  - { date: 2026-12-19, label: "Final project FP4 (supplemental materials) due", finals: true, url: "https://docs.google.com/document/d/1Dv9oyLbX_pzdlPI0wZW_6PRT7wUZNs4acDxUnRdpUm0/view" }
 
 other_due:
   - { date: 2026-09-10, label: Beginning-of-semester survey, url: "https://docs.google.com/forms/d/1V2s-wjjvZy4EY8aB25mUfXf2cqgGiPgcbaXVjErRsiM/viewform" }
@@ -702,3 +707,7 @@ meetings:
       - { text: "Class AI agreements — final reread", url: "https://docs.google.com/document/d/1JhAzzTbECGEE5IdOwabVJUh36YZ5DD6ozG_cvodqc9s/edit" }
       - { text: "Day 1 shared doc — final reread", tbd: true }
   - topic: Final project presentations (FP3)
+    materials:
+      # The same FP3 / FP4 brief the FP4 deadline links (verified Nov 17, see
+      # `milestones:`). It gives the talk limit: 15 minutes plus 5 for questions.
+      - { text: "Final project FP3 / FP4 brief: presentation and supplemental materials", url: "https://docs.google.com/document/d/1Dv9oyLbX_pzdlPI0wZW_6PRT7wUZNs4acDxUnRdpUm0/view" }
