@@ -663,14 +663,8 @@ meetings:
     materials:
       - { text: comparative experiment, tbd: true }
       - { text: organizational case, tbd: true }
-      # Owen emailed the article Wed Nov 11, 2:25pm, as this link, and the
-      # instructor approved it that evening. It returned HTTP 200 from the
-      # editing sandbox on Nov 12 and the full text showed in a browser with no
-      # sign-in. The page marks itself as not free to read and carries a hidden
-      # "complete the form to unlock this article" block, so a reader may be
-      # asked to register after some number of views. The title and date are
-      # the page's own headline and publish date.
-      - { text: 'Owen leads discussion on "New York Launches AI Safety Center Ahead of RAISE Act Deadline" (PYMNTS, Nov 11)', url: "https://www.pymnts.com/news/artificial-intelligence/2026/new-york-launches-ai-safety-center-ahead-of-raise-act-deadline/" }
+      # Owen's news discussion stood here until Nov 17, when the instructor
+      # moved it to Tue Dec 1.
 
   - module: Collective Systems
     topic: Guest speaker session
@@ -691,6 +685,16 @@ meetings:
   # governance, law, and institutions) and their three TBD materials are off
   # the schedule; no other teaching day in this module is left to carry them.
   - topic: "Final project check-ins (FP2): 5 to 10 minutes per group"
+    materials:
+      # Moved here from Thu Nov 19 (instructor, Nov 17).
+      # Owen emailed the article Wed Nov 11, 2:25pm, as this link, and the
+      # instructor approved it that evening. It returned HTTP 200 from the
+      # editing sandbox on Nov 12 and the full text showed in a browser with no
+      # sign-in. The page marks itself as not free to read and carries a hidden
+      # "complete the form to unlock this article" block, so a reader may be
+      # asked to register after some number of views. The title and date are
+      # the page's own headline and publish date.
+      - { text: 'Owen leads discussion on "New York Launches AI Safety Center Ahead of RAISE Act Deadline" (PYMNTS, Nov 11)', url: "https://www.pymnts.com/news/artificial-intelligence/2026/new-york-launches-ai-safety-center-ahead-of-raise-act-deadline/" }
   - topic: Guest speaker session
     speaker: Yuren (Rock) Pang
     materials:
