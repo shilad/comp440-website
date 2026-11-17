@@ -318,7 +318,11 @@ milestones:
   # "Comp 440 F26 - Final Project FP3 / FP4", shared anyone-with-link reader;
   # its /view link returned HTTP 200 with that title without sign-in from the
   # editing sandbox.
-  - { date: 2026-12-10, label: Final presentation materials }
+  # Later on Nov 17 (instructor): what FP3 hands in is a link to the slides,
+  # so the entry says that; it read "Final presentation materials" until then.
+  # Same day and 8:00am deadline as before. It links the FP3 / FP4 brief, which
+  # says how to submit.
+  - { date: 2026-12-10, label: "Final project FP3: link to slides due", url: "https://docs.google.com/document/d/1Dv9oyLbX_pzdlPI0wZW_6PRT7wUZNs4acDxUnRdpUm0/view" }
   - { date: 2026-12-19, label: "Final project FP4 (supplemental materials) due", finals: true, url: "https://docs.google.com/document/d/1Dv9oyLbX_pzdlPI0wZW_6PRT7wUZNs4acDxUnRdpUm0/view" }
 
 other_due:
