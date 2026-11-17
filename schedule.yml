@@ -176,6 +176,24 @@ readings:
   - date: 2026-11-12
     cite: 'Azad, Warman, McGraw & Saria, "Lessons from Henrietta Lacks inform a transparency framework to catalyze generative artificial intelligence in medicine" (npj Digital Medicine, 2025)'
     url: "https://pubmed.ncbi.nlm.nih.gov/40369180/"
+  # Nov 17 (instructor): "read two" from the list of seven articles that the
+  # political polarization class is reading for the Nov 19 joint discussion,
+  # and one reflection on them. The list is in the session's Google Doc, which
+  # is the link here; the anchor is reused by the Nov 19 row's material so the
+  # URL is written once. The Doc tells students to name the two articles they
+  # chose at the start of their first answer. Not a speaker day, so it has a
+  # `form_option`. This session had no Forms tool, so the matching dropdown
+  # option was handed to the instructor to add by hand; until it is on the
+  # form, the Submit link opens the reading-reflection section with no Nov 19
+  # option selected.
+  - date: 2026-11-19
+    form_option: "Nov 19 (Thu) — Two articles on AI and workers' rights (your choice from the list)"
+    cite: 'two articles of your choice from the list on AI and workers'' rights'
+    label: article list
+    url: &nov19doc "https://docs.google.com/document/d/11pwryWVeGgyFpwbaI09-frgEi3ySbzlA638LC-jnvZI/view"
+    note: >-
+      One reflection covers both articles. Name the two you read at the start
+      of your first answer.
 
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
@@ -675,9 +693,12 @@ meetings:
   # editing sandbox that day. Of the seven articles it lists, five returned
   # HTTP 200 with the listed headline; civilrights.org and washingtontimes.com
   # answered the sandbox with 403, so those two are unverified.
+  # Later on Nov 17 (instructor): two of the articles are now assigned, with a
+  # reflection, so the reading is in `readings:` above and this material is
+  # only the session's details. Its URL is the `&nov19doc` anchor set there.
   - topic: "First 30 minutes (1:20 to 1:50pm) in HUM 214: joint discussion on AI and workers' rights with Professor Lavery's political polarization class. Then in OLRI 241: Human–AI collaboration, delegation, and agents in organizations"
     materials:
-      - { text: "Details and optional readings for the joint discussion", url: "https://docs.google.com/document/d/11pwryWVeGgyFpwbaI09-frgEi3ySbzlA638LC-jnvZI/view" }
+      - { text: "Joint discussion: time, room and format", url: *nov19doc }
       - { text: comparative experiment, tbd: true }
       - { text: organizational case, tbd: true }
       # Owen's news discussion stood here until Nov 17, when the instructor
