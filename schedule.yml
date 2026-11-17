@@ -620,9 +620,17 @@ meetings:
     materials:
       - { text: "Suzanne Rivera — Macalester president's page", url: "https://www.macalester.edu/president/" }
       - { text: "Suzanne Rivera on LinkedIn", url: "https://www.linkedin.com/in/suzannemrivera/" }
-  - topic: Memory, planning, control, and agent evaluation
+  # Nov 16, late (instructor: "We are only doing Colin and agent eval as a
+  # topic"): the topic was "Memory, planning, control, and agent evaluation".
+  # The activity is the public repo shilad/comp440-agent-eval; its README
+  # title is "COMP 440 Activity: Evaluating Support Agents with a Rubric".
+  # That night the README was on the branch claude/nifty-heisenberg-8r5h9m and
+  # main still held a one-line README. github.com answers the editing sandbox
+  # with 403, so the page itself is unverified; `git ls-remote` and
+  # raw.githubusercontent.com both reached the repo without credentials.
+  - topic: Evaluating agents
     materials:
-      - { text: agent evaluation activity, tbd: true }
+      - { text: "Activity: evaluating support agents with a rubric (GitHub)", url: "https://github.com/shilad/comp440-agent-eval" }
       # Colin emailed the article Wed Nov 11, 8:29pm, as this link. It returned
       # HTTP 200 from the editing sandbox on Nov 12 and the full text showed in
       # a browser with no sign-in. The title and date are the page's own
