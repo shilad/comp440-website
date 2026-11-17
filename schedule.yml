@@ -696,7 +696,13 @@ meetings:
   # Later on Nov 17 (instructor): two of the articles are now assigned, with a
   # reflection, so the reading is in `readings:` above and this material is
   # only the session's details. Its URL is the `&nov19doc` anchor set there.
-  - topic: "First 30 minutes (1:20 to 1:50pm) in HUM 214: joint discussion on AI and workers' rights with Professor Lavery's political polarization class. Then in OLRI 241: Human–AI collaboration, delegation, and agents in organizations"
+  # Still later on Nov 17 (instructor: "All bold and large font. fix it."): the
+  # visit and the room had been written into the topic, which made the Class
+  # cell six lines of the topic's larger type. The topic is back to what it
+  # was, and the visit and the room are the meeting's `note`, which build.py
+  # renders under the topic at the size of a material.
+  - topic: Human–AI collaboration, delegation, and agents in organizations
+    note: "First 30 minutes (1:20 to 1:50pm) in HUM 214: joint discussion on AI and workers' rights with Professor Lavery's political polarization class. The rest of class is in OLRI 241."
     materials:
       - { text: "Joint discussion: time, room and format", url: *nov19doc }
       - { text: comparative experiment, tbd: true }

@@ -66,6 +66,8 @@ def build() -> str:
                 "speaker_name": (entry["speaker"]
                                  if isinstance(entry.get("speaker"), str) else None),
                 "materials": entry.get("materials", []) or [],
+                # A one-off fact about this meeting, such as a room change.
+                "note": entry.get("note"),
                 "due": [],
             }
         )
@@ -574,10 +576,15 @@ def render(course, cal, rows) -> str:
             who = (f'Guest speaker: {e(row["speaker_name"])}' if row["speaker_name"]
                    else "Guest speaker window")
             speaker = f'<span class="spk">{who}</span>'
+        # A meeting's `note` is a one-off fact about that day, such as a room
+        # change (instructor, Nov 17). It sits under the topic in the smaller
+        # text the materials use: written into the topic itself, a sentence of
+        # logistics filled the cell with six lines of the topic's larger type.
+        note = f'<span class="mnote">{e(row["note"])}</span>' if row.get("note") else ""
         body.append(
             f'<tr id="{anchor}" class="" data-date="{d.isoformat()}">'
             f'{date_cell}'
-            f'<td class="tp">{e(row["topic"])}{speaker}{materials(row)}</td>'
+            f'<td class="tp">{e(row["topic"])}{speaker}{note}{materials(row)}</td>'
             f'<td class="du" data-label="Due {e(cal.get("column_time", cal["due_time"]))}">'
             f'{due(row)}</td>'
             f"</tr>"
@@ -637,6 +644,9 @@ thead th {{ font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; co
 .dt a:hover {{ text-decoration:underline }}
 .tp {{ width:36% }}
 .spk {{ display:block; font-size:.78rem; color:var(--accent); margin-top:.2rem }}
+/* A meeting's own note, e.g. a room change. The size of a material, in the
+   text colour and not muted, because a student has to act on it. */
+.mnote {{ display:block; font-size:.85rem; line-height:1.45; margin-top:.3rem }}
 /* Nothing on this page is smaller than 12px. The sizes are 16 / 14.4 / 13.6 / 12,
    and every caption, tag and kind label shares the bottom one. */
 .sec {{ display:block; font-size:.75rem; text-transform:uppercase;

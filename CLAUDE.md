@@ -48,6 +48,9 @@ the build assigns dates to the `meetings` list in order.
 - **A deadline in finals week** — add `finals: true` to the milestone. Its date is checked against
   `calendar.finals` (the college's final examination period, from the registrar's calendar) and it
   is shown on the last meeting with its own day. Without the flag a date after `last` fails.
+- **A one-off fact about a class** (a room change, a visit to another class) — add `note:` to the
+  meeting. It renders under the topic in the smaller text the materials use. Keep the topic itself
+  short: it is set in the row's largest type, so a sentence of logistics there fills the cell.
 - **Add a speaker** — `speaker: true` for an unnamed window, or `speaker: Their Name`.
   "Speaker questions due" is placed automatically per the `speaker_questions` policy.
   Never enter it by hand.
