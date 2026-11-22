@@ -194,6 +194,20 @@ readings:
     note: >-
       One reflection covers both articles. Name the two you read at the start
       of your first answer.
+  # Rock Pang's visit. Set Nov 22 (instructor: "post the appropriate
+  # reading" from his notes and email with Rock). His notes from their Nov 5
+  # chat, under "Topic: Human / AI collaboration", name this paper by its ACM
+  # link and title (IUI 2026, the 31st Intelligent User Interfaces conference).
+  # No email from Rock names another. The ACM page refused the editing
+  # sandbox's fetch, so it is unverified from here; the arXiv version
+  # (2506.23678, Jun 30, 2025) has the same title with Rock as first author and
+  # opened (HTTP 200) on Nov 22, so it is the open link students reach first.
+  # No `form_option`: speaker day, so it folds into the speaker questions.
+  - date: 2026-12-03
+    cite: 'Pang et al, "Interactive Reasoning: Visualizing and Controlling Chain-of-Thought Reasoning in Large Language Models" (IUI 2026)'
+    url: "https://arxiv.org/pdf/2506.23678"
+    sources:
+      - { text: ACM version, url: "https://dl.acm.org/doi/full/10.1145/3742413.3789091" }
 
 # Deadlines are declared here, once. The build joins them onto the grid above
 # and fails if one no longer lands on a class meeting.
@@ -742,10 +756,10 @@ meetings:
       # asked to register after some number of views. The title and date are
       # the page's own headline and publish date.
       - { text: 'Owen leads discussion on "New York Launches AI Safety Center Ahead of RAISE Act Deadline" (PYMNTS, Nov 11)', url: "https://www.pymnts.com/news/artificial-intelligence/2026/new-york-launches-ai-safety-center-ahead-of-raise-act-deadline/" }
+  # Nov 22: his reading is in `readings:` above, so the "to be set" material
+  # that stood here is gone.
   - topic: Guest speaker session
     speaker: Yuren (Rock) Pang
-    materials:
-      - { text: background reading (to be set with speaker), tbd: true }
 
   # Nov 17 (instructor): Dec 8 is a project work day with the course
   # evaluation and the wrap-up; all presentations are on Dec 10. Until then
